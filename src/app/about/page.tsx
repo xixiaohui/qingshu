@@ -20,7 +20,7 @@ export default function About() {
         }}
       >
         <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          关于情书
+          关于qingshu
         </Typography>
         <Box sx={{ maxWidth: 'sm' }}>
           <Button variant="contained" component={NextLink} href="/">

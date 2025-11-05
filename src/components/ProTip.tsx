@@ -15,8 +15,8 @@ export default function ProTip() {
   return (
     <Typography sx={{ mt: 6, mb: 3, color: 'text.secondary' }}>
       <LightBulbIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-      {'专注情书这件事 '}
-      <Link href="https://qingshu.shop">情书</Link>
+      {'专注qingshu这件事 '}
+      <Link href="https://qingshu.shop">qingshu</Link>
       {' 想到的种种'}
     </Typography>
   );
