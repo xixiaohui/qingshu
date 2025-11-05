@@ -15,9 +15,9 @@ export default function ProTip() {
   return (
     <Typography sx={{ mt: 6, mb: 3, color: 'text.secondary' }}>
       <LightBulbIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-      {'Pro tip: See more '}
-      <Link href="https://mui.com/material-ui/getting-started/templates/">templates</Link>
-      {' in the Material UI documentation.'}
+      {'专注情书这件事 '}
+      <Link href="https://qingshu.shop">情书</Link>
+      {' 想到的种种'}
     </Typography>
   );
 }
