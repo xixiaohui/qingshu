@@ -20,11 +20,11 @@ export default function About() {
         }}
       >
         <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          Material UI - Next.js example in TypeScript
+          关于情书
         </Typography>
         <Box sx={{ maxWidth: 'sm' }}>
           <Button variant="contained" component={NextLink} href="/">
-            Go to the home page
+            返回主页
           </Button>
         </Box>
         <ProTip />
