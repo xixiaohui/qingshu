@@ -20,10 +20,10 @@ export default function Home() {
         }}
       >
         <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          情书
+          qingshu
         </Typography>
         <Link href="/about" color="secondary" component={NextLink}>
-         关于情书
+         关于qingshu
         </Link>
         <ProTip />
         <Copyright />
