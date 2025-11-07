@@ -101,7 +101,7 @@ function MainContentTitle() {
   return (
     <div>
       <Typography variant="h1" gutterBottom>
-        qingshu
+        QingShu
       </Typography>
       <Typography>
         "让人重新相信文字里的爱。" —— 一个专注于表达与理解爱的社交平台。
@@ -228,7 +228,7 @@ function MainContent() {
         gap: 4,
       }}
     >
-      {/* <MainContentTitle /> */}
+      <MainContentTitle />
       <MainContentSearch></MainContentSearch>
       <MainContentChips></MainContentChips>
 
