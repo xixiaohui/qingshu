@@ -218,11 +218,8 @@ function MainContentChips() {
   );
 }
 
-
-
-
 function MainContent() {
-  const index = 0
+  const index = 0;
   return (
     <Box
       sx={{
@@ -234,8 +231,28 @@ function MainContent() {
       {/* <MainContentTitle /> */}
       <MainContentSearch></MainContentSearch>
       <MainContentChips></MainContentChips>
-      <MainContentCard data={cardData.slice(0,2)} md={6}></MainContentCard>
-      <MainContentCard data={cardData.slice(2,3)} md={4}></MainContentCard>
+
+      <Grid container spacing={2} columns={12}>
+        <MainContentCard data={cardData.slice(0, 2)} md={6}></MainContentCard>
+        <MainContentCard data={cardData.slice(2, 3)} md={4}></MainContentCard>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              height: "100%",
+            }}
+          >
+            <MainContentCard
+              data={cardData.slice(3, 5)}
+              md={4}
+              isHaveImage={false}
+            ></MainContentCard>
+          </Box>
+        </Grid>
+        <MainContentCard data={cardData.slice(5, 6)} md={4}></MainContentCard>
+      </Grid>
     </Box>
   );
 }

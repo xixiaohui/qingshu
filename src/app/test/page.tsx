@@ -1,3 +1,4 @@
+import Latest from "@/components/test/Latest";
 import MainContent from "@/components/test/MainContent";
 import { Container } from "@mui/material";
 import { blue, grey, red } from "@mui/material/colors";
@@ -18,6 +19,7 @@ function TestPage() {
       }}
     >
       <MainContent></MainContent>
+      <Latest></Latest>
     </Container>
   );
 }
