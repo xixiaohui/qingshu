@@ -92,10 +92,8 @@ type CardItem = {
   tag: string;
   title: string;
   description: string;
-  authors:{ name: string; avatar: string }[]
+  authors: { name: string; avatar: string }[];
 };
-
-
 
 // 单卡组件
 function MainContentCard({
@@ -111,7 +109,7 @@ function MainContentCard({
   focusedCardIndex: number | null;
   onFocus: (index: number) => void;
   onBlur: () => void;
-  md?:number
+  md?: number;
 }) {
   return (
     <Grid size={{ xs: 12, md: md }}>
@@ -149,10 +147,55 @@ function MainContentCard({
   );
 }
 
-
+function MainContentCard2({
+  data,
+  index,
+  focusedCardIndex,
+  onFocus,
+  onBlur,
+}: {
+  data: CardItem;
+  index: number;
+  focusedCardIndex: number | null;
+  onFocus: (index: number) => void;
+  onBlur: () => void;
+}) {
+  return (
+    <>
+      <StyledCard
+        variant="outlined"
+        onFocus={() => onFocus(index)}
+        onBlur={onBlur}
+        tabIndex={0}
+        className={focusedCardIndex === index ? "Mui-focused" : ""}
+      >
+        <StyledCardContent>
+          <Typography gutterBottom variant="caption" component="div">
+            {data.tag}
+          </Typography>
+          <Typography gutterBottom variant="h6" component="div">
+            {data.title}
+          </Typography>
+          <StyledTypography variant="body2" color="text.secondary" gutterBottom>
+            {data.description}
+          </StyledTypography>
+        </StyledCardContent>
+        <Author authors={data.authors} />
+      </StyledCard>
+    </>
+  );
+}
 
 // 网格组件：自动渲染多个卡片
-export default function MainContentGrid({ data , md = 6}: { data: CardItem[] ,md?:number}) {
+export default function MainContentGrid({
+  data,
+  md = 6,
+  isHaveImage = true,
+}: {
+  data: CardItem[];
+  md?: number;
+  isHaveImage?: boolean;
+}) {
   const [focusedCardIndex, setFocusedCardIndex] = React.useState<number | null>(
     null
   );
@@ -161,18 +204,29 @@ export default function MainContentGrid({ data , md = 6}: { data: CardItem[] ,md
   const handleBlur = () => setFocusedCardIndex(null);
 
   return (
-    <Grid container spacing={2} columns={12}>
-      {data.map((item, i) => (
-        <MainContentCard
-          key={i}
-          data={item}
-          index={i}
-          focusedCardIndex={focusedCardIndex}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          md = {md}
-        />
-      ))}
-    </Grid>
+    <>
+      {data.map((item, i) =>
+        isHaveImage ? (
+          <MainContentCard
+            key={i}
+            data={item}
+            index={i}
+            focusedCardIndex={focusedCardIndex}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            md={md}
+          />
+        ) : (
+          <MainContentCard2
+            key={i}
+            data={item}
+            index={i}
+            focusedCardIndex={focusedCardIndex}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+        )
+      )}
+    </>
   );
 }
