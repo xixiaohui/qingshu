@@ -27,8 +27,8 @@ const cardData = [
     description:
       "Our latest engineering tools are designed to streamline workflows and boost productivity. Discover how these innovations are transforming the software development landscape.",
     authors: [
-      { name: "Remy Sharp", avatar: "images/avatar/1.jpg" },
-      { name: "Travis Howard", avatar: "images/avatar/2.jpg" },
+      { name: "Remy Sharp", avatar: "static/images/avatar/1.jpg" },
+      { name: "Travis Howard", avatar: "static/images/avatar/2.jpg" },
     ],
   },
   {
@@ -37,7 +37,7 @@ const cardData = [
     title: "Innovative product features that drive success",
     description:
       "Explore the key features of our latest product release that are helping businesses achieve their goals. From user-friendly interfaces to robust functionality, learn why our product stands out.",
-    authors: [{ name: "Erica Johns", avatar: "images/avatar/6.jpg" }],
+    authors: [{ name: "Erica Johns", avatar: "static/images/avatar/6.jpg" }],
   },
   {
     img: "https://picsum.photos/800/450?random=3",
@@ -45,7 +45,7 @@ const cardData = [
     title: "Designing for the future: trends and insights",
     description:
       "Stay ahead of the curve with the latest design trends and insights. Our design team shares their expertise on creating intuitive and visually stunning user experiences.",
-    authors: [{ name: "Kate Morrison", avatar: "images/avatar/7.jpg" }],
+    authors: [{ name: "Kate Morrison", avatar: "static/images/avatar/7.jpg" }],
   },
   {
     img: "https://picsum.photos/800/450?random=4",
@@ -53,7 +53,7 @@ const cardData = [
     title: "Our company's journey: milestones and achievements",
     description:
       "Take a look at our company's journey and the milestones we've achieved along the way. From humble beginnings to industry leader, discover our story of growth and success.",
-    authors: [{ name: "Cindy Baker", avatar: "images/avatar/3.jpg" }],
+    authors: [{ name: "Cindy Baker", avatar: "static/images/avatar/3.jpg" }],
   },
   {
     img: "https://picsum.photos/800/450?random=45",
@@ -62,8 +62,8 @@ const cardData = [
     description:
       "Learn about our commitment to sustainability and the innovative engineering solutions we're implementing to create a greener future. Discover the impact of our eco-friendly initiatives.",
     authors: [
-      { name: "Agnes Walker", avatar: "images/avatar/4.jpg" },
-      { name: "Trevor Henderson", avatar: "images/avatar/5.jpg" },
+      { name: "Agnes Walker", avatar: "static/images/avatar/4.jpg" },
+      { name: "Trevor Henderson", avatar: "static/images/avatar/5.jpg" },
     ],
   },
   {
@@ -72,7 +72,7 @@ const cardData = [
     title: "Maximizing efficiency with our latest product updates",
     description:
       "Our recent product updates are designed to help you maximize efficiency and achieve more. Get a detailed overview of the new features and improvements that can elevate your workflow.",
-    authors: [{ name: "Travis Howard", avatar: "images/avatar/2.jpg" }],
+    authors: [{ name: "Travis Howard", avatar: "static/images/avatar/2.jpg" }],
   },
 ];
 
@@ -101,7 +101,7 @@ function MainContentTitle() {
   return (
     <div>
       <Typography variant="h1" gutterBottom>
-        QingShu
+        QS
       </Typography>
       <Typography>
         "让人重新相信文字里的爱。" —— 一个专注于表达与理解爱的社交平台。
