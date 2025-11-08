@@ -15,9 +15,9 @@ import { CssBaseline } from '@mui/material';
 import AppAppBar from '@/components/homepage/AppAppBar';
 
 
-export default function Home(props: { disableCustomTheme?: boolean }){
+export default function Home(){
   return(
-    <AppTheme {...props}>
+    <AppTheme>
       <CssBaseline enableColorScheme />
       <AppAppBar />
       <Container

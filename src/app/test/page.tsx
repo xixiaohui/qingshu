@@ -5,9 +5,9 @@ import MainContent from "@/components/test/MainContent";
 import AppTheme from "@/shared-theme/AppTheme";
 import { Container, CssBaseline } from "@mui/material";
 
-function TestPage(props: { disableCustomTheme?: boolean }) {
+function TestPage() {
   return (
-    <AppTheme {...props}>
+    <AppTheme>
       <CssBaseline enableColorScheme />
       <AppAppBar />
       <Container
