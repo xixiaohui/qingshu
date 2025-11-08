@@ -14,9 +14,9 @@ import Testimonials from "../../components/homepage/Testimonials";
 import FAQ from "../../components/homepage/FAQ";
 import Footer from "../../components/homepage/Footer";
 
-export default function HomePage(props: { disableCustomTheme?: boolean }) {
+export default function HomePage() {
   return (
-    <AppTheme {...props}>
+    <AppTheme >
       <CssBaseline enableColorScheme />
       <AppAppBar />
       <Hero />
