@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import visuallyHidden from '@mui/utils/visuallyHidden';
 import { styled } from '@mui/material/styles';
+import { purple } from '@mui/material/colors';
 
 const StyledBox = styled('div')(({ theme }) => ({
   alignSelf: 'center',
@@ -82,9 +83,9 @@ export default function Hero() {
               variant="h1"
               sx={(theme) => ({
                 fontSize: 'inherit',
-                color: 'primary.main',
+                color: purple[100],
                 ...theme.applyStyles('dark', {
-                  color: 'primary.light',
+                  color: purple[100],
                 }),
               })}
             >
