@@ -1,5 +1,6 @@
 "use client"
 import AppAppBar from "@/components/homepage/AppAppBar";
+import Footer from "@/components/homepage/Footer";
 import Latest from "@/components/test/Latest";
 import MainContent from "@/components/test/MainContent";
 import AppTheme from "@/shared-theme/AppTheme";
@@ -22,6 +23,7 @@ function TestPage() {
       >
         <MainContent></MainContent>
         <Latest></Latest>
+        <Footer />
       </Container>
     </AppTheme>
   );

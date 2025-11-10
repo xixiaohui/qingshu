@@ -18,6 +18,7 @@ import RssFeedRoundedIcon from "@mui/icons-material/RssFeedRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import React from "react";
 import MainContentCard from "./MainContentCard";
+import Hero from "../homepage/Hero";
 
 const cardData = [
   {
@@ -228,7 +229,8 @@ function MainContent() {
         gap: 4,
       }}
     >
-      <MainContentTitle />
+      {/* <MainContentTitle /> */}
+      <Hero />
       <MainContentSearch></MainContentSearch>
       <MainContentChips></MainContentChips>
 

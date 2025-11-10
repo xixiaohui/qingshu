@@ -46,10 +46,10 @@ export default function Hero() {
         backgroundRepeat: 'no-repeat',
 
         backgroundImage:
-          'radial-gradient(ellipse 80% 50% at 50% -20%, hsl(210, 100%, 90%), transparent)',
+          'radial-gradient(ellipse 80% 50% at 50% -20%, hsl(323, 100%, 90%), transparent)',
         ...theme.applyStyles('dark', {
           backgroundImage:
-            'radial-gradient(ellipse 80% 50% at 50% -20%, hsl(210, 100%, 16%), transparent)',
+            'radial-gradient(ellipse 80% 50% at 50% -20%, hsl(298, 32%, 32%), transparent)',
         }),
       })}
     >
@@ -76,7 +76,7 @@ export default function Hero() {
               fontSize: 'clamp(3rem, 10vw, 3.5rem)',
             }}
           >
-            Our&nbsp;latest&nbsp;
+            精选&nbsp;最新&nbsp;
             <Typography
               component="span"
               variant="h1"
@@ -88,7 +88,7 @@ export default function Hero() {
                 }),
               })}
             >
-              products
+              QS
             </Typography>
           </Typography>
           <Typography
@@ -98,9 +98,7 @@ export default function Hero() {
               width: { sm: '100%', md: '80%' },
             }}
           >
-            Explore our cutting-edge dashboard, delivering high-quality solutions
-            tailored to your needs. Elevate your experience with top-tier features
-            and services.
+            "让人重新相信文字里的爱。" —— 一个专注于表达与理解爱的社交平台。
           </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
@@ -109,7 +107,7 @@ export default function Hero() {
             sx={{ pt: 2, width: { xs: '100%', sm: '350px' } }}
           >
             <InputLabel htmlFor="email-hero" sx={visuallyHidden}>
-              Email
+              邮箱
             </InputLabel>
             <TextField
               id="email-hero"
@@ -117,7 +115,7 @@ export default function Hero() {
               size="small"
               variant="outlined"
               aria-label="Enter your email address"
-              placeholder="Your email address"
+              placeholder="您的邮箱地址"
               fullWidth
               slotProps={{
                 htmlInput: {
@@ -132,7 +130,7 @@ export default function Hero() {
               size="small"
               sx={{ minWidth: 'fit-content' }}
             >
-              Start now
+              现在开始
             </Button>
           </Stack>
           <Typography
@@ -140,14 +138,14 @@ export default function Hero() {
             color="text.secondary"
             sx={{ textAlign: 'center' }}
           >
-            By clicking &quot;Start now&quot; you agree to our&nbsp;
+            点击 &quot;现在开始&quot; 同意我们的&nbsp;
             <Link href="#" color="primary">
-              Terms & Conditions
+              条款  & 细则
             </Link>
             .
           </Typography>
         </Stack>
-        <StyledBox id="image" />
+        {/* <StyledBox id="image" /> */}
       </Container>
     </Box>
   );

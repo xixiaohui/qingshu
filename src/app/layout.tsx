@@ -6,6 +6,8 @@ import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 import theme from '@/theme';
 import ModeSwitch from '@/components/ModeSwitch';
 
+import './globals.css'
+
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -15,7 +17,6 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            
             {props.children}
             {/* <ModeSwitch /> */}
           </ThemeProvider>

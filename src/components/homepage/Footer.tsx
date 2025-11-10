@@ -19,8 +19,8 @@ function Copyright() {
   return (
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
-      <Link color="text.secondary" href="https://mui.com/">
-        Sitemark
+      <Link color="text.secondary" href="https://qingshu.shop">
+        情书
       </Link>
       &nbsp;
       {new Date().getFullYear()}
@@ -59,12 +59,12 @@ export default function Footer() {
           <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
             <SitemarkIcon />
             <Typography variant="body2" gutterBottom sx={{ fontWeight: 600, mt: 2 }}>
-              Join the newsletter
+              加入情书
             </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-              Subscribe for weekly updates. No spams ever!
+              订阅即可每周收到最新资讯。绝无垃圾邮件！
             </Typography>
-            <InputLabel htmlFor="email-newsletter">Email</InputLabel>
+            <InputLabel htmlFor="email-newsletter">邮箱</InputLabel>
             <Stack direction="row" spacing={1} useFlexGap>
               <TextField
                 id="email-newsletter"
@@ -73,7 +73,7 @@ export default function Footer() {
                 variant="outlined"
                 fullWidth
                 aria-label="Enter your email address"
-                placeholder="Your email address"
+                placeholder="您的邮箱地址"
                 slotProps={{
                   htmlInput: {
                     autoComplete: 'off',
@@ -88,7 +88,7 @@ export default function Footer() {
                 size="small"
                 sx={{ flexShrink: 0 }}
               >
-                Subscribe
+                订阅
               </Button>
             </Stack>
           </Box>
@@ -101,22 +101,22 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
-            Product
+            情书
           </Typography>
-          <Link color="text.secondary" variant="body2" href="#">
-            Features
+          <Link color="text.secondary" variant="body2" href="/selected">
+            精选
           </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            Testimonials
+          <Link color="text.secondary" variant="body2" href="/latest">
+            最新
           </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            Highlights
+          <Link color="text.secondary" variant="body2" href="/confessing">
+            表白专栏
           </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            Pricing
+          <Link color="text.secondary" variant="body2" href="/end">
+            散场信箱
           </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            FAQs
+          <Link color="text.secondary" variant="body2" href="/about">
+            了解情书
           </Link>
         </Box>
         <Box
@@ -127,16 +127,16 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
-            Company
+            情书Club
           </Typography>
-          <Link color="text.secondary" variant="body2" href="#">
-            About us
+          <Link color="text.secondary" variant="body2" href="/about">
+            关于情书
           </Link>
           <Link color="text.secondary" variant="body2" href="#">
-            Careers
+            愿景
           </Link>
           <Link color="text.secondary" variant="body2" href="#">
-            Press
+            规划
           </Link>
         </Box>
         <Box
@@ -147,16 +147,16 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
-            Legal
+            合法的
           </Typography>
           <Link color="text.secondary" variant="body2" href="#">
-            Terms
+            条款
           </Link>
           <Link color="text.secondary" variant="body2" href="#">
-            Privacy
+            隐私
           </Link>
           <Link color="text.secondary" variant="body2" href="#">
-            Contact
+            联系
           </Link>
         </Box>
       </Box>
@@ -172,13 +172,13 @@ export default function Footer() {
       >
         <div>
           <Link color="text.secondary" variant="body2" href="#">
-            Privacy Policy
+            隐私政策
           </Link>
           <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
             &nbsp;•&nbsp;
           </Typography>
           <Link color="text.secondary" variant="body2" href="#">
-            Terms of Service
+            服务条款
           </Link>
           <Copyright />
         </div>
@@ -191,7 +191,7 @@ export default function Footer() {
           <IconButton
             color="inherit"
             size="small"
-            href="https://github.com/mui"
+            href="/"
             aria-label="GitHub"
             sx={{ alignSelf: 'center' }}
           >
@@ -200,7 +200,7 @@ export default function Footer() {
           <IconButton
             color="inherit"
             size="small"
-            href="https://x.com/MaterialUI"
+            href="/"
             aria-label="X"
             sx={{ alignSelf: 'center' }}
           >
@@ -209,7 +209,7 @@ export default function Footer() {
           <IconButton
             color="inherit"
             size="small"
-            href="https://www.linkedin.com/company/mui/"
+            href="/"
             aria-label="LinkedIn"
             sx={{ alignSelf: 'center' }}
           >
