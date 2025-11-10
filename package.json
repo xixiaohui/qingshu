@@ -16,6 +16,7 @@
     "@mui/material": "latest",
     "@mui/material-nextjs": "latest",
     "@tailwindcss/postcss": "^4.1.17",
+    "framer-motion": "^12.23.24",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
