@@ -91,8 +91,8 @@ function AboutContent() {
 
 export default function About() {
   return (
-    <AppTheme>
-      <CssBaseline enableColorScheme />
+    <>
+     
       <AppAppBar />
       
       <Container
@@ -108,7 +108,7 @@ export default function About() {
         <AboutContent></AboutContent>
         <Footer />
       </Container>
-    </AppTheme>
+    </>
   );
 }
 

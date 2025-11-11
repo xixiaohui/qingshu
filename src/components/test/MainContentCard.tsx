@@ -9,6 +9,7 @@ import {
   Box,
   AvatarGroup,
   Avatar,
+  Link,
 } from "@mui/material";
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -20,12 +21,15 @@ const StyledCard = styled(Card)(({ theme }) => ({
   "&:hover": {
     backgroundColor: "transparent",
     cursor: "pointer",
+    boxShadow: 4,
   },
   "&:focus-visible": {
     outline: "3px solid",
     outlineColor: "hsla(210, 98%, 48%, 0.5)",
     outlineOffset: "2px",
   },
+  cursor: "pointer",
+  transition: "all 0.2s ease-in-out",
 }));
 
 const StyledCardContent = styled(CardContent)({
@@ -47,7 +51,7 @@ const StyledTypography = styled(Typography)({
   textOverflow: "ellipsis",
 });
 
-function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
+export function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
   return (
     <Box
       sx={{
@@ -87,12 +91,14 @@ function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
 }
 
 // 单张卡片的数据类型
-type CardItem = {
+export type CardItem = {
+  id?: number;
   img: string;
   tag: string;
   title: string;
   description: string;
   authors: { name: string; avatar: string }[];
+  content?:string;
 };
 
 // 单卡组件
@@ -113,36 +119,42 @@ function MainContentCard({
 }) {
   return (
     <Grid size={{ xs: 12, md: md }}>
-      <StyledCard
-        variant="outlined"
-        onFocus={() => onFocus(index)}
-        onBlur={onBlur}
-        tabIndex={0}
-        className={focusedCardIndex === index ? "Mui-focused" : ""}
-      >
-        <CardMedia
-          component="img"
-          alt={data.title}
-          image={data.img}
-          sx={{
-            aspectRatio: "16 / 9",
-            borderBottom: "1px solid",
-            borderColor: "divider",
-          }}
-        />
-        <StyledCardContent>
-          <Typography gutterBottom variant="caption" component="div">
-            {data.tag}
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {data.title}
-          </Typography>
-          <StyledTypography variant="body2" color="text.secondary" gutterBottom>
-            {data.description}
-          </StyledTypography>
-        </StyledCardContent>
-        <Author authors={data.authors} />
-      </StyledCard>
+      <Link href={`/blog/${data.id}`} style={{ textDecoration: "none" }}>
+        <StyledCard
+          variant="outlined"
+          onFocus={() => onFocus(index)}
+          onBlur={onBlur}
+          tabIndex={0}
+          className={focusedCardIndex === index ? "Mui-focused" : ""}
+        >
+          <CardMedia
+            component="img"
+            alt={data.title}
+            image={data.img}
+            sx={{
+              aspectRatio: "16 / 9",
+              borderBottom: "1px solid",
+              borderColor: "divider",
+            }}
+          />
+          <StyledCardContent>
+            <Typography gutterBottom variant="caption" component="div">
+              {data.tag}
+            </Typography>
+            <Typography gutterBottom variant="h6" component="div">
+              {data.title}
+            </Typography>
+            <StyledTypography
+              variant="body2"
+              color="text.secondary"
+              gutterBottom
+            >
+              {data.description}
+            </StyledTypography>
+          </StyledCardContent>
+          <Author authors={data.authors} />
+        </StyledCard>
+      </Link>
     </Grid>
   );
 }
@@ -162,26 +174,32 @@ function MainContentCard2({
 }) {
   return (
     <>
-      <StyledCard
-        variant="outlined"
-        onFocus={() => onFocus(index)}
-        onBlur={onBlur}
-        tabIndex={0}
-        className={focusedCardIndex === index ? "Mui-focused" : ""}
-      >
-        <StyledCardContent>
-          <Typography gutterBottom variant="caption" component="div">
-            {data.tag}
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {data.title}
-          </Typography>
-          <StyledTypography variant="body2" color="text.secondary" gutterBottom>
-            {data.description}
-          </StyledTypography>
-        </StyledCardContent>
-        <Author authors={data.authors} />
-      </StyledCard>
+      <Link href={`/blog/${data.id}`} style={{ textDecoration: "none" }}>
+        <StyledCard
+          variant="outlined"
+          onFocus={() => onFocus(index)}
+          onBlur={onBlur}
+          tabIndex={0}
+          className={focusedCardIndex === index ? "Mui-focused" : ""}
+        >
+          <StyledCardContent>
+            <Typography gutterBottom variant="caption" component="div">
+              {data.tag}
+            </Typography>
+            <Typography gutterBottom variant="h6" component="div">
+              {data.title}
+            </Typography>
+            <StyledTypography
+              variant="body2"
+              color="text.secondary"
+              gutterBottom
+            >
+              {data.description}
+            </StyledTypography>
+          </StyledCardContent>
+          <Author authors={data.authors} />
+        </StyledCard>
+      </Link>
     </>
   );
 }

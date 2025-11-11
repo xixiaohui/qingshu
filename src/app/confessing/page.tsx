@@ -39,8 +39,8 @@ function ConfessingMain(){
 
 export default function ConfessingPage() {
   return (
-    <AppTheme>
-      <CssBaseline enableColorScheme />
+    <>
+     
       <AppAppBar />
       <Container
         maxWidth="lg"
@@ -56,6 +56,6 @@ export default function ConfessingPage() {
         <ConfessingMain></ConfessingMain>
         <Footer />
       </Container>
-    </AppTheme>
+    </>
   );
 }
