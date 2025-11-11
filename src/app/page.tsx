@@ -11,9 +11,11 @@ import Footer from "@/components/homepage/Footer";
 
 
 export default function Home() {
+
+
+
   return (
-    <AppTheme>
-      <CssBaseline enableColorScheme />
+    <>
       <AppAppBar />
       <Container
         maxWidth="lg"
@@ -29,6 +31,6 @@ export default function Home() {
         <Latest></Latest>
         <Footer />
       </Container>
-    </AppTheme>
+    </>
   );
 }

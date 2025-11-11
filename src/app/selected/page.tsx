@@ -57,7 +57,7 @@ function SelectMain() {
     <div>
       <Grid container spacing={2} columns={12}>
         <MainContentCard
-          data={blogData.slice((page-1)*pageLimit, pageLimit*page)}
+          data={blogData.slice((page - 1) * pageLimit, pageLimit * page)}
           md={4}
         ></MainContentCard>
       </Grid>
@@ -77,8 +77,7 @@ function SelectMain() {
 
 export default function SelectedPage() {
   return (
-    <AppTheme>
-      <CssBaseline enableColorScheme />
+    <>
       <AppAppBar />
       <Container
         maxWidth="lg"
@@ -94,6 +93,6 @@ export default function SelectedPage() {
         <SelectMain></SelectMain>
         <Footer />
       </Container>
-    </AppTheme>
+    </>
   );
 }

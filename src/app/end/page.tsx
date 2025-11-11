@@ -40,8 +40,8 @@ function EndMain(){
 
 export default function EndPage() {
   return (
-    <AppTheme>
-      <CssBaseline enableColorScheme />
+    <>
+      
       <AppAppBar />
       <Container
         maxWidth="lg"
@@ -57,6 +57,6 @@ export default function EndPage() {
         <EndMain></EndMain>
         <Footer />
       </Container>
-    </AppTheme>
+    </>
   );
 }
