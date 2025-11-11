@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Latest from '@/components/test/Latest';
-import MainContent from '@/components/test/MainContent';
-import AppTheme from '@/shared-theme/AppTheme';
-import { CssBaseline } from '@mui/material';
-import AppAppBar from '@/components/homepage/AppAppBar';
-import Footer from '@/components/homepage/Footer';
+import * as React from "react";
+import Container from "@mui/material/Container";
+import Latest from "@/components/test/Latest";
+import MainContent from "@/components/test/MainContent";
+import AppTheme from "@/shared-theme/AppTheme";
+import { CssBaseline } from "@mui/material";
+import AppAppBar from "@/components/homepage/AppAppBar";
+import Footer from "@/components/homepage/Footer";
 
 
-export default function Home(){
-  return(
+export default function Home() {
+  return (
     <AppTheme>
       <CssBaseline enableColorScheme />
       <AppAppBar />
@@ -32,5 +32,3 @@ export default function Home(){
     </AppTheme>
   );
 }
-
-

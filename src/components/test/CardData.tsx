@@ -35,7 +35,7 @@ export const cardData = [
     authors: [{ name: "Cindy Baker", avatar: "static/images/avatar/3.jpg" }],
   },
   {
-    img: "https://picsum.photos/800/450?random=45",
+    img: "https://picsum.photos/800/450?random=5",
     tag: "Engineering",
     title: "Pioneering sustainable engineering solutions",
     description:
