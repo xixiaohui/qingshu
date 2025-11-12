@@ -31,8 +31,8 @@ const pageLimit = 7;
 
 function SelectMain() {
   const [blogData, setblogData] = useState<any[]>([]);
+  
   const [pageCount, setpageCount] = useState(0);
-
   const [page, setPage] = useState(1); // 当前页
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {

@@ -11,6 +11,7 @@ import {
   Avatar,
   Link,
 } from "@mui/material";
+import { slugify } from "./Latest";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
@@ -119,7 +120,7 @@ function MainContentCard({
 }) {
   return (
     <Grid size={{ xs: 12, md: md }}>
-      <Link href={`/blog/${data.id}`} style={{ textDecoration: "none" }}>
+      <Link href={`/blog/${slugify(data.title)}`} style={{ textDecoration: "none" }}>
         <StyledCard
           variant="outlined"
           onFocus={() => onFocus(index)}
@@ -174,7 +175,7 @@ function MainContentCard2({
 }) {
   return (
     <>
-      <Link href={`/blog/${data.id}`} style={{ textDecoration: "none" }}>
+      <Link href={`/blog/${slugify(data.title)}`} style={{ textDecoration: "none" }}>
         <StyledCard
           variant="outlined"
           onFocus={() => onFocus(index)}

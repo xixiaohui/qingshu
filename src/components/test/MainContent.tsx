@@ -19,6 +19,8 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import React, { useEffect, useState } from "react";
 import MainContentCard, { CardItem } from "./MainContentCard";
 import Hero from "../homepage/Hero";
+import { getRandomIntBetween } from "@/lib/util";
+
 
 
 function Search() {
@@ -41,7 +43,6 @@ function Search() {
     </FormControl>
   );
 }
-
 
 function MainContentSearch() {
   return (
@@ -151,6 +152,8 @@ function MainContentChips() {
   );
 }
 
+const startIndex = getRandomIntBetween(20, 30);
+
 function MainContent() {
   const [blogs, setBlogs] = useState<CardItem[]>([]);
 
@@ -173,8 +176,14 @@ function MainContent() {
       <MainContentChips></MainContentChips>
 
       <Grid container spacing={2} columns={12}>
-        <MainContentCard data={blogs.slice(0, 2)} md={6}></MainContentCard>
-        <MainContentCard data={blogs.slice(2, 3)} md={4}></MainContentCard>
+        <MainContentCard
+          data={blogs.slice(startIndex, startIndex + 2)}
+          md={6}
+        ></MainContentCard>
+        <MainContentCard
+          data={blogs.slice(startIndex + 2, startIndex + 3)}
+          md={4}
+        ></MainContentCard>
         <Grid size={{ xs: 12, md: 4 }}>
           <Box
             sx={{
@@ -191,7 +200,10 @@ function MainContent() {
             ></MainContentCard>
           </Box>
         </Grid>
-        <MainContentCard data={blogs.slice(5, 6)} md={4}></MainContentCard>
+        <MainContentCard
+          data={blogs.slice(startIndex + 5, startIndex + 6)}
+          md={4}
+        ></MainContentCard>
       </Grid>
     </Box>
   );

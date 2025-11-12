@@ -4,14 +4,14 @@ import {
   AvatarGroup,
   Box,
   Grid,
+  Link,
   Pagination,
   styled,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
-import { cardData } from "./CardData";
-
+import { CardItem } from "./MainContentCard";
 
 const StyledTypography = styled(Typography)({
   display: "-webkit-box",
@@ -96,10 +96,29 @@ function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
   );
 }
 
+export const slugify = (title: string) =>
+  title
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-") // 空格换 -
+    .replace(/[^\w\-一-龥]+/g, ""); // 保留中文、字母、数字、连字符
+
+//每页显示数
+const pageLimit = 7;
+
 export default function Latest() {
   const [focusedCardIndex, setFocusedCardIndex] = React.useState<number | null>(
     null
   );
+  const [blogs, setBlogs] = React.useState<CardItem[]>([]);
+
+  const [pageCount, setpageCount] = useState(0);
+  const [page, setPage] = useState(1); // 当前页
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    console.log("当前页是：", value);
+  };
 
   const handleFocus = (index: number) => {
     setFocusedCardIndex(index);
@@ -108,50 +127,66 @@ export default function Latest() {
   const handleBlur = () => {
     setFocusedCardIndex(null);
   };
+
+  useEffect(() => {
+    fetch("/blogs.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogs(data);
+        let pageCount = Math.ceil(data.length / pageLimit);
+        setpageCount(pageCount);
+      });
+  }, []);
+
   return (
     <div>
       <Typography variant="h2" gutterBottom>
         最新的
       </Typography>
       <Grid container spacing={8} columns={12} sx={{ my: 4 }}>
-        {cardData.slice(20,37).map((article, index) => (
+        {blogs.slice((page - 1) * pageLimit, pageLimit * page).map((blog, index) => (
           <Grid key={index} size={{ xs: 12, sm: 6 }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                gap: 1,
-                height: "100%",
-              }}
+            <Link
+              href={`/blog/${slugify(blog.title)}`}
+              style={{ textDecoration: "none" }}
             >
-              <Typography gutterBottom variant="caption" component="div">
-                {article.tag}
-              </Typography>
-              <TitleTypography
-                gutterBottom
-                variant="h6"
-                onFocus={() => handleFocus(index)}
-                onBlur={handleBlur}
-                tabIndex={0}
-                className={focusedCardIndex === index ? "Mui-focused" : ""}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  gap: 1,
+                  height: "100%",
+                }}
               >
-                {article.title}
-                <NavigateNextRoundedIcon
-                  className="arrow"
-                  sx={{ fontSize: "1rem" }}
-                />
-              </TitleTypography>
-              <StyledTypography
-                variant="body2"
-                color="text.secondary"
-                gutterBottom
-              >
-                {article.description}
-              </StyledTypography>
+                <Typography gutterBottom variant="caption" component="div">
+                  {blog.tag}
+                </Typography>
+                <TitleTypography
+                  gutterBottom
+                  variant="h6"
+                  onFocus={() => handleFocus(index)}
+                  onBlur={handleBlur}
+                  tabIndex={0}
+                  className={focusedCardIndex === index ? "Mui-focused" : ""}
+                >
+                  {blog.title}
+                  <NavigateNextRoundedIcon
+                    className="arrow"
+                    sx={{ fontSize: "1rem" }}
+                  />
+                </TitleTypography>
+                <StyledTypography
+                  variant="body2"
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  {blog.description}
+                </StyledTypography>
 
-              <Author authors={article.authors} />
-            </Box>
+                <Author authors={blog.authors} />
+              </Box>
+            </Link>
           </Grid>
         ))}
       </Grid>
@@ -159,8 +194,9 @@ export default function Latest() {
         <Pagination
           hidePrevButton
           hideNextButton
-          count={5}
-          boundaryCount={5}
+          count={pageCount}
+          page={page}
+          onChange={handleChange}
         />
       </Box>
     </div>
