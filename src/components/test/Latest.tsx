@@ -58,7 +58,13 @@ const TitleTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 
-function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
+function Author({
+  authors,
+  time = "2025年11月12日",
+}: {
+  authors: { name: string; avatar: string }[];
+  time?: string;
+}) {
   return (
     <Box
       sx={{
@@ -91,7 +97,7 @@ function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
           {authors.map((author) => author.name).join(", ")}
         </Typography>
       </Box>
-      <Typography variant="caption">July 14, 2021</Typography>
+      <Typography variant="caption">{time}</Typography>
     </Box>
   );
 }
@@ -132,9 +138,15 @@ export default function Latest() {
     fetch("/blogs.json")
       .then((res) => res.json())
       .then((data) => {
-        setBlogs(data);
-        let pageCount = Math.ceil(data.length / pageLimit);
+        //过滤条件
+        const filtered = data.filter(
+          (item: CardItem) => item.tag && item.tag.includes("最新")
+        );
+
+        let pageCount = Math.ceil(filtered.length / pageLimit);
         setpageCount(pageCount);
+
+        setBlogs(filtered);
       });
   }, []);
 
@@ -144,51 +156,53 @@ export default function Latest() {
         最新的
       </Typography>
       <Grid container spacing={8} columns={12} sx={{ my: 4 }}>
-        {blogs.slice((page - 1) * pageLimit, pageLimit * page).map((blog, index) => (
-          <Grid key={index} size={{ xs: 12, sm: 6 }}>
-            <Link
-              href={`/blog/${slugify(blog.title)}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  gap: 1,
-                  height: "100%",
-                }}
+        {blogs
+          .slice((page - 1) * pageLimit, pageLimit * page)
+          .map((blog, index) => (
+            <Grid key={index} size={{ xs: 12, sm: 6 }}>
+              <Link
+                href={`/blog/${slugify(blog.title)}`}
+                style={{ textDecoration: "none" }}
               >
-                <Typography gutterBottom variant="caption" component="div">
-                  {blog.tag}
-                </Typography>
-                <TitleTypography
-                  gutterBottom
-                  variant="h6"
-                  onFocus={() => handleFocus(index)}
-                  onBlur={handleBlur}
-                  tabIndex={0}
-                  className={focusedCardIndex === index ? "Mui-focused" : ""}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    gap: 1,
+                    height: "100%",
+                  }}
                 >
-                  {blog.title}
-                  <NavigateNextRoundedIcon
-                    className="arrow"
-                    sx={{ fontSize: "1rem" }}
-                  />
-                </TitleTypography>
-                <StyledTypography
-                  variant="body2"
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  {blog.description}
-                </StyledTypography>
+                  <Typography gutterBottom variant="caption" component="div">
+                    {blog.tag}
+                  </Typography>
+                  <TitleTypography
+                    gutterBottom
+                    variant="h6"
+                    onFocus={() => handleFocus(index)}
+                    onBlur={handleBlur}
+                    tabIndex={0}
+                    className={focusedCardIndex === index ? "Mui-focused" : ""}
+                  >
+                    {blog.title}
+                    <NavigateNextRoundedIcon
+                      className="arrow"
+                      sx={{ fontSize: "1rem" }}
+                    />
+                  </TitleTypography>
+                  <StyledTypography
+                    variant="body2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
+                    {blog.description}
+                  </StyledTypography>
 
-                <Author authors={blog.authors} />
-              </Box>
-            </Link>
-          </Grid>
-        ))}
+                  <Author authors={blog.authors} />
+                </Box>
+              </Link>
+            </Grid>
+          ))}
       </Grid>
       <Box sx={{ display: "flex", flexDirection: "row", pt: 4 }}>
         <Pagination
