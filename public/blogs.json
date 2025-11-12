@@ -7,7 +7,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -20,7 +20,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -33,7 +33,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -46,7 +46,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -59,7 +59,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -72,7 +72,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -85,7 +85,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -98,7 +98,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -111,7 +111,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -124,7 +124,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -137,7 +137,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -150,7 +150,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -163,7 +163,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -176,7 +176,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -189,7 +189,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -202,7 +202,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -215,7 +215,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -228,7 +228,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -241,7 +241,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -254,7 +254,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -267,7 +267,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -280,7 +280,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -293,7 +293,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -306,7 +306,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -319,7 +319,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -332,7 +332,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -345,7 +345,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -358,7 +358,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -371,7 +371,7 @@
     "authors": [
       {
         "name": "舒婷",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## 原文\n我如果爱你——\n绝不像攀援的凌霄花，借你的高枝炫耀自己；\n我如果爱你——\n绝不学痴情的鸟儿，为绿荫重复单调的歌曲。\n\n## 英译\nIf I love you—\nI will never be a climbing flower,\nborrowing your tall branches to show off myself;\nIf I love you—\nI will never be a sentimental bird,\nrepeating the same monotonous song for your shade.\n\n## 赏析\n《致橡树》代表了独立、平等的爱情观。诗人以橡树与木棉象征爱情中并肩而立的关系，表达现代女性自尊、自立的精神力量。"
@@ -384,7 +384,7 @@
     "authors": [
       {
         "name": "W. B. Yeats",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original (English)\nWhen you are old and grey and full of sleep,\nAnd nodding by the fire, take down this book,\nAnd slowly read, and dream of the soft look\nYour eyes had once, and of their shadows deep.\n\n## 中文译文\n当你老了，头发花白，睡意昏沉，\n在炉火旁打盹，请取下这本书，\n慢慢读着，回想你眼神的柔和，\n那曾经深邃的阴影。\n\n## 赏析\n叶芝以温柔的语气回忆逝去的爱情。诗中有哀伤，也有超然，表达诗人对青春与真爱的追忆。"
@@ -397,7 +397,7 @@
     "authors": [
       {
         "name": "Elizabeth Barrett Browning",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original (English)\nHow do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.\n\n## 中文译文\n我怎样爱你？让我细数方式。\n我爱你如灵魂可达的深与广，\n当我摸索无形的彼岸，\n只为存在的意义与完美的恩典。\n\n## 赏析\n这首诗出自《十四行诗集》，诗人用层层推进的修辞，展现出爱超越生死的永恒力量。"
@@ -410,7 +410,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '静夜思'.\n\n## 中文译文\n静夜思 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -423,7 +423,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'The Tyger'.\n\n## 中文译文\nThe Tyger 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -436,7 +436,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'La Vie Antérieure'.\n\n## 中文译文\nLa Vie Antérieure 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -449,7 +449,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '再别康桥'.\n\n## 中文译文\n再别康桥 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -462,7 +462,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/7.jpg"
+        "avatar": "/static/images/avatar/7.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'She Walks in Beauty'.\n\n## 中文译文\nShe Walks in Beauty 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -475,7 +475,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/8.jpg"
+        "avatar": "/static/images/avatar/8.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '登鹳雀楼'.\n\n## 中文译文\n登鹳雀楼 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -488,7 +488,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/9.jpg"
+        "avatar": "/static/images/avatar/9.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'When You Are Old'.\n\n## 中文译文\nWhen You Are Old 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -501,7 +501,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/10.jpg"
+        "avatar": "/static/images/avatar/10.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '饮酒·其五'.\n\n## 中文译文\n饮酒·其五 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -514,7 +514,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'To Autumn'.\n\n## 中文译文\nTo Autumn 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -527,7 +527,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '关雎'.\n\n## 中文译文\n关雎 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -540,7 +540,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'A Dream Within a Dream'.\n\n## 中文译文\nA Dream Within a Dream 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -553,7 +553,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '雨巷'.\n\n## 中文译文\n雨巷 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -566,7 +566,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Ode to a Nightingale'.\n\n## 中文译文\nOde to a Nightingale 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -579,7 +579,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '将进酒'.\n\n## 中文译文\n将进酒 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -592,7 +592,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/7.jpg"
+        "avatar": "/static/images/avatar/7.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Le Lac'.\n\n## 中文译文\nLe Lac 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -605,7 +605,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/8.jpg"
+        "avatar": "/static/images/avatar/8.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Shall I compare thee to a summer’s day?'.\n\n## 中文译文\nShall I compare thee to a summer’s day? 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -618,7 +618,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/9.jpg"
+        "avatar": "/static/images/avatar/9.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '长恨歌'.\n\n## 中文译文\n长恨歌 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -631,7 +631,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/10.jpg"
+        "avatar": "/static/images/avatar/10.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Daffodils'.\n\n## 中文译文\nDaffodils 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -644,7 +644,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Ozymandias'.\n\n## 中文译文\nOzymandias 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -657,7 +657,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '锦瑟'.\n\n## 中文译文\n锦瑟 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -670,7 +670,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Don Juan'.\n\n## 中文译文\nDon Juan 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -683,7 +683,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '逍遥游'.\n\n## 中文译文\n逍遥游 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -696,7 +696,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Annabel Lee'.\n\n## 中文译文\nAnnabel Lee 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -709,7 +709,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '庐山谣'.\n\n## 中文译文\n庐山谣 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -722,7 +722,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/7.jpg"
+        "avatar": "/static/images/avatar/7.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'The Raven'.\n\n## 中文译文\nThe Raven 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -735,7 +735,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/8.jpg"
+        "avatar": "/static/images/avatar/8.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '春江花月夜'.\n\n## 中文译文\n春江花月夜 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -748,7 +748,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/9.jpg"
+        "avatar": "/static/images/avatar/9.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Romance de la lune, lune'.\n\n## 中文译文\nRomance de la lune, lune 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -761,7 +761,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/10.jpg"
+        "avatar": "/static/images/avatar/10.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '卜算子·咏梅'.\n\n## 中文译文\n卜算子·咏梅 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -774,7 +774,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'If—'.\n\n## 中文译文\nIf— 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -787,7 +787,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '赤壁赋'.\n\n## 中文译文\n赤壁赋 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -800,7 +800,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Ode on a Grecian Urn'.\n\n## 中文译文\nOde on a Grecian Urn 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -813,7 +813,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '虞美人·春花秋月何时了'.\n\n## 中文译文\n虞美人·春花秋月何时了 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -826,7 +826,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'To His Coy Mistress'.\n\n## 中文译文\nTo His Coy Mistress 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -839,7 +839,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '将进酒·君不见黄河之水天上来'.\n\n## 中文译文\n将进酒·君不见黄河之水天上来 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -852,7 +852,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/7.jpg"
+        "avatar": "/static/images/avatar/7.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Kubla Khan'.\n\n## 中文译文\nKubla Khan 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -865,7 +865,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/8.jpg"
+        "avatar": "/static/images/avatar/8.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '念奴娇·赤壁怀古'.\n\n## 中文译文\n念奴娇·赤壁怀古 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -878,7 +878,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/9.jpg"
+        "avatar": "/static/images/avatar/9.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Sonnet 18'.\n\n## 中文译文\nSonnet 18 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -891,7 +891,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/10.jpg"
+        "avatar": "/static/images/avatar/10.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '静女'.\n\n## 中文译文\n静女 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -904,7 +904,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Invictus'.\n\n## 中文译文\nInvictus 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -917,7 +917,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '登高'.\n\n## 中文译文\n登高 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -930,7 +930,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'My Last Duchess'.\n\n## 中文译文\nMy Last Duchess 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -943,7 +943,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/4.jpg"
+        "avatar": "/static/images/avatar/4.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '沁园春·雪'.\n\n## 中文译文\n沁园春·雪 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -956,7 +956,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/5.jpg"
+        "avatar": "/static/images/avatar/5.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'The Waste Land'.\n\n## 中文译文\nThe Waste Land 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -969,7 +969,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/6.jpg"
+        "avatar": "/static/images/avatar/6.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '梦游天姥吟留别'.\n\n## 中文译文\n梦游天姥吟留别 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -982,7 +982,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/7.jpg"
+        "avatar": "/static/images/avatar/7.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'The Second Coming'.\n\n## 中文译文\nThe Second Coming 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -995,7 +995,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/8.jpg"
+        "avatar": "/static/images/avatar/8.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '题都城南庄'.\n\n## 中文译文\n题都城南庄 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -1008,7 +1008,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/9.jpg"
+        "avatar": "/static/images/avatar/9.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'The Road Not Taken'.\n\n## 中文译文\nThe Road Not Taken 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -1021,7 +1021,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/10.jpg"
+        "avatar": "/static/images/avatar/10.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '相思'.\n\n## 中文译文\n相思 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -1034,7 +1034,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/1.jpg"
+        "avatar": "/static/images/avatar/1.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem 'Ode to the West Wind'.\n\n## 中文译文\nOde to the West Wind 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -1047,7 +1047,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/2.jpg"
+        "avatar": "/static/images/avatar/2.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '赠花卿'.\n\n## 中文译文\n赠花卿 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
@@ -1060,7 +1060,7 @@
     "authors": [
       {
         "name": "Various",
-        "avatar": "static/images/avatar/3.jpg"
+        "avatar": "/static/images/avatar/3.jpg"
       }
     ],
     "content": "## Original\nExcerpt from the classic poem '夜雨寄北'.\n\n## 中文译文\n夜雨寄北 的节选或译文。\n\n## 赏析\n这首诗展现了诗人独特的情感与思想。"
