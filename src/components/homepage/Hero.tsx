@@ -77,7 +77,8 @@ export default function Hero() {
               fontSize: 'clamp(3rem, 10vw, 3.5rem)',
             }}
           >
-            精选&nbsp;最新&nbsp;
+            <Link href="/selected">精选&nbsp;</Link>
+            <Link href="/latest">最新&nbsp;</Link>
             <Typography
               component="span"
               variant="h1"
@@ -101,7 +102,7 @@ export default function Hero() {
           >
             "让人重新相信文字里的爱。" —— 一个专注于表达与理解爱的社交平台。
           </Typography>
-          <Stack
+          {/* <Stack
             direction={{ xs: 'column', sm: 'row' }}
             spacing={1}
             useFlexGap
@@ -144,7 +145,7 @@ export default function Hero() {
               条款  & 细则
             </Link>
             .
-          </Typography>
+          </Typography> */}
         </Stack>
         {/* <StyledBox id="image" /> */}
       </Container>

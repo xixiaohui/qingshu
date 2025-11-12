@@ -12,6 +12,7 @@ import {
   Link,
 } from "@mui/material";
 import { slugify } from "./Latest";
+import { motion } from "framer-motion";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
@@ -52,7 +53,13 @@ const StyledTypography = styled(Typography)({
   textOverflow: "ellipsis",
 });
 
-export function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
+export function Author({
+  authors,
+  time = "2025年11月12日",
+}: {
+  authors: { name: string; avatar: string }[];
+  time?: string;
+}) {
   return (
     <Box
       sx={{
@@ -86,7 +93,7 @@ export function Author({ authors }: { authors: { name: string; avatar: string }[
           {authors.map((author) => author.name).join(", ")}
         </Typography>
       </Box>
-      <Typography variant="caption">July 14, 2021</Typography>
+      <Typography variant="caption">{time}</Typography>
     </Box>
   );
 }
@@ -99,11 +106,12 @@ export type CardItem = {
   title: string;
   description: string;
   authors: { name: string; avatar: string }[];
-  content?:string;
+  content?: string;
+  created_at?: string;
 };
 
 // 单卡组件
-function MainContentCard({
+function ContentCard({
   data,
   index,
   focusedCardIndex,
@@ -120,7 +128,10 @@ function MainContentCard({
 }) {
   return (
     <Grid size={{ xs: 12, md: md }}>
-      <Link href={`/blog/${slugify(data.title)}`} style={{ textDecoration: "none" }}>
+      <Link
+        href={`/blog/${slugify(data.title)}`}
+        style={{ textDecoration: "none" }}
+      >
         <StyledCard
           variant="outlined"
           onFocus={() => onFocus(index)}
@@ -128,14 +139,18 @@ function MainContentCard({
           tabIndex={0}
           className={focusedCardIndex === index ? "Mui-focused" : ""}
         >
-          <CardMedia
-            component="img"
+          <motion.img
+            src={data.img}
             alt={data.title}
-            image={data.img}
-            sx={{
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              width: "100%",
               aspectRatio: "16 / 9",
-              borderBottom: "1px solid",
-              borderColor: "divider",
+              borderBottom: "1px solid var(--mui-palette-divider)",
+              cursor: "pointer",
             }}
           />
           <StyledCardContent>
@@ -153,14 +168,14 @@ function MainContentCard({
               {data.description}
             </StyledTypography>
           </StyledCardContent>
-          <Author authors={data.authors} />
+          <Author authors={data.authors} time={data.created_at} />
         </StyledCard>
       </Link>
     </Grid>
   );
 }
 
-function MainContentCard2({
+function ContentCard2({
   data,
   index,
   focusedCardIndex,
@@ -175,7 +190,10 @@ function MainContentCard2({
 }) {
   return (
     <>
-      <Link href={`/blog/${slugify(data.title)}`} style={{ textDecoration: "none" }}>
+      <Link
+        href={`/blog/${slugify(data.title)}`}
+        style={{ textDecoration: "none" }}
+      >
         <StyledCard
           variant="outlined"
           onFocus={() => onFocus(index)}
@@ -198,7 +216,7 @@ function MainContentCard2({
               {data.description}
             </StyledTypography>
           </StyledCardContent>
-          <Author authors={data.authors} />
+          <Author authors={data.authors} time={data.created_at} />
         </StyledCard>
       </Link>
     </>
@@ -206,14 +224,16 @@ function MainContentCard2({
 }
 
 // 网格组件：自动渲染多个卡片
-export default function MainContentGrid({
+export default function MainContentCard({
   data,
   md = 6,
   isHaveImage = true,
+  message = "",
 }: {
   data: CardItem[];
   md?: number;
   isHaveImage?: boolean;
+  message?: string;
 }) {
   const [focusedCardIndex, setFocusedCardIndex] = React.useState<number | null>(
     null
@@ -226,7 +246,7 @@ export default function MainContentGrid({
     <>
       {data.map((item, i) =>
         isHaveImage ? (
-          <MainContentCard
+          <ContentCard
             key={i}
             data={item}
             index={i}
@@ -236,7 +256,7 @@ export default function MainContentGrid({
             md={md}
           />
         ) : (
-          <MainContentCard2
+          <ContentCard2
             key={i}
             data={item}
             index={i}

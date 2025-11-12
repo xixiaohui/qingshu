@@ -19,9 +19,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import React, { useEffect, useState } from "react";
 import MainContentCard, { CardItem } from "./MainContentCard";
 import Hero from "../homepage/Hero";
-import { getRandomIntBetween } from "@/lib/util";
-
-
+import { chips, getRandomIntBetween } from "@/lib/util";
 
 function Search() {
   return (
@@ -66,7 +64,16 @@ const handleClick = () => {
   console.info("You clicked the filter chip.");
 };
 
-function MainContentChips() {
+function MainContentChips({ onSend }: { onSend: (text: string) => void }) {
+  const [selectedIndex, setSelectedIndex] = useState(0); // 默认选中第一个
+
+  
+
+  const handleClick = (label: string, index: number) => {
+    setSelectedIndex(index);
+    onSend(label); // 把选中的 label 传给父组件
+  };
+
   return (
     <Box
       sx={{
@@ -87,52 +94,23 @@ function MainContentChips() {
           overflow: "auto",
         }}
       >
-        <Chip onClick={handleClick} size="medium" label="所有分类"></Chip>
-        <Chip
-          onClick={handleClick}
-          size="medium"
-          label="表白专栏"
-          sx={{
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-        />
-        <Chip
-          onClick={handleClick}
-          size="medium"
-          label="散场信箱"
-          sx={{
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-        />
-        <Chip
-          onClick={handleClick}
-          size="medium"
-          label="暧昧集"
-          sx={{
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-        />
-        <Chip
-          onClick={handleClick}
-          size="medium"
-          label="心绪日记"
-          sx={{
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-        />
-        <Chip
-          onClick={handleClick}
-          size="medium"
-          label="情书博物馆"
-          sx={{
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-        />
+        {chips.map((label, index) => (
+          <Chip
+            key={index}
+            size="medium"
+            label={label}
+            onClick={() => handleClick(label, index)}
+            sx={{
+              backgroundColor:
+                selectedIndex === index ? "primary.second" : "transparent",
+              border: "none",
+              "&:hover": {
+                backgroundColor:
+                  selectedIndex === index ? "primary.second" : "action.hover",
+              },
+            }}
+          />
+        ))}
       </Box>
       <Box
         sx={{
@@ -152,16 +130,26 @@ function MainContentChips() {
   );
 }
 
-const startIndex = getRandomIntBetween(20, 30);
+// let startIndex = getRandomIntBetween(20, 30);
 
 function MainContent() {
   const [blogs, setBlogs] = useState<CardItem[]>([]);
+  const [message, setMessage] = useState(chips[0]);
+
 
   useEffect(() => {
     fetch("/blogs.json")
       .then((res) => res.json())
-      .then((data) => setBlogs(data));
-  }, []);
+      .then((data) => {
+
+        //过滤条件
+        const filtered = data.filter(
+          (item:CardItem) => item.tag && item.tag.includes(message)
+        )
+        setBlogs(filtered)
+
+      });
+  }, [message]);//当标签变化时重新过滤
 
   return (
     <Box
@@ -173,17 +161,19 @@ function MainContent() {
     >
       <Hero />
       <MainContentSearch></MainContentSearch>
-      <MainContentChips></MainContentChips>
+      <MainContentChips onSend={(text) => setMessage(text)}></MainContentChips>
 
       <Grid container spacing={2} columns={12}>
         <MainContentCard
-          data={blogs.slice(startIndex, startIndex + 2)}
+          data={blogs.slice(0, 2)}
           md={6}
+          message={message}
         ></MainContentCard>
         <MainContentCard
-          data={blogs.slice(startIndex + 2, startIndex + 3)}
+          data={blogs.slice(2, 3)}
           md={4}
         ></MainContentCard>
+
         <Grid size={{ xs: 12, md: 4 }}>
           <Box
             sx={{
@@ -201,7 +191,7 @@ function MainContent() {
           </Box>
         </Grid>
         <MainContentCard
-          data={blogs.slice(startIndex + 5, startIndex + 6)}
+          data={blogs.slice(5, 6)}
           md={4}
         ></MainContentCard>
       </Grid>
