@@ -5,6 +5,7 @@ import CatalogePage from "@/components/test/CatalogePage";
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   FormControl,
   InputAdornment,
@@ -12,7 +13,7 @@ import {
 } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 
 function SearchContent() {
@@ -46,7 +47,6 @@ function SearchContent() {
               display: "flex",
               flexDirection: "row",
               gap: 1,
-              
             }}
             variant="outlined"
           >
@@ -96,12 +96,12 @@ export default function SelectedPage() {
   const message = searchParams.get("message") as string;
 
   return (
-    <>
+    <Suspense fallback={<CircularProgress />}>
       {message ? (
         <CatalogePage catalogeName={message}></CatalogePage>
       ) : (
         <NoMessageSearchPage></NoMessageSearchPage>
       )}
-    </>
+    </Suspense>
   );
 }
