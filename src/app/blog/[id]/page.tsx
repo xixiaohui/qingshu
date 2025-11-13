@@ -22,9 +22,16 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import html2canvas from "html2canvas";
-import { Download, DownloadDoneSharp, DownloadingRounded } from "@mui/icons-material";
+import {
+  Download,
+  DownloadDoneSharp,
+  DownloadingRounded,
+} from "@mui/icons-material";
+import BlogContentCard from "@/components/BlogContentCard";
+import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 
-const MotionCardMedia = motion(CardMedia as any);
+const MotionCardMedia = motion.create(CardMedia as any);
 
 const cardData = [
   {
@@ -66,7 +73,7 @@ function BlogContent({ identifier }: { identifier: string }) {
         setblogData(errorData);
       } else {
         setblogData(data);
-        
+
         // ✅ 如果数据库有图片，就用数据库的
         if (data?.img) {
           setCurrentImage(data.img);
@@ -75,7 +82,6 @@ function BlogContent({ identifier }: { identifier: string }) {
           const fixedSeed = Math.floor(Math.random() * 10000);
           setCurrentImage(`https://picsum.photos/seed/${fixedSeed}/800/450`);
         }
-
       }
     }
     console.log("identifier is " + identifier);
@@ -136,8 +142,8 @@ function BlogContent({ identifier }: { identifier: string }) {
           >
             <Card
               sx={{
-                boxShadow: "0 8px 20px rgba(255, 9, 234, 0.15)",
-                border: "1px solid rgba(243, 216, 235, 0.151)",
+                boxShadow: "0 8px 20px rgba(255, 0, 255, 0.15)",
+                border: "1px solid rgba(255, 255, 255, 0)",
                 borderRadius: 3,
                 overflow: "hidden",
                 width: "100%",
@@ -168,9 +174,11 @@ function BlogContent({ identifier }: { identifier: string }) {
                 />
               </AnimatePresence>
 
-              <CardContent sx={{
-                mb:7
-              }}>
+              <CardContent
+                sx={{
+                  mb: 7,
+                }}
+              >
                 <Typography gutterBottom variant="caption" component="div">
                   {blogData?.tag}
                 </Typography>
@@ -181,7 +189,15 @@ function BlogContent({ identifier }: { identifier: string }) {
                   authors={blogData?.authors ?? []}
                   time={blogData?.created_at}
                 />
-                <Typography variant="body2">{blogData?.content}</Typography>
+                {/* <Typography variant="body2" sx={{ whiteSpace: "pre-line" }}>
+                  {blogData?.content}
+                </Typography> */}
+                {/* <BlogContentCard content={blogData?.content} variant="body1" /> */}
+               
+                <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                  {blogData?.content || ''}
+                </ReactMarkdown>
+
               </CardContent>
             </Card>
             <CardActions>
@@ -190,7 +206,8 @@ function BlogContent({ identifier }: { identifier: string }) {
                 <CircularProgress size={24} />
               ) : (
                 <Button size="small" onClick={handleDownload}>
-                  <Download/>下载
+                  <Download />
+                  下载
                 </Button>
               )}
             </CardActions>
