@@ -10,11 +10,12 @@ import {
   Grid,
   Pagination,
   Typography,
+  CircularProgress,
 } from "@mui/material";
 
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
-import { chips } from "@/lib/util";
+import LoadingFrame from "../Loading";
 
 function CatalogeTitle({ name }: { name: string }) {
   return (
@@ -31,6 +32,7 @@ const pageLimit = 7;
 
 function CatalogeMain({ name }: { name: string }) {
   const [blogData, setblogData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const [pageCount, setpageCount] = useState(0);
   const [page, setPage] = useState(1); // 当前页
@@ -42,20 +44,52 @@ function CatalogeMain({ name }: { name: string }) {
 
   useEffect(() => {
     async function load() {
-      const { data, error } = await supabase
+      setLoading(true);
+      let { data, error } = await supabase
         .from("blogs")
         .select("*")
         .ilike("tag", `%${name}%`);
-      if (error) console.error(error);
-      else {
-        setblogData(data);
-        let pageCount = Math.ceil(data.length / pageLimit);
-        setpageCount(pageCount);
+
+      if (!data || data.length === 0) {
+        const titleResult = await supabase
+          .from("blogs")
+          .select("*")
+          .ilike("title", `%${name}%`);
+
+        data = titleResult.data;
+
+        if ((!data || data.length === 0) && !titleResult.error) {
+          const contentResult = await supabase
+            .from("blogs")
+            .select("*")
+            .ilike("content", `%${name}%`);
+          data = contentResult.data;
+        }
+      }
+
+      if (error) {
+        console.error(error);
+        setLoading(false);
+      } else {
+        if (data) {
+          setblogData(data);
+          let pageCount = Math.ceil(data.length / pageLimit);
+          setpageCount(pageCount);
+
+          setLoading(false);
+        }
       }
     }
     load();
   }, []);
 
+  if (loading) {
+    return (
+      <>
+        <LoadingFrame></LoadingFrame>
+      </>
+    );
+  }
   return (
     <div>
       <Grid container spacing={2} columns={12}>

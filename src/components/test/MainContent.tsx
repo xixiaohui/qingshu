@@ -2,6 +2,7 @@
 
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -10,6 +11,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Link,
   OutlinedInput,
   styled,
   Typography,
@@ -20,25 +22,54 @@ import React, { useEffect, useState } from "react";
 import MainContentCard, { CardItem } from "./MainContentCard";
 import Hero from "../homepage/Hero";
 import { chips, getRandomIntBetween } from "@/lib/util";
+import { useRouter } from "next/navigation";
 
 function Search() {
+  const router = useRouter();
+  const [message, setMessage] = useState("");
+
+  const handleSearch = () => {
+    if (message.trim()) {
+      router.push(`/search?message=${encodeURIComponent(message)}`);
+    }
+  };
   return (
-    <FormControl sx={{ width: { xs: "100%", md: "25ch" } }} variant="outlined">
-      <OutlinedInput
-        size="small"
-        id="search"
-        placeholder="查找..."
-        sx={{ flexGrow: 1 }}
-        startAdornment={
-          <InputAdornment position="start" sx={{ color: "text.primary" }}>
-            <SearchRoundedIcon fontSize="small" />
-          </InputAdornment>
-        }
-        inputProps={{
-          "aria-label": "search",
+    <>
+      <FormControl
+        sx={{
+          width: { xs: "100%", md: "25ch" },
+          display: "flex",
+          flexDirection: "row",
+          gap: 1,
         }}
-      />
-    </FormControl>
+        variant="outlined"
+      >
+        <OutlinedInput
+          size="small"
+          id="search"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="查找..."
+          sx={{ flexGrow: 1 }}
+          startAdornment={
+            <InputAdornment position="start" sx={{ color: "text.primary" }}>
+              <SearchRoundedIcon fontSize="small" />
+            </InputAdornment>
+          }
+          inputProps={{
+            "aria-label": "search",
+          }}
+          onKeyDown={(e)=>{
+            if(e.key == "Enter"){
+              handleSearch();
+            }
+          }}
+        />
+      </FormControl>
+      <Button variant="contained" color="primary" onClick={handleSearch}>
+        搜索
+      </Button>
+    </>
   );
 }
 
@@ -66,8 +97,6 @@ const handleClick = () => {
 
 function MainContentChips({ onSend }: { onSend: (text: string) => void }) {
   const [selectedIndex, setSelectedIndex] = useState(0); // 默认选中第一个
-
-  
 
   const handleClick = (label: string, index: number) => {
     setSelectedIndex(index);
@@ -122,9 +151,12 @@ function MainContentChips({ onSend }: { onSend: (text: string) => void }) {
         }}
       >
         <Search />
-        <IconButton size="small" aria-label="RSS feed">
-          <RssFeedRoundedIcon />
-        </IconButton>
+        <Link href="/search">
+          <IconButton size="small" aria-label="RSS feed">
+            <RssFeedRoundedIcon />
+          </IconButton>
+        </Link>
+        
       </Box>
     </Box>
   );
@@ -136,20 +168,17 @@ function MainContent() {
   const [blogs, setBlogs] = useState<CardItem[]>([]);
   const [message, setMessage] = useState(chips[0]);
 
-
   useEffect(() => {
     fetch("/blogs.json")
       .then((res) => res.json())
       .then((data) => {
-
         //过滤条件
         const filtered = data.filter(
-          (item:CardItem) => item.tag && item.tag.includes(message)
-        )
-        setBlogs(filtered)
-
+          (item: CardItem) => item.tag && item.tag.includes(message)
+        );
+        setBlogs(filtered);
       });
-  }, [message]);//当标签变化时重新过滤
+  }, [message]); //当标签变化时重新过滤
 
   return (
     <Box
@@ -169,10 +198,7 @@ function MainContent() {
           md={6}
           message={message}
         ></MainContentCard>
-        <MainContentCard
-          data={blogs.slice(2, 3)}
-          md={4}
-        ></MainContentCard>
+        <MainContentCard data={blogs.slice(2, 3)} md={4}></MainContentCard>
 
         <Grid size={{ xs: 12, md: 4 }}>
           <Box
@@ -190,10 +216,7 @@ function MainContent() {
             ></MainContentCard>
           </Box>
         </Grid>
-        <MainContentCard
-          data={blogs.slice(5, 6)}
-          md={4}
-        ></MainContentCard>
+        <MainContentCard data={blogs.slice(5, 6)} md={4}></MainContentCard>
       </Grid>
     </Box>
   );
