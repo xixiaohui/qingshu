@@ -10,6 +10,7 @@ import {
   FormControl,
   InputAdornment,
   OutlinedInput,
+  Typography,
 } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
@@ -17,7 +18,7 @@ import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 
 function SearchForm() {
-  const router = useRouter()
+  const router = useRouter();
   const [message, setMessage] = useState("");
 
   const handleSearch = () => {
@@ -86,6 +87,23 @@ function NoMessageSearchPage() {
     <>
       <FramePage>
         <SearchForm></SearchForm>
+        <Container
+          maxWidth="lg"
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              gap: 1,
+            }}
+          >
+            <Typography variant="body2">搜索全部QS请输入##</Typography>
+          </Box>
+        </Container>
       </FramePage>
     </>
   );
@@ -106,7 +124,6 @@ function SearchContent() {
 }
 
 export default function SelectedPage() {
-  
   return (
     <Suspense fallback={<CircularProgress />}>
       <SearchContent></SearchContent>
