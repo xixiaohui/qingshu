@@ -16,7 +16,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 
-function SearchContent() {
+function SearchForm() {
   const router = useRouter()
   const [message, setMessage] = useState("");
 
@@ -85,23 +85,31 @@ function NoMessageSearchPage() {
   return (
     <>
       <FramePage>
-        <SearchContent></SearchContent>
+        <SearchForm></SearchForm>
       </FramePage>
     </>
   );
 }
 
-export default function SelectedPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
-  const message = searchParams.get("message") as string;
-
+  const message = searchParams.get("message");
   return (
-    <Suspense fallback={<CircularProgress />}>
+    <>
       {message ? (
         <CatalogePage catalogeName={message}></CatalogePage>
       ) : (
         <NoMessageSearchPage></NoMessageSearchPage>
       )}
+    </>
+  );
+}
+
+export default function SelectedPage() {
+  
+  return (
+    <Suspense fallback={<CircularProgress />}>
+      <SearchContent></SearchContent>
     </Suspense>
   );
 }
