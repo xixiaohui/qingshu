@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { slugify } from "./Latest";
 import { motion } from "framer-motion";
+import { formatDateSmart } from "@/lib/util";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
@@ -93,7 +94,7 @@ export function Author({
           {authors.map((author) => author.name).join(", ")}
         </Typography>
       </Box>
-      <Typography variant="caption">{time}</Typography>
+      <Typography variant="caption">{formatDateSmart(time)}</Typography>
     </Box>
   );
 }
