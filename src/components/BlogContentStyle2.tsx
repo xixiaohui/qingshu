@@ -182,7 +182,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   alt={blogData?.title}
                   image={blogData?.img}
                   sx={{
-                    aspectRatio: "9 / 11",
+                    aspectRatio: "16 / 9",
                     borderBottom: "1px solid",
                     borderColor: "divider",
                   }}
