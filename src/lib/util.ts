@@ -25,6 +25,17 @@ export const formatDateSmart = (dateString: string) => {
   }
 };
 
+export function splitByLineLength(text: string, maxPerLine: number): string[] {
+  console.log(text)
+  const result: string[] = [];
+
+  for (let i = 0; i < text.length; i += maxPerLine) {
+    result.push(text.slice(i, i + maxPerLine));
+  }
+  console.log(result)
+  return result;
+}
+
 export const chips = [
   "精选",
   "表白专栏",
