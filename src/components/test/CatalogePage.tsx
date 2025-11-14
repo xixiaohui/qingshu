@@ -48,13 +48,15 @@ function CatalogeMain({ name }: { name: string }) {
       let { data, error } = await supabase
         .from("blogs")
         .select("*")
-        .ilike("tag", `%${name}%`);
+        .ilike("tag", `%${name}%`)
+        .order("created_at", { ascending: false }); // false = 倒序;
 
       if (!data || data.length === 0) {
         const titleResult = await supabase
           .from("blogs")
           .select("*")
-          .ilike("title", `%${name}%`);
+          .ilike("title", `%${name}%`)
+          .order("created_at", { ascending: false }); // false = 倒序;
 
         data = titleResult.data;
 
@@ -62,7 +64,8 @@ function CatalogeMain({ name }: { name: string }) {
           const contentResult = await supabase
             .from("blogs")
             .select("*")
-            .ilike("content", `%${name}%`);
+            .ilike("content", `%${name}%`)
+            .order("created_at", { ascending: false }); // false = 倒序;
           data = contentResult.data;
         }
       }
