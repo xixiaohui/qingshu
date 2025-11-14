@@ -38,7 +38,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
 
   const [contentArray, setcontentArray] = useState<string[]>([]);
 
-
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
@@ -48,7 +47,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
       const { data, error } = await supabase
         .from("blogs")
         .select("*")
-        .order("created_at", { ascending: false })// false = 倒序
+        .order("created_at", { ascending: false }) // false = 倒序
         .eq(isId ? "id" : "slug", identifier)
         .maybeSingle();
       if (error) {
@@ -81,9 +80,9 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
     );
   }
 
-  if(blogData?.id && contentArray?.length===0){
-    setcontentArray(splitByLineLength(blogData.content || "",620))
-    console.log(contentArray)
+  if (blogData?.id && contentArray?.length === 0) {
+    setcontentArray(splitByLineLength(blogData.content || "", 620));
+    console.log(contentArray);
   }
 
   return (
@@ -99,13 +98,13 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: { xs:"column",md:"row"},
               gap: 2,
               justifyContent: "flex-end", // 横向靠右
               alignItems: "flex-end", // 纵向靠下
             }}
           >
-            <Grid size={{ xs: 12, lg: 3 }}>
+            <Grid size={{ xs: 12, md: 3 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -124,7 +123,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 3 }}>
+            <Grid size={{ xs: 12, md: 3 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -139,7 +138,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 3 }}>
+            <Grid size={{ xs: 12, md: 3 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -147,14 +146,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   justifyContent: "flex-end",
                 }}
               >
-                <Typography variant="body2" gutterBottom >
+                <Typography variant="body2" gutterBottom>
                   {" "}
                   {blogData?.description}
                 </Typography>
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 3 }}>
+            <Grid size={{ xs: 12, md: 3 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -172,11 +171,11 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: { xs:"column",md:"row"},
               gap: 2,
             }}
           >
-            <Grid size={{ xs: 12, lg: 3 }}>
+            <Grid size={{ xs: 12, md: 3 }}>
               <Card>
                 <CardMedia
                   component="img"
@@ -191,23 +190,29 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 3 }}>
+            <Grid size={{ xs: 12, md: 3 }}>
               <BlogContentMarkdown
                 content={contentArray?.at(0) || ""}
               ></BlogContentMarkdown>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 3 }}>
-                {contentArray.length>1?<BlogContentMarkdown
-                content={contentArray?.at(1) || ""}
-              ></BlogContentMarkdown>:<></>}
-              
+            <Grid size={{ xs: 12, md: 3 }}>
+              {contentArray.length > 1 ? (
+                <BlogContentMarkdown
+                  content={contentArray?.at(1) || ""}
+                ></BlogContentMarkdown>
+              ) : (
+                <></>
+              )}
             </Grid>
-            <Grid size={{ xs: 12, lg: 3 }}>
-                {contentArray.length>2?<BlogContentMarkdown
-                content={contentArray?.at(2) || ""}
-              ></BlogContentMarkdown>:<></>}
-              
+            <Grid size={{ xs: 12, md: 3 }}>
+              {contentArray.length > 2 ? (
+                <BlogContentMarkdown
+                  content={contentArray?.at(2) || ""}
+                ></BlogContentMarkdown>
+              ) : (
+                <></>
+              )}
             </Grid>
           </Box>
         </Box>
@@ -223,7 +228,7 @@ export default function BlogContentStyle1({
 }) {
   return (
     <>
-      <Grid container columns={12} sx={{ my: 16 }}>
+      <Grid container spacing={2} columns={12} sx={{my:12}}>
         <BlogCotentMain identifier={identifier}></BlogCotentMain>
       </Grid>
     </>
