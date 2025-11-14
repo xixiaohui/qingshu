@@ -28,10 +28,12 @@ import {
   DownloadingRounded,
 } from "@mui/icons-material";
 import BlogContentCard from "@/components/BlogContentCard";
-import ReactMarkdown from 'react-markdown';
-import remarkBreaks from 'remark-breaks';
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+import Loading from "@/components/Loading";
+import BlogContentCardUseMarkdown from "@/components/BlogContentCardUseMarkdown";
 
-const MotionCardMedia = motion.create(CardMedia as any);
+// const MotionCardMedia = motion.create(CardMedia as any);
 
 const cardData = [
   {
@@ -54,6 +56,7 @@ function BlogContent({ identifier }: { identifier: string }) {
   const [blogData, setblogData] = useState<CardItem>();
   const [currentImage, setCurrentImage] = useState<string>("");
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isLoading,setIsLoading] = useState(true)
 
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -62,6 +65,7 @@ function BlogContent({ identifier }: { identifier: string }) {
 
   useEffect(() => {
     async function load() {
+      setIsLoading(true);
       const { data, error } = await supabase
         .from("blogs")
         .select("*")
@@ -82,6 +86,7 @@ function BlogContent({ identifier }: { identifier: string }) {
           const fixedSeed = Math.floor(Math.random() * 10000);
           setCurrentImage(`https://picsum.photos/seed/${fixedSeed}/800/450`);
         }
+        setIsLoading(false);
       }
     }
     console.log("identifier is " + identifier);
@@ -129,6 +134,14 @@ function BlogContent({ identifier }: { identifier: string }) {
       setIsDownloading(false);
     }
   };
+  
+  if(isLoading){
+    return(
+      <>
+        <Loading></Loading>
+      </>
+    );
+  }
 
   return (
     <>
@@ -147,36 +160,46 @@ function BlogContent({ identifier }: { identifier: string }) {
                 borderRadius: 3,
                 overflow: "hidden",
                 width: "100%",
-                maxWidth: 600,
                 mx: "auto",
               }}
               ref={cardRef}
               elevation={0}
             >
-              <AnimatePresence mode="wait">
-                <MotionCardMedia
-                  key={currentImage} // 👈 每次图片变化都会触发重新动画
-                  component="img"
-                  alt={blogData?.title}
-                  image={currentImage}
+              {currentImage && (
+                <Box
+                  // MUI 的 sx 需要这样写
                   sx={{
                     aspectRatio: "16 / 9",
                     borderBottom: "1px solid",
                     borderColor: "divider",
-                    cursor: "pointer",
                     transition: "0.3s",
                     "&:hover": { opacity: 0.85 },
+                    display:{xs:"flex",sm:"flex"}
                   }}
-                  onClick={handleImageClick}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4 }}
-                />
-              </AnimatePresence>
+                >
+                  <motion.img
+                    key={currentImage} // 👈 图片切换触发重新播放动画
+                    alt={blogData?.title}
+                    src={currentImage}
+                    onClick={handleImageClick}
+                    style={{ width: "100%", cursor: "pointer" }}
+                    className="MuiCardMedia-root"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Box>
+              )}
 
               <CardContent
                 sx={{
-                  mb: 7,
+                  // backgroundImage:{
+                  //   xs:"none",
+                  //   md:`url(${currentImage})`
+                  // },
+                  // backgroundSize: "cover",
+                  // backgroundPosition: "center",
+                  // backgroundRepeat: "no-repeat",
                 }}
               >
                 <Typography gutterBottom variant="caption" component="div">
@@ -193,11 +216,12 @@ function BlogContent({ identifier }: { identifier: string }) {
                   {blogData?.content}
                 </Typography> */}
                 {/* <BlogContentCard content={blogData?.content} variant="body1" /> */}
-               
-                <ReactMarkdown remarkPlugins={[remarkBreaks]}>
-                  {blogData?.content || ''}
-                </ReactMarkdown>
 
+                {/* <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                  {blogData?.content || ""}
+                </ReactMarkdown> */}
+
+                <BlogContentCardUseMarkdown content={blogData?.content || ""}></BlogContentCardUseMarkdown>
               </CardContent>
             </Card>
             <CardActions>
@@ -235,6 +259,7 @@ export default function BlogPage() {
           gap: 4,
         }}
       >
+        
         <BlogContent identifier={identifier as string} />
 
         <Footer />
