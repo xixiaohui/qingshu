@@ -10,8 +10,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
 import BlogContentMarkdown from "./BlogContentMarkdown";
-import Loading from "./Loading";
-import { splitByLineLength } from "@/lib/util";
+import { formatDateSmart, splitByLineLength, splitBySpecial } from "@/lib/util";
+import { blue } from "@mui/material/colors";
 
 const cardData = [
   {
@@ -32,18 +32,15 @@ const cardData = [
 function BlogCotentMain({ identifier }: { identifier: string }) {
   const [blogData, setblogData] = useState<CardItem>();
   const [currentImage, setCurrentImage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(true);
-
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const [contentArray, setcontentArray] = useState<string[]>([]);
+  const [contentArray, setContentArray] = useState<string[]>([]);
 
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
   useEffect(() => {
     async function load() {
-      setIsLoading(true);
       const { data, error } = await supabase
         .from("blogs")
         .select("*")
@@ -65,25 +62,12 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
           const fixedSeed = Math.floor(Math.random() * 10000);
           setCurrentImage(`https://picsum.photos/seed/${fixedSeed}/800/450`);
         }
-        setIsLoading(false);
+
+        setContentArray(splitBySpecial(data?.content || ""));
       }
     }
-    console.log("identifier is " + identifier);
     load();
   }, [identifier]);
-
-  if (isLoading) {
-    return (
-      <>
-        <Loading></Loading>
-      </>
-    );
-  }
-
-  if (blogData?.id && contentArray?.length === 0) {
-    setcontentArray(splitByLineLength(blogData.content || "", 620));
-    console.log(contentArray);
-  }
 
   return (
     <>
@@ -98,7 +82,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs:"column",md:"row"},
+              flexDirection: { xs: "column", md: "row" },
               gap: 2,
               justifyContent: "flex-end", // 横向靠右
               alignItems: "flex-end", // 纵向靠下
@@ -118,7 +102,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   {blogData?.tag}
                 </Typography>
                 <Typography gutterBottom variant="caption" component="div">
-                  {blogData?.created_at}
+                  {formatDateSmart(blogData?.created_at || "")}
                 </Typography>
               </Box>
             </Grid>
@@ -131,10 +115,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   justifyContent: "flex-start",
                 }}
               >
-                {/* <Typography gutterBottom variant="h2" component="div">
+                <Typography
+                  gutterBottom
+                  variant="h2"
+                  component="div"
+                  color="primary"
+                >
                   {blogData?.title}
-                </Typography> */}
-                <p className="text-6xl text-blue-300">{blogData?.title}</p>
+                </Typography>
               </Box>
             </Grid>
 
@@ -147,7 +135,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                 }}
               >
                 <Typography variant="body2" gutterBottom>
-                  {" "}
                   {blogData?.description}
                 </Typography>
               </Box>
@@ -158,7 +145,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "flex-end",
+                  justifyContent: "flex-start",
                 }}
               >
                 <Typography gutterBottom variant="body2" component="div">
@@ -171,7 +158,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs:"column",md:"row"},
+              flexDirection: { xs: "column", md: "row" },
               gap: 2,
             }}
           >
@@ -190,30 +177,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 3 }}>
-              <BlogContentMarkdown
-                content={contentArray?.at(0) || ""}
-              ></BlogContentMarkdown>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 3 }}>
-              {contentArray.length > 1 ? (
+            {contentArray.map((value, index) => (
+              
+              <Grid key={index} size={{ xs: 12, md: 3 }}>
                 <BlogContentMarkdown
-                  content={contentArray?.at(1) || ""}
+                  content={value || ""}
                 ></BlogContentMarkdown>
-              ) : (
-                <></>
-              )}
-            </Grid>
-            <Grid size={{ xs: 12, md: 3 }}>
-              {contentArray.length > 2 ? (
-                <BlogContentMarkdown
-                  content={contentArray?.at(2) || ""}
-                ></BlogContentMarkdown>
-              ) : (
-                <></>
-              )}
-            </Grid>
+              </Grid>
+            ))}
           </Box>
         </Box>
       </Grid>
@@ -221,14 +192,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
   );
 }
 
-export default function BlogContentStyle1({
+export default function BlogContentStyle2({
   identifier,
 }: {
   identifier: string;
 }) {
   return (
     <>
-      <Grid container spacing={2} columns={12} sx={{my:12}}>
+      <Grid container spacing={2} columns={12} sx={{ my: 12 }}>
         <BlogCotentMain identifier={identifier}></BlogCotentMain>
       </Grid>
     </>

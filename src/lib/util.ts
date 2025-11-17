@@ -13,7 +13,8 @@ export const formatDateSmart = (dateString: string) => {
   if (!dateString) return "";
 
   // 判断是否为 ISO 格式（带 T 或 - 符号）
-  const isISO = dateString.includes("T") || /^\d{4}-\d{2}-\d{2}/.test(dateString);
+  const isISO =
+    dateString.includes("T") || /^\d{4}-\d{2}-\d{2}/.test(dateString);
 
   if (isISO) {
     const date = new Date(dateString);
@@ -26,15 +27,19 @@ export const formatDateSmart = (dateString: string) => {
 };
 
 export function splitByLineLength(text: string, maxPerLine: number): string[] {
-  console.log(text)
   const result: string[] = [];
 
   for (let i = 0; i < text.length; i += maxPerLine) {
     result.push(text.slice(i, i + maxPerLine));
   }
-  console.log(result)
   return result;
 }
+
+export const splitBySpecial = (str: string) => {
+  return str
+    .split(/(?=##)/) // 正向断言：以 "##" 作为开头位置切割
+    .filter((s) => s.trim() !== "");
+};
 
 export const chips = [
   "精选",
@@ -45,4 +50,4 @@ export const chips = [
   "情书博物馆",
 ];
 
-export const LATEST = "最新"
+export const LATEST = "最新";

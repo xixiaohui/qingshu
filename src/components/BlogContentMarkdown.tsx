@@ -1,7 +1,10 @@
+"use client"
+
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 
 function BlogContentMoblie({ content }: { content: string }) {
   return (
@@ -100,6 +103,8 @@ function BlogContentMoblie({ content }: { content: string }) {
   );
 }
 
+
+
 function BlogContentPC({ content }: { content: string }) {
   return (
     <>
@@ -192,6 +197,7 @@ function BlogContentPC({ content }: { content: string }) {
     </>
   );
 }
+
 
 export default function BlogContentCardUseMarkdown({
   content,
