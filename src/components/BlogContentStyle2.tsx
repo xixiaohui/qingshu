@@ -178,7 +178,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
             </Grid>
 
             {contentArray.map((value, index) => (
-              
               <Grid key={index} size={{ xs: 12, md: 3 }}>
                 <BlogContentMarkdown
                   content={value || ""}
