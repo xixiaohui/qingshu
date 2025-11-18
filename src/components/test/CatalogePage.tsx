@@ -49,7 +49,8 @@ function CatalogeMain({ name }: { name: string }) {
         .from("blogs")
         .select("*")
         .ilike("tag", `%${name}%`)
-        .order("created_at", { ascending: false }); // false = 倒序;
+        .order("created_at", { ascending: false })
+        .range(5000, 10000);
 
       if (!data || data.length === 0) {
         const titleResult = await supabase
