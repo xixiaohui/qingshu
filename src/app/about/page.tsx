@@ -5,14 +5,24 @@ import NextLink from "next/link";
 import ProTip from "@/components/ProTip";
 import Copyright from "@/components/Copyright";
 import AppTheme from "@/shared-theme/AppTheme";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Link } from "@mui/material";
 import AppAppBar from "@/components/homepage/AppAppBar";
 import Footer from "@/components/homepage/Footer";
 import Hero from "@/components/homepage/Hero";
 
-
-import { Box, Container, Typography, Button, Grid, Card, CardContent } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+} from "@mui/material";
 import { motion } from "framer-motion";
+import FramePage from "@/components/Frame";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 const discribtion = [
   `🌹 平台简介
@@ -53,7 +63,7 @@ const discribtion = [
 
 基于情感语义识别与生成模型，提供 共情式回复建议，帮助用户更好地表达与理解复杂的情绪。
 不是冷冰冰的机器人，而是一个“懂你情绪温度”的朋友。`,
-`🌸 平台愿景
+  `🌸 平台愿景
 
 我们希望：
 
@@ -63,53 +73,61 @@ const discribtion = [
 
 让“爱”不再只是符号或社交姿态，而是可以被表达、被倾听、被理解的真实存在。`,
 
-`用户群体
+  `用户群体
 
 在爱情、亲情、友情中寻求理解与疗愈的人；
 
 喜欢用文字记录情绪与思考的表达者；
 
 希望结识懂得沟通、尊重情感深度的同路人。`,
-
 ];
 
 function AboutContent() {
   return (
     <>
-      <Typography variant="h2" gutterBottom>
+      <Typography variant="h2" color="primary" gutterBottom>
         关于情书
       </Typography>
-      {discribtion.map((value,index)=>(
+      {discribtion.map((value, index) => (
         <Typography variant="body2" key={index}>
           {value}
         </Typography>
       ))}
-      
+    </>
+  );
+}
+
+function AboutQS() {
+  
+  const [totalCount, setTotalCount] = useState(0);
+
+  async function fetchCount() {
+    const { count } = await supabase
+      .from("blogs")
+      .select("*", { count: "exact", head: true });
+
+    if (count) setTotalCount(count);
+  }
+  useEffect(() => {
+    fetchCount();
+  }, []);
+  
+  return (
+    <>
+      <Typography variant="h2" gutterBottom color="primary">
+        收录{totalCount}条QS
+      </Typography>
+      <Link href="/all">查看所有QS</Link>
+      <Link href="/filter">热门搜索</Link>
     </>
   );
 }
 
 export default function About() {
   return (
-    <>
-     
-      <AppAppBar />
-      
-      <Container
-        maxWidth="lg"
-        component="main"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          my: 16,
-          gap: 4,
-        }}
-      >
-        <AboutContent></AboutContent>
-        <Footer />
-      </Container>
-    </>
+    <FramePage>
+      <AboutContent></AboutContent>
+      <AboutQS></AboutQS>
+    </FramePage>
   );
 }
-
-

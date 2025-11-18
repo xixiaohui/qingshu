@@ -26,6 +26,7 @@ export default function BlogListButton() {
   const [blogs, setBlogs] = useState<any[]>([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  
   const LIMIT = 7;
 
   const fetchBlogs = async () => {

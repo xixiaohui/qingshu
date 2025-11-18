@@ -51,3 +51,16 @@ export const chips = [
 ];
 
 export const LATEST = "最新";
+
+export const PAGE_LIMIT = 7;
+
+export const mainKeyWords =[
+  "精选",
+  "表白专栏",
+  "散场信箱",
+  "暧昧集",
+  "心绪日记",
+  "情书博物馆",
+  "致橡树"
+];
+
