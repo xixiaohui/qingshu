@@ -66,7 +66,7 @@ export default function BlogList() {
   const pageCount = Math.ceil(totalCount / pageSize);
 
   return (
-    <FramePage>
+    <>
       <Box sx={{ py: 4 }}>
         {/* 加载中 */}
         {loading && (
@@ -78,7 +78,7 @@ export default function BlogList() {
         {/* 博客列表 */}
         {!loading && (
           <Grid container spacing={2} columns={12}>
-            <MainContentCard data={blogs} md={4}></MainContentCard>
+            <MainContentCard data={blogs} md={6}></MainContentCard>
           </Grid>
         )}
 
@@ -99,6 +99,6 @@ export default function BlogList() {
           />
         </Box>
       </Box>
-    </FramePage>
+    </>
   );
 }

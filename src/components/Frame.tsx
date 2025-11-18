@@ -19,11 +19,12 @@ export default function FramePage({ children }: FramePageProps) {
           flexDirection: "column",
           my: 16,
           gap: 4,
+         
         }}
       >
         {children}
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }
