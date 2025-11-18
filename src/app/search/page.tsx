@@ -16,6 +16,7 @@ import { useSearchParams } from "next/navigation";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
+import BlogList from "@/components/test/BlogList";
 
 function SearchForm() {
   const router = useRouter();

@@ -15,7 +15,7 @@ import { slugify } from "./Latest";
 import { motion } from "framer-motion";
 import { formatDateSmart } from "@/lib/util";
 
-const StyledCard = styled(Card)(({ theme }) => ({
+export const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   padding: 0,
@@ -35,7 +35,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   transition: "all 0.2s ease-in-out",
 }));
 
-const StyledCardContent = styled(CardContent)({
+export const StyledCardContent = styled(CardContent)({
   display: "flex",
   flexDirection: "column",
   gap: 4,
@@ -46,7 +46,7 @@ const StyledCardContent = styled(CardContent)({
   },
 });
 
-const StyledTypography = styled(Typography)({
+export const StyledTypography = styled(Typography)({
   display: "-webkit-box",
   WebkitBoxOrient: "vertical",
   WebkitLineClamp: 2,

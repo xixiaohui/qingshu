@@ -2,7 +2,7 @@ import json
 import pandas as pd
 
 # 假设你的 JSON 数据保存为 blogs_full.json
-with open("blogs.json", "r", encoding="utf-8") as f:
+with open("poems_10000.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 # 转 DataFrame
