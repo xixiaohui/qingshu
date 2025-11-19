@@ -16,7 +16,7 @@ key: str = os.environ.get("SUPABASE_KEY")
 
 supabase: Client = create_client(url, key)
 
-JSON_FILE = "blogs_data.json"      # 你的 JSON 文件名
+JSON_FILE = "blogs_data.json"  # 你的 JSON 文件名
 TABLE = "blogs"  # 表名换成你的
 BATCH_SIZE = 200  # 每次处理 200 条，可根据负载调整
 
@@ -103,6 +103,7 @@ def count():
 
     print(response.data)
 
+
 # count()
 
 
@@ -112,7 +113,7 @@ def insert_batch(batch, retry=3):
         try:
             response = supabase.table(TABLE).insert(batch).execute()
             print(f"✔ 插入成功：{len(batch)} 条,")
-            print(response.data)
+            # print(response.data)
             return True
         except Exception as e:
             print(f"❌ 插入失败，第 {attempt+1} 次尝试：", e)
@@ -121,9 +122,10 @@ def insert_batch(batch, retry=3):
     print("⛔ 多次尝试仍失败，跳过这一批")
     return False
 
+
 def test_insert_batch():
 
-    with open(JSON_FILE,"r",encoding="utf-8") as f:
+    with open(JSON_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     total = len(data)
@@ -139,9 +141,9 @@ def test_insert_batch():
 
         print(f"→ 正在插入第 {i+1}/{total_batches} 批 ({len(batch)} 条)")
 
-        print(batch)
+        # print(batch)
         success = insert_batch(batch)
-    
+
         if not success:
             print(f"⚠ 第 {i+1} 批插入失败，暂停后继续")
             time.sleep(3)
@@ -151,4 +153,90 @@ def test_insert_batch():
 
     print("🎉 全部插入完成")
 
-test_insert_batch()
+
+# test_insert_batch()
+
+content = """
+## 原文
+How do I love thee? Let me count the ways.
+I love thee to the depth and breadth and height
+My soul can reach, when feeling out of sight
+For the ends of Being and ideal Grace.
+I love thee to the level of every day's
+Most quiet need, by sun and candle-light.
+I love thee freely, as men strive for Right;
+I love thee purely, as they turn from Praise.
+I love thee with the passion put to use
+In my old griefs, and with my childhood’s faith.
+I love thee with a love I seemed to lose
+With my lost saints,—I love thee with the breath,
+Smiles, tears, of all my life!—and, if God choose,
+I shall but love thee better after death.
+
+## 译文
+我怎样爱你？让我细数爱的方式。
+我爱你，深及灵魂的高度与广度与深度，
+那是灵魂在寻觅存在与恩典极限时所能触及的地方。
+我爱你，如每日宁静的需求般自然，
+在阳光下，也在烛光中。
+我自由地爱你，如人们追求正义；
+我纯洁地爱你，如他们远离虚荣。
+我爱你，用尽我旧日悲痛的热情，
+以及童年的信仰。
+我爱你，用那份曾因失去圣徒而消逝的爱，
+以我一生的呼吸、微笑与泪水爱你！
+若上帝允许，
+我将在死后更深地爱你。
+"""
+
+def test_update():
+
+    response = (
+        supabase.table(TABLE).update({"content": content}).eq("id", 101051).execute()
+    )
+
+# test_update()
+
+CONTENT_DIR = "contents"   # 你的 txt 文件夹
+
+
+def read_content_from_file(file_path):
+    """读取 content 文件"""
+    with open(file_path, "r", encoding="utf-8") as f:
+        return f.read()
+
+def update_content(id, content):
+    """更新 supabase 指定 id 的 content 字段"""
+    try:
+        supabase.table(TABLE).update({
+            "content": content
+        }).eq("id", id).execute()
+        print(f"✔ 更新成功 ID={id}")
+    except Exception as e:
+        print(f"❌ 更新失败 ID={id} 错误：{e}")
+
+def test_update_from_content_dir():
+    files = os.listdir(CONTENT_DIR)
+    txt_files = [f for f in files if f.endswith(".txt")]
+
+    print(f"发现 {len(txt_files)} 个内容文件")
+
+    for filename in txt_files:
+        # 文件名例如 "2157.txt"
+        id_str = filename.replace(".txt", "")
+        if not id_str.isdigit():
+            print(f"跳过无效文件：{filename}")
+            continue
+
+        id = int(id_str)
+        file_path = os.path.join(CONTENT_DIR, filename)
+
+        # 读取内容
+        content = read_content_from_file(file_path)
+
+        # 更新到 supabase
+        update_content(id, content)
+
+    print("🎉 全部完成！")
+
+# test_update_from_content_dir()
