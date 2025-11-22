@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Masonry from "@mui/lab/Masonry";
 import FramePage from "../Frame";
-import { slugify } from "./Latest";
+
 
 const pageSize = 7;
 
