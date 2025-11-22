@@ -79,7 +79,7 @@ function BlogListMasonryMain() {
           {blogs.map((item) => (
             <Card key={item.id} sx={{ overflow: "hidden" }}>
               <Link
-                href={`/blog/${slugify(item.title)}`}
+                href={`/blog/${item.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <CardMedia

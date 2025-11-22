@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import Masonry from "@mui/lab/Masonry";
 import FramePage from "../Frame";
-import { slugify } from "./Latest";
+
 
 const pageSize = 12;
 
@@ -92,7 +92,7 @@ function BlogListMasonryInfiniteMain() {
         {blogs.map((item) => (
           <Card key={item.id} sx={{ overflow: "hidden" }}>
             <Link
-              href={`/blog/${slugify(item.title)}`}
+              href={`/blog/${item.slug}`}
               style={{ textDecoration: "none" }}
             >
               <CardMedia
