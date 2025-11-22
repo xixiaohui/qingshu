@@ -65,6 +65,6 @@ export const mainKeyWords =[
   "Elizabeth Barrett Browning",
   "Christina Rossetti",
   "Lord Byron",
-  "gutenburg"
+  "gutenberg",
 ];
 

@@ -105,7 +105,7 @@ function BlogListButton({ message }: { message: string }) {
           .select("*")
           .ilike(field, `%${message}%`)
           .range(start, end)
-          .order("id", { ascending: false });
+          .order("id", { ascending: true });
 
         if (res.data && res.data.length > 0) {
           data = res.data;

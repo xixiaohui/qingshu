@@ -156,7 +156,6 @@ function MainContentChips({ onSend }: { onSend: (text: string) => void }) {
             <RssFeedRoundedIcon />
           </IconButton>
         </Link>
-        
       </Box>
     </Box>
   );
