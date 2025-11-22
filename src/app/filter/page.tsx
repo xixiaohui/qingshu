@@ -2,7 +2,6 @@
 import AppAppBar from "@/components/homepage/AppAppBar";
 import Footer from "@/components/homepage/Footer";
 import BlogList from "@/components/test/BlogList";
-import { slugify } from "@/components/test/Latest";
 import {
   Author,
   StyledCardContent,
@@ -96,7 +95,7 @@ function BlogListButton({ message }: { message: string }) {
       .select("*")
       .ilike("tag", `%${message}%`)
       .range(start, end)
-      .order("id", { ascending: false });
+      .order("id", { ascending: true });
 
     if (!error && (!data || data.length === 0)) {
       const fields = ["title", "content"];
@@ -167,7 +166,7 @@ function BlogListButton({ message }: { message: string }) {
           {blogs.map((data, index) => (
             <Card key={index} variant="outlined" tabIndex={0}>
               <Link
-                href={`/blog/${slugify(data.title)}`}
+                href={`/blog/${data.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <CardMedia

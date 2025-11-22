@@ -20,9 +20,9 @@ supabase = create_client(url, key)
 
 
 
-START_ID = 8247
-END_ID = 100000
-BATCH = 1  # 每批 50 条，避免超时
+START_ID = 37289
+END_ID = 100078
+BATCH = 4  # 每批 50 条，避免超时
 
 for batch_start in tqdm(range(START_ID, END_ID + 1, BATCH), desc="Clearing slug"):
     batch_ids = list(range(batch_start, min(batch_start + BATCH, END_ID + 1)))

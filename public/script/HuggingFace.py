@@ -143,3 +143,72 @@ def _update_batch(batch):
     time.sleep(0.2)
 
 # update_supabase_blogs_content()
+
+
+# ----------------------------------------------------------
+# 提取所有id
+# ----------------------------------------------------------
+def read_parquet_write_id_json():
+    # 或者你已经下载到本地
+    dataset = load_dataset(
+        "parquet", data_files="../../../DATA/QS/train-00000-of-00001-fa9fb9e1f16eed7e.parquet", split="train"
+    )
+
+    print(dataset[0])      # 第一首诗
+    print(len(dataset))    # 总共多少条，通常就是 3085117
+
+    # 用列表保存所有 gid
+    gutenberg_ids = []
+
+    for item in tqdm(dataset):
+        gid = item["gutenberg_id"]
+        gutenberg_ids.append(gid)
+
+    # 去重并排序（可选）
+    unique_ids = sorted(list(set(gutenberg_ids)))
+
+    # 存到 JSON 文件
+    with open("gutenberg_ids.json", "w", encoding="utf-8") as f:
+        json.dump(gutenberg_ids, f, ensure_ascii=False, indent=2)
+
+# read_parquet_write_id_json()
+
+def read_ids():
+    # 1️⃣ 读取原始 JSON
+    with open("gutenberg_ids.json", "r", encoding="utf-8") as f:
+        ids = json.load(f)
+
+    # 2️⃣ 去重并排序（可选）
+    unique_ids = sorted(list(set(ids)))
+
+    # 3️⃣ 保存为新的 JSON 文件
+    with open("gutenberg_ids_unique.json", "w", encoding="utf-8") as f:
+        json.dump(unique_ids, f, ensure_ascii=False, indent=2)
+
+    print(f"原始数量: {len(ids)}, 去重后数量: {len(unique_ids)}")
+
+# read_ids()
+
+def read_unique_ids():
+    # 1️⃣ 读取原始 JSON
+    with open("gutenberg_ids_unique.json", "r", encoding="utf-8") as f:
+        ids = json.load(f)
+
+    for blog_id in tqdm(ids,desc="Updating tags"):
+        res = supabase.table("blogs").select("tag").eq("id",blog_id).single().execute()
+
+        if not res.data:
+            continue
+
+        old_tag = res.data.get("tag") or ""
+        # 拼接新 tag
+        if old_tag.strip() == "":
+            new_tag = "gutenberg"
+        else:
+            new_tag = old_tag + ",gutenberg"
+
+        # 写回 Supabase
+        supabase.table("blogs").update({"tag": new_tag}).eq("id", blog_id).execute()
+
+
+read_unique_ids()
