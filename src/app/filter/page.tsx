@@ -96,7 +96,6 @@ function BlogListButton({ message }: { message: string }) {
       .ilike("tag", `%${message}%`)
       .range(start, end)
       .order("id", { ascending: true });
-
     if (!error && (!data || data.length === 0)) {
       const fields = ["title", "content"];
 
