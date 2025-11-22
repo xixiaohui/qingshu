@@ -42,4 +42,4 @@ def generate_poems(n=10000):
     print(f"生成完成，共 {n} 条，文件已保存为 poems_10000.json")
 
 # 运行函数
-generate_poems(100000)
+# generate_poems(100000)

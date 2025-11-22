@@ -11,7 +11,6 @@ import {
   Avatar,
   Link,
 } from "@mui/material";
-import { slugify } from "./Latest";
 import { motion } from "framer-motion";
 import { formatDateSmart } from "@/lib/util";
 
@@ -61,6 +60,10 @@ export function Author({
   authors: { name: string; avatar: string }[];
   time?: string;
 }) {
+  if(!authors){
+    authors=[{name:"",avatar:"/static/images/avatar/7.jpg"}]
+  }
+
   return (
     <Box
       sx={{
@@ -109,6 +112,7 @@ export type CardItem = {
   authors: { name: string; avatar: string }[];
   content?: string;
   created_at?: string;
+  slug?:string
 };
 
 // 单卡组件
@@ -130,7 +134,7 @@ function ContentCard({
   return (
     <Grid size={{ xs: 12, md: md }}>
       <Link
-        href={`/blog/${slugify(data.title)}`}
+        href={`/blog/${data.slug}`}
         style={{ textDecoration: "none" }}
       >
         <StyledCard
@@ -192,7 +196,7 @@ function ContentCard2({
   return (
     <>
       <Link
-        href={`/blog/${slugify(data.title)}`}
+        href={`/blog/${data.slug}`}
         style={{ textDecoration: "none" }}
       >
         <StyledCard

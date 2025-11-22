@@ -39,7 +39,7 @@ function MainContentChips({ onSend }: { onSend: (text: string) => void }) {
         display: "flex",
         flexDirection: { xs: "column-reverse", md: "column" },
         width: "100%",
-        justifyContent: "space-between",
+        justifyContent: "start",
         alignItems: { xs: "start", md: "center" },
         gap: 4,
         overflow: "auto",
@@ -71,15 +71,6 @@ function MainContentChips({ onSend }: { onSend: (text: string) => void }) {
           />
         ))}
       </Box>
-      <Box
-        sx={{
-          display: { xs: "none", sm: "flex" },
-          flexDirection: "row",
-          gap: 1,
-          width: { xs: "100%", md: "fit-content" },
-          overflow: "auto",
-        }}
-      ></Box>
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import json
 import os
 
+LIMIT = 3
 
 def main():
     # 输入文件: blogs_index.json
@@ -23,7 +24,7 @@ def main():
         with open(f"content_files/{blog_id}.md", "w", encoding="utf-8") as f:
             f.write(content)
 
-        if index > 3:
+        if index > LIMIT:
             break
         index += 1
 

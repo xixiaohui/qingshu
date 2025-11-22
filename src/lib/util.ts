@@ -61,6 +61,9 @@ export const mainKeyWords =[
   "暧昧集",
   "心绪日记",
   "情书博物馆",
-  "致橡树"
+  "Shakespeare",
+  "Elizabeth Barrett Browning",
+  "Christina Rossetti",
+  "Lord Byron"
 ];
 

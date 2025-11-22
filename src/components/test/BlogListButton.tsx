@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import Masonry from "@mui/lab/Masonry";
 import { supabase } from "@/lib/supabaseClient";
-import { slugify } from "./Latest";
 import FramePage from "../Frame";
 import {
   Author,
@@ -42,7 +41,7 @@ export default function BlogListButton() {
       .from("blogs")
       .select("*")
       .range(start, end)
-      .order("id", { ascending: false });
+      .order("id", { ascending: true });
 
     if (error) {
       console.error(error);
@@ -79,7 +78,7 @@ export default function BlogListButton() {
           {blogs.map((data, index) => (
             <Card key={index} variant="outlined" tabIndex={0}>
               <Link
-                href={`/blog/${slugify(data.title)}`}
+                href={`/blog/${data.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <CardMedia

@@ -102,12 +102,12 @@ function Author({
   );
 }
 
-export const slugify = (title: string) =>
-  title
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, "-") // 空格换 -
-    .replace(/[^\w\-一-龥]+/g, ""); // 保留中文、字母、数字、连字符
+// export const slugify = (title: string) =>
+//   title
+//     .trim()
+//     .toLowerCase()
+//     .replace(/\s+/g, "-") // 空格换 -
+//     .replace(/[^\w\-一-龥]+/g, ""); // 保留中文、字母、数字、连字符
 
 //每页显示数
 const pageLimit = 7;
@@ -161,7 +161,7 @@ export default function Latest() {
           .map((blog, index) => (
             <Grid key={index} size={{ xs: 12, sm: 6 }}>
               <Link
-                href={`/blog/${slugify(blog.title)}`}
+                href={`/blog/${blog.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <Box
