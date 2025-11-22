@@ -45,18 +45,21 @@ function CatalogeMain({ name }: { name: string }) {
   useEffect(() => {
     async function load() {
       setLoading(true);
+      console.log(`name is ${name}`)
       let { data, error } = await supabase
         .from("blogs")
         .select("*")
         .ilike("tag", `%${name}%`)
-        .order("id", { ascending: false });
+        .order("id", { ascending: true })
+        .range(0, 49);
 
       if (!data || data.length === 0) {
         const titleResult = await supabase
           .from("blogs")
           .select("*")
           .ilike("title", `%${name}%`)
-          .order("id", { ascending: false }); // false = 倒序;
+          .order("id", { ascending: true })// false = 倒序;
+          .range(0, 49);
 
         data = titleResult.data;
 
@@ -65,7 +68,8 @@ function CatalogeMain({ name }: { name: string }) {
             .from("blogs")
             .select("*")
             .ilike("content", `%${name}%`)
-            .order("id", { ascending: false }); // false = 倒序;
+            .order("id", { ascending: true })// false = 倒序;
+            .range(0, 49);
           data = contentResult.data;
         }
       }
