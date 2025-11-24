@@ -112,7 +112,7 @@ function BlogContentPC({ content }: { content: string }) {
         sx={{
           lineHeight: 1.2, // ← 更适合中文
           fontSize: "1.05rem", // ← 微调舒适阅读字号
-          color: "text.primary",
+          color: "#373737",
           fontFamily: `"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif`, // ← 中文更漂亮
 
           // PC端限制高度，让内容在 Box 内滚动

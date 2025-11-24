@@ -71,7 +71,10 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
 
   return (
     <>
-      <Grid size={{ xs: 12 }}>
+      <Grid size={{ xs: 12 }} sx={{
+        backgroundColor:"#F3F0E6",
+        color:"#373737"
+      }}>
         <Box
           sx={{
             display: "flex",
@@ -119,7 +122,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   gutterBottom
                   variant="h2"
                   component="div"
-                  color="primary"
+                  color="#373737"
                 >
                   {blogData?.title}
                 </Typography>
@@ -134,9 +137,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   justifyContent: "flex-end",
                 }}
               >
-                <Typography variant="body2" gutterBottom>
-                  {blogData?.description}
-                </Typography>
+
               </Box>
             </Grid>
 
@@ -144,10 +145,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               <Box
                 sx={{
                   display: "flex",
-                  flexDirection: "row",
+                  flexDirection: "column",
                   justifyContent: "flex-start",
                 }}
               >
+                <Typography variant="body2" gutterBottom>
+                  {blogData?.description}
+                </Typography>
+
                 <Typography gutterBottom variant="body2" component="div">
                   {blogData?.authors[0].name}
                 </Typography>
