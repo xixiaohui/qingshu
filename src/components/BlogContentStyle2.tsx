@@ -12,6 +12,7 @@ import { Author, CardItem } from "./test/MainContentCard";
 import BlogContentMarkdown from "./BlogContentMarkdown";
 import { formatDateSmart, splitByLineLength, splitBySpecial } from "@/lib/util";
 import { blue } from "@mui/material/colors";
+import LongTextPagination from "./LongTextPagination";
 
 const cardData = [
   {
@@ -168,6 +169,20 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
             }}
           >
             <Grid size={{ xs: 12, md: 3 }}>
+              
+            </Grid>
+
+            {contentArray.map((value, index) => (
+              <Grid key={index} size={{ xs: 12, md: 6 }}>
+                {/* <BlogContentMarkdown
+                  content={value || ""}
+                ></BlogContentMarkdown> */}
+
+                <LongTextPagination content={value || ""} />
+              </Grid>
+            ))}
+
+            <Grid size={{ xs: 12, md: 3 }}>
               <Card>
                 <CardMedia
                   component="img"
@@ -181,14 +196,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                 />
               </Card>
             </Grid>
-
-            {contentArray.map((value, index) => (
-              <Grid key={index} size={{ xs: 12, md: 3 }}>
-                <BlogContentMarkdown
-                  content={value || ""}
-                ></BlogContentMarkdown>
-              </Grid>
-            ))}
           </Box>
         </Box>
       </Grid>

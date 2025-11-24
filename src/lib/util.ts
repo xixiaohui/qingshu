@@ -41,6 +41,14 @@ export const splitBySpecial = (str: string) => {
     .filter((s) => s.trim() !== "");
 };
 
+export function splitTextToPages(text: string, pageSize: number = 1000) {
+  const pages = [];
+  for (let i = 0; i < text.length; i += pageSize) {
+    pages.push(text.slice(i, i + pageSize));
+  }
+  return pages;
+}
+
 export const chips = [
   "精选",
   "表白专栏",
