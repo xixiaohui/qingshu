@@ -58,7 +58,7 @@ export default function LongTextPagination({ content }: { content: string }) {
         sx={{
           display: "flex",
           justifyContent: "flex-start",
-          m: 4,
+          m: 5,
           "& .MuiPaginationItem-root": {
             color: "#373737", // 普通页码颜色
           },

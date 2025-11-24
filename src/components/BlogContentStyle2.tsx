@@ -35,8 +35,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
   const [currentImage, setCurrentImage] = useState<string>("");
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const [contentArray, setContentArray] = useState<string[]>([]);
-
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
@@ -63,8 +61,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
           const fixedSeed = Math.floor(Math.random() * 10000);
           setCurrentImage(`https://picsum.photos/seed/${fixedSeed}/800/450`);
         }
-
-        setContentArray(splitBySpecial(data?.content || ""));
       }
     }
     load();
@@ -72,10 +68,13 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
 
   return (
     <>
-      <Grid size={{ xs: 12 }} sx={{
-        backgroundColor:"#F3F0E6",
-        color:"#373737"
-      }}>
+      <Grid
+        size={{ xs: 12 }}
+        sx={{
+          backgroundColor: "#F3F0E6",
+          color: "#373737",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -90,6 +89,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               gap: 2,
               justifyContent: "flex-end", // 横向靠右
               alignItems: "flex-end", // 纵向靠下
+              mt: 3,
             }}
           >
             <Grid size={{ xs: 12, md: 3 }}>
@@ -111,7 +111,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 3 }}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -119,28 +119,29 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   justifyContent: "flex-start",
                 }}
               >
-                <Typography
+                {/* <Typography
                   gutterBottom
                   variant="h2"
                   component="div"
                   color="#373737"
                 >
                   {blogData?.title}
-                </Typography>
+                </Typography> */}
+                <p className="text-8xl tracking-tighter text-balance text-[#373737]">
+                  {blogData?.title}
+                </p>
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 3 }}>
+            {/* <Grid size={{ xs: 12, md: 3 }}>
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-end",
                 }}
-              >
-
-              </Box>
-            </Grid>
+              ></Box>
+            </Grid> */}
 
             <Grid size={{ xs: 12, md: 3 }}>
               <Box
@@ -168,19 +169,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               gap: 2,
             }}
           >
-            <Grid size={{ xs: 12, md: 3 }}>
-              
+            <Grid size={{ xs: 12, md: 3 }}></Grid>
+
+            <Grid size={{ xs: 12, md: 6 }}>
+              {/* <BlogContentMarkdown
+                content={value || ""}
+              ></BlogContentMarkdown> */}
+              <LongTextPagination content={blogData?.content || ""} />
             </Grid>
-
-            {contentArray.map((value, index) => (
-              <Grid key={index} size={{ xs: 12, md: 6 }}>
-                {/* <BlogContentMarkdown
-                  content={value || ""}
-                ></BlogContentMarkdown> */}
-
-                <LongTextPagination content={value || ""} />
-              </Grid>
-            ))}
 
             <Grid size={{ xs: 12, md: 3 }}>
               <Card>
