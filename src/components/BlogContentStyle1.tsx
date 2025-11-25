@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Author, CardItem } from "@/components/test/MainContentCard";
 import { supabase } from "@/lib/supabaseClient";
 import {
@@ -30,6 +30,7 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import Loading from "@/components/Loading";
 import BlogContentMarkdown from "@/components/BlogContentMarkdown";
+import LongTextPagination from "./LongTextPagination";
 const cardData = [
   {
     img: "https://picsum.photos/800/450?random=1",
@@ -42,8 +43,7 @@ const cardData = [
         avatar: "/static/images/avatar/1.jpg",
       },
     ],
-    content:
-      "## QS",
+    content: "## QS",
   },
 ];
 
@@ -140,7 +140,11 @@ function BlogContent({ identifier }: { identifier: string }) {
 
   return (
     <>
-      <Grid container columns={12}>
+      <Grid
+        container
+        columns={12}
+    
+      >
         <Grid size={{ xs: 12, md: 6 }} offset={{ md: 3 }}>
           <Box
             sx={{
@@ -156,6 +160,8 @@ function BlogContent({ identifier }: { identifier: string }) {
                 overflow: "hidden",
                 width: "100%",
                 mx: "auto",
+                backgroundColor: "#F3F0E6",
+        
               }}
               ref={cardRef}
               elevation={0}
@@ -186,20 +192,26 @@ function BlogContent({ identifier }: { identifier: string }) {
                 </Box>
               )}
 
-              <CardContent>
+              <CardContent sx={{
+                color:"#373737"
+              }}>
                 <Typography gutterBottom variant="caption" component="div">
                   {blogData?.tag}
                 </Typography>
-                <Typography gutterBottom variant="h6" component="div">
+                {/* <Typography gutterBottom variant="h6" component="div">
                   {blogData?.title}
-                </Typography>
+                </Typography> */}
+                <p className="text-5xl tracking-tighter text-balance text-[#373737]">
+                  {blogData?.title}
+                </p>
                 <Author
                   authors={blogData?.authors ?? []}
                   time={blogData?.created_at}
                 />
-                <BlogContentMarkdown
+                {/* <BlogContentMarkdown
                   content={blogData?.content || ""}
-                ></BlogContentMarkdown>
+                ></BlogContentMarkdown> */}
+                <LongTextPagination content={blogData?.content || ""} />
               </CardContent>
             </Card>
             <CardActions>
@@ -219,8 +231,6 @@ function BlogContent({ identifier }: { identifier: string }) {
     </>
   );
 }
-
-
 
 export default function BlogContentStyle1({
   identifier,

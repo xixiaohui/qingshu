@@ -15,8 +15,8 @@ function BlogContentMoblie({ content }: { content: string }) {
           fontFamily: `"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif`,
           fontSize: { xs: "1.05rem", sm: "1.1rem" }, // ← 手机更大一点
           lineHeight: { xs: 1.95, sm: 1.85 }, // ← 中文更舒适的行距
-          color: "text.primary",
-
+         
+          color: "#373737",
           px: { xs: 1, sm: 2 }, // ← 手机保留留白
 
           // 段落
