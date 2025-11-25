@@ -115,8 +115,8 @@ export default function Footer() {
           <Link color="text.secondary" variant="body2" href="/end">
             散场信箱
           </Link>
-          <Link color="text.secondary" variant="body2" href="/about">
-            了解情书
+          <Link color="text.secondary" variant="body2" href="/blog_zh">
+            中文文章
           </Link>
         </Box>
         <Box
