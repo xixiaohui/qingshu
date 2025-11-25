@@ -5,6 +5,8 @@ import { CardItem } from "@/components/test/MainContentCard";
 import { Box, Grid, Link } from "@mui/material";
 import { useEffect, useState } from "react";
 
+import { Stack } from "@mui/material";
+
 export default function BlogZhPage() {
   const [blogs, setBlogs] = useState<CardItem[]>([]);
 
@@ -25,20 +27,20 @@ export default function BlogZhPage() {
     <>
       <CatalogePage catalogeName="中文文章">
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, md: 3 }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                mr: 1,
-              }}
+          <Grid size={12}>
+            <Stack
+              direction="row" // 横向排列
+              flexWrap="wrap" // 自动换行
+              spacing={1} // 间距
             >
               {blogs.map((item, i) => (
                 <Link key={i} href={`/blog/${item.id}`}>
-                  {item.title}
+                  <p className="text-sm m-0">
+                    {i + 1}: {item.title}
+                  </p>
                 </Link>
               ))}
-            </Box>
+            </Stack>
           </Grid>
         </Grid>
       </CatalogePage>
