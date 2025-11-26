@@ -69,20 +69,13 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
-  const handleTranslate = async ({
-    textToTranslate,
-  }: {
-    textToTranslate: string;
-  }) => {
+  const handleTranslate = async (textToTranslate: string) => {
     try {
       const res = await fetch("/api/translate", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json", // ✅ 必须指定
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           text: textToTranslate,
-          target: "zh-CN", // 翻译成英文，可改为 zh / ja / ko / es
         }),
       });
 
@@ -92,7 +85,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
 
       const data: { result: string } = await res.json();
       setResult(data.result);
-      console.log(data.result);
     } catch (error) {
       console.error("翻译出错:", error);
       setResult("翻译失败，请重试");
@@ -132,32 +124,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   flexDirection: "row",
                   justifyContent: "flex-start",
                   alignItems: "flex-start",
-                  m: 1,
+                  m: 2,
                 }}
               >
-                {/* <Typography
-                  gutterBottom
-                  variant="h2"
-                  component="div"
-                  color="#373737"
-                >
-                  {blogData?.title}
-                </Typography> */}
                 <p className="text-8xl tracking-tighter text-balance text-[#373737]">
                   {blogData?.title}
                 </p>
               </Box>
             </Grid>
-
-            {/* <Grid size={{ xs: 12, md: 3 }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-end",
-                }}
-              ></Box>
-            </Grid> */}
 
             <Grid size={{ xs: 12, md: 3 }}>
               <Box
@@ -204,42 +178,54 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               gap: 2,
             }}
           >
-            <Grid size={{ xs: 12, md: 6 }} sx={{ m: 3 }}>
+            <Grid
+              size={{ xs: 12, md: 5 }}
+              sx={{
+                m:2,
+                display: "flex",
+                justifyContent: "center", // 水平居中
+                alignItems: "center", // 垂直居中（可选）
+                flexDirection: "column", // 内容上下排列
+              }}
+            >
               <LongTextPagination content={blogData?.content || ""} />
-              <Grid size={{ xs: 12, md: 6 }}>
-                <Card>
-                  <CardMedia
-                    component="img"
-                    alt={blogData?.title}
-                    image={blogData?.img}
-                    sx={{
-                      aspectRatio: "16 / 9",
-                      borderBottom: "1px solid",
-                      borderColor: "divider",
-                    }}
-                  />
-                </Card>
-              </Grid>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 6 }} sx={{ m: 3 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() =>
-                  handleTranslate({
-                    textToTranslate: blogData?.content || "",
-                  })
-                }
-              >
-                点击翻译
-              </Button>
+            <Grid
+              size={{ xs: 12, md: 5 }}
+              sx={{
+                m:2,
+                display: {xs:"none",md:'flex'},
+                justifyContent: "center", // 水平居中
+                alignItems: "center", // 垂直居中（可选）
+                flexDirection: "column", // 内容上下排列
+              }}
+            >
+              <LongTextPagination content={blogData?.content || ""} />
+            </Grid>
 
-              {result && (
-                <Box mt={2}>
-                  <LongTextPagination content={result || ""} />
-                </Box>
-              )}
+            <Grid
+              size={{ xs: 12, md: 2 }}
+              sx={{
+                mr:2,
+                display: "flex",
+                justifyContent: "flex-start", // 水平居中
+                alignItems: "flex-start", // 垂直居中（可选）
+                flexDirection: "column", // 内容上下排列
+              }}
+            >
+              <Card>
+                <CardMedia
+                  component="img"
+                  alt={blogData?.title}
+                  image={blogData?.img}
+                  sx={{
+                    aspectRatio: "16 / 9",
+                    borderBottom: "1px solid",
+                    borderColor: "divider",
+                  }}
+                />
+              </Card>
             </Grid>
           </Box>
         </Box>
