@@ -6,13 +6,14 @@ import BlogContentStyle1 from "@/components/BlogContentStyle1";
 import { useParams } from "next/navigation";
 import BlogContentStyle2 from "@/components/BlogContentStyle2";
 import { useMediaQuery, useTheme } from "@mui/system";
-import theme from "@/theme";
+import BlogContentStyle3 from "@/components/BlogContentStyle3";
 
-type BlogStyleType = "style1" | "style2";
+type BlogStyleType = "style1" | "style2" | "style3";
 
 const components: Record<BlogStyleType, React.FC<{ identifier: string }>> = {
   style1: BlogContentStyle1,
   style2: BlogContentStyle2,
+  style3: BlogContentStyle3,
 };
 
 const BlogContent = ({
@@ -29,6 +30,9 @@ const BlogContent = ({
     style2: () => (
       <BlogContentStyle2 identifier={identifier}></BlogContentStyle2>
     ),
+    style3: () => (
+      <BlogContentStyle3 identifier={identifier}></BlogContentStyle3>
+    ),
   };
 
   const RenderComponent = style[type];
@@ -41,7 +45,7 @@ const typeByScreen = {
   sm: "style1",
   md: "style2",
   lg: "style2",
-  xl: "style2",
+  xl: "style3",
 } as const;
 
 export default function BlogPage() {

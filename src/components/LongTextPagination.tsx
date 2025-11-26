@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Box, Pagination, Typography } from "@mui/material";
+import { Box, Grid, Pagination, Typography } from "@mui/material";
 import BlogContentMarkdown from "./BlogContentMarkdown";
 
 function splitTextToPages(text: string, size: number = 1000) {
@@ -32,21 +32,37 @@ export default function LongTextPagination({ content }: { content: string }) {
   const pages = useMemo(() => paginateByLines(content, 14), [content]);
 
   return (
-    <Box sx={{ maxWidth: 800, margin: "1 auto" }}>
-      {/* 内容部分 */}
-      {/* <Typography
-        sx={{
-          whiteSpace: "pre-wrap",
-          lineHeight: 1.8,
-          fontSize: "17px",
-          mb: 3,
-          wordBreak: "break-word",
-        }}
-      >
-        {pages[page - 1]}
-      </Typography> */}
-
-      <BlogContentMarkdown content={pages[page - 1]}></BlogContentMarkdown>
+    <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "100%" }}>
+      <Grid container columns={12}>
+        <Grid size={{ xs: 12, md: 5 }} sx={{ mx: 1 }}>
+          <Box
+            sx={{
+              maxWidth: "100%",
+              overflow: "hidden",
+             
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Box sx={{ width: "100%" }}>
+              <BlogContentMarkdown
+                content={pages[page - 1]}
+              ></BlogContentMarkdown>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid size={{ xs: 12, md: 5 }} sx={{ mx: 1 }}>
+          <Box
+            sx={{
+              maxWidth: "100%",
+              overflow: "hidden",
+              
+            }}
+          >
+            <BlogContentMarkdown content={pages[page]}></BlogContentMarkdown>
+          </Box>
+        </Grid>
+      </Grid>
 
       {/* 分页控件 */}
       <Pagination
