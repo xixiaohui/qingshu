@@ -51,7 +51,7 @@ function CatalogeMain({ name }: { name: string }) {
         .select("id,img,tag,title,description,authors,slug")
         .ilike("tag", `%${name}%`)
         .order("id", { ascending: true })
-        .range(0, 500);
+        .range(0, 50);
 
       if (!data || data.length === 0) {
         const titleResult = await supabase
@@ -59,7 +59,7 @@ function CatalogeMain({ name }: { name: string }) {
           .select("id,img,tag,title,description,authors,slug")
           .ilike("title", `%${name}%`)
           .order("id", { ascending: true })// false = 倒序;
-          .range(0, 500);
+          .range(0, 50);
 
         data = titleResult.data;
 
@@ -69,7 +69,7 @@ function CatalogeMain({ name }: { name: string }) {
             .select("id,img,tag,title,description,authors,slug")
             .ilike("content", `%${name}%`)
             .order("id", { ascending: true })// false = 倒序;
-            .range(0, 500);
+            .range(0, 50);
           data = contentResult.data;
         }
       }
