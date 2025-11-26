@@ -9,11 +9,11 @@ import { Stack } from "@mui/material";
 import React from "react";
 
 export type BlogZhItem = {
-  id:number;
+  id: number;
   title: string;
   author: string;
   subjects: string;
-}
+};
 
 function CardItemCard({ item }: { item: BlogZhItem }) {
   return (
@@ -23,12 +23,25 @@ function CardItemCard({ item }: { item: BlogZhItem }) {
           {item.author}
         </Typography>
         <Link href={`/blog/${item.id}`}>
-          <Typography variant="h5" component="div">
-            {item.title}
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 2, // 限制两行
+              overflow: "hidden",
+            }}
+          >
+            {item.title.length > 40
+              ? item.title.slice(0, 40) + "..."
+              : item.title}
           </Typography>
         </Link>
         <Typography variant="body2" component="div">
-          {item.subjects}
+          {item.subjects.length > 40
+            ? item.subjects.slice(0, 40) + "..."
+            : item.subjects}
         </Typography>
       </CardContent>
     </React.Fragment>
@@ -54,12 +67,14 @@ export default function BlogZhPage() {
   return (
     <>
       <CatalogePage catalogeName="中文文章">
+
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Stack
               direction="row" // 横向排列
               flexWrap="wrap" // 自动换行
-              spacing={2} // 间距
+              spacing={1} // 横向间距
+              rowGap={1} //竖向间距
             >
               {blogs.map((item, i) => (
                 <Card key={i} variant="outlined">
@@ -69,6 +84,27 @@ export default function BlogZhPage() {
             </Stack>
           </Grid>
         </Grid>
+
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            <Stack
+              direction="row" // 横向排列
+              flexWrap="wrap" // 自动换行
+              spacing={1} // 横向间距
+              rowGap={1} //竖向间距
+            >
+              {blogs.map((item, i) => (
+                <Link key={i} href={`/blog/${item.id}`}>
+                  {i + 1}:{" "}
+                  {item.title.length > 20
+                    ? item.title.slice(0, 20) + "..."
+                    : item.title}
+                </Link>
+              ))}
+            </Stack>
+          </Grid>
+        </Grid>
+        
       </CatalogePage>
     </>
   );

@@ -1,3 +1,4 @@
+"use client";
 import { supabase } from "@/lib/supabaseClient";
 import {
   Box,
@@ -6,6 +7,7 @@ import {
   Grid,
   Card,
   CardMedia,
+  Button,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
@@ -34,6 +36,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
   const [blogData, setblogData] = useState<CardItem>();
   const [currentImage, setCurrentImage] = useState<string>("");
   const cardRef = useRef<HTMLDivElement>(null);
+  const [result, setResult] = useState("");
 
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
@@ -66,6 +69,36 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
+  const handleTranslate = async ({
+    textToTranslate,
+  }: {
+    textToTranslate: string;
+  }) => {
+    try {
+      const res = await fetch("/api/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // ✅ 必须指定
+        },
+        body: JSON.stringify({
+          text: textToTranslate,
+          target: "zh-CN", // 翻译成英文，可改为 zh / ja / ko / es
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`翻译请求失败: ${res.status}`);
+      }
+
+      const data: { result: string } = await res.json();
+      setResult(data.result);
+      console.log(data.result);
+    } catch (error) {
+      console.error("翻译出错:", error);
+      setResult("翻译失败，请重试");
+    }
+  };
+
   return (
     <>
       <Grid
@@ -87,36 +120,19 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               gap: 2,
-              justifyContent: "flex-end", // 横向靠右
+              justifyContent: "flex-start", // 横向靠右
               alignItems: "flex-end", // 纵向靠下
               mt: 3,
             }}
           >
-            <Grid size={{ xs: 12, md: 3 }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-end",
-                  gap: 1,
-                }}
-              >
-                <Typography gutterBottom variant="caption" component="div">
-                  {blogData?.tag}
-                </Typography>
-                <Typography gutterBottom variant="caption" component="div">
-                  {formatDateSmart(blogData?.created_at || "")}
-                </Typography>
-              </Box>
-            </Grid>
-
             <Grid size={{ xs: 12, md: 6 }}>
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                  m: 1,
                 }}
               >
                 {/* <Typography
@@ -160,6 +176,25 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                 </Typography>
               </Box>
             </Grid>
+
+            <Grid size={{ xs: 12, md: 3 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                  gap: 1,
+                }}
+              >
+                <Typography gutterBottom variant="caption" component="div">
+                  {blogData?.tag}
+                </Typography>
+                <Typography gutterBottom variant="caption" component="div">
+                  {formatDateSmart(blogData?.created_at || "")}
+                </Typography>
+              </Box>
+            </Grid>
           </Box>
 
           <Box
@@ -169,28 +204,44 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               gap: 2,
             }}
           >
-            <Grid size={{ xs: 12, md: 3 }}></Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              {/* <BlogContentMarkdown
-                content={value || ""}
-              ></BlogContentMarkdown> */}
+            <Grid size={{ xs: 12, md: 6 }} sx={{ m: 3 }}>
               <LongTextPagination content={blogData?.content || ""} />
+              <Grid size={{ xs: 12, md: 6 }}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    alt={blogData?.title}
+                    image={blogData?.img}
+                    sx={{
+                      aspectRatio: "16 / 9",
+                      borderBottom: "1px solid",
+                      borderColor: "divider",
+                    }}
+                  />
+                </Card>
+              </Grid>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 3 }}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  alt={blogData?.title}
-                  image={blogData?.img}
-                  sx={{
-                    aspectRatio: "16 / 9",
-                    borderBottom: "1px solid",
-                    borderColor: "divider",
-                  }}
-                />
-              </Card>
+            <Grid size={{ xs: 12, md: 6 }} sx={{ m: 3 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() =>
+                  handleTranslate({
+                    textToTranslate: blogData?.content || "",
+                  })
+                }
+              >
+                点击翻译
+              </Button>
+
+              {result && (
+                <Box mt={2}>
+                  <Typography gutterBottom variant="body2">
+                    {result}
+                  </Typography>
+                </Box>
+              )}
             </Grid>
           </Box>
         </Box>
