@@ -237,9 +237,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
 
               {result && (
                 <Box mt={2}>
-                  <Typography gutterBottom variant="body2">
-                    {result}
-                  </Typography>
+                  <LongTextPagination content={result || ""} />
                 </Box>
               )}
             </Grid>
