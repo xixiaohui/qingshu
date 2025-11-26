@@ -2,13 +2,41 @@
 
 import CatalogePage from "@/components/test/CatalogePage";
 import { CardItem } from "@/components/test/MainContentCard";
-import { Box, Grid, Link } from "@mui/material";
+import { Box, Card, CardContent, Grid, Link, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { Stack } from "@mui/material";
+import React from "react";
+
+export type BlogZhItem = {
+  id:number;
+  title: string;
+  author: string;
+  subjects: string;
+}
+
+function CardItemCard({ item }: { item: BlogZhItem }) {
+  return (
+    <React.Fragment>
+      <CardContent>
+        <Typography gutterBottom sx={{ color: "text.secondary", fontSize: 14 }}>
+          {item.author}
+        </Typography>
+        <Link href={`/blog/${item.id}`}>
+          <Typography variant="h5" component="div">
+            {item.title}
+          </Typography>
+        </Link>
+        <Typography variant="body2" component="div">
+          {item.subjects}
+        </Typography>
+      </CardContent>
+    </React.Fragment>
+  );
+}
 
 export default function BlogZhPage() {
-  const [blogs, setBlogs] = useState<CardItem[]>([]);
+  const [blogs, setBlogs] = useState<BlogZhItem[]>([]);
 
   useEffect(() => {
     fetch("/gutenberg_metadata_by_id_zh.json")
@@ -31,14 +59,12 @@ export default function BlogZhPage() {
             <Stack
               direction="row" // 横向排列
               flexWrap="wrap" // 自动换行
-              spacing={1} // 间距
+              spacing={2} // 间距
             >
               {blogs.map((item, i) => (
-                <Link key={i} href={`/blog/${item.id}`}>
-                  <p className="text-sm m-0">
-                    {i + 1}: {item.title}
-                  </p>
-                </Link>
+                <Card key={i} variant="outlined">
+                  <CardItemCard item={item}></CardItemCard>
+                </Card>
               ))}
             </Stack>
           </Grid>
