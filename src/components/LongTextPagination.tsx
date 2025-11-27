@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { Box, Grid, Pagination, Typography } from "@mui/material";
 import BlogContentMarkdown from "./BlogContentMarkdown";
+import BlogContentMarkdownWithAnnotation from "./BlogContentAnnotation";
 
 function splitTextToPages(text: string, size: number = 1000) {
   const pages = [];
@@ -32,57 +33,52 @@ export default function LongTextPagination({ content }: { content: string }) {
   const pages = useMemo(() => paginateByLines(content, 14), [content]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "100%" }}>
-      <Grid container columns={12}>
-        <Grid size={{ xs: 12, md: 5 }} sx={{ mx: 1 }}>
-          <Box
-            sx={{
-              maxWidth: "100%",
-              overflow: "hidden",
-             
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Box sx={{ width: "100%" }}>
-              <BlogContentMarkdown
-                content={pages[page - 1]}
-              ></BlogContentMarkdown>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: "100%",
+        justifyContent: "space-between",
+      }}
+    >
+      <Box sx={{ minHeight: "67vh"}}>
+        <Grid container columns={12}>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box sx={{ display:"flex", justifyContent: "center", }}>
+              <BlogContentMarkdown content={pages[page - 1]}></BlogContentMarkdown>
             </Box>
-          </Box>
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box sx={{ display:"flex", justifyContent: "center", }}>
+              <BlogContentMarkdown content={pages[page]}></BlogContentMarkdown>
+            </Box>
+          </Grid>
         </Grid>
-        <Grid size={{ xs: 12, md: 5 }} sx={{ mx: 1 }}>
-          <Box
-            sx={{
-              maxWidth: "100%",
-              overflow: "hidden",
-              
-            }}
-          >
-            <BlogContentMarkdown content={pages[page]}></BlogContentMarkdown>
-          </Box>
-        </Grid>
-      </Grid>
+      </Box>
 
       {/* 分页控件 */}
-      <Pagination
-        count={pages.length}
-        page={page}
-        onChange={(e, value) => setPage(value)}
-        shape="rounded"
-        color="primary"
+      <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-start",
-          m: 5,
-          "& .MuiPaginationItem-root": {
-            color: "#373737", // 普通页码颜色
-          },
-          "& .MuiPaginationItem-root.Mui-selected": {
-            color: "#373737", // 选中页码颜色
-          },
+          justifyContent: "center",
         }}
-      />
+      >
+        <Pagination
+          count={pages.length}
+          page={page}
+          onChange={(e, value) => setPage(value)}
+          shape="rounded"
+          color="primary"
+          sx={{
+            "& .MuiPaginationItem-root": {
+              color: "#373737", // 普通页码颜色
+            },
+            "& .MuiPaginationItem-root.Mui-selected": {
+              color: "#0019fd", // 选中页码颜色
+            },
+          }}
+        />
+      </Box>
     </Box>
   );
 }

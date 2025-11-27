@@ -67,3 +67,18 @@
 📚 文艺市集：售卖手写信纸、明信片、香氛、签封、音乐等联动周边
 
 🌏 国际化扩展：英文/日文/法文版本（Love Letter Archive）
+
+
+
+# 添加一个批注表 用来存储批注的
+
+create table annotations (
+  id bigint generated always as identity primary key,
+  blog_id bigint not null,
+  content text not null,
+  start_offset int not null,
+  end_offset int not null,
+  type text not null, -- highlight | underline
+  created_at timestamp default now()
+);
+

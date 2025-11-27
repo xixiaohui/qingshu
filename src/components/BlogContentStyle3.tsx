@@ -85,16 +85,17 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
             display: "flex",
             flexDirection: "column",
             gap: 7,
+            minHeight: "100vh",
           }}
         >
           <Box
             sx={{
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
-              gap: 2,
+              gap: 1,
               justifyContent: "flex-start", // 横向靠右
               alignItems: "flex-end", // 纵向靠下
-              mt: 3,
+              mt: 2,
             }}
           >
             <Grid size={{ xs: 12, md: 6 }}>
@@ -103,11 +104,10 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-start",
-                  alignItems: "flex-start",
                   m: 2,
                 }}
               >
-                <p className="text-2xl tracking-tighter text-balance text-[#373737]">
+                <p className="text-5xl tracking-tighter text-balance text-[#373737]">
                   {blogData?.title}
                 </p>
               </Box>
@@ -155,10 +155,23 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
             sx={{
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
-              gap: 2,
+              gap: 1,
             }}
           >
-            <Grid size={{ xs: 12, md: 1 }}></Grid>
+            <Grid size={{ xs: 12, md: 1 }} sx={{ ml: 2 }}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  alt={blogData?.title}
+                  image={blogData?.img}
+                  sx={{
+                    aspectRatio: "9 / 16",
+                    borderBottom: "1px solid",
+                    borderColor: "divider",
+                  }}
+                />
+              </Card>
+            </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
               <Box>
                 <LongTextPagination content={blogData?.content || ""} />
@@ -168,30 +181,14 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
             <Grid
               size={{ xs: 12, md: 1 }}
               sx={{
-                mr: 2,
                 display: "flex",
-                justifyContent: "flex-start", // 水平居中
-                alignItems: "flex-start", // 垂直居中（可选）
-                flexDirection: "column", // 内容上下排列
+                flexDirection: "column",
+                justifyContent: "flex-end",
               }}
             >
-              <Card>
-                <CardMedia
-                  component="img"
-                  alt={blogData?.title}
-                  image={blogData?.img}
-                  sx={{
-                    aspectRatio: "16 / 16",
-                    borderBottom: "1px solid",
-                    borderColor: "divider",
-                  }}
-                />
-              </Card>
-
               <Box
                 sx={{
-                  mt: 6,
-                  bgcolor:"transparent"
+                  bgcolor: "transparent",
                 }}
               >
                 {blogData && <PDFButton blog={blogData}></PDFButton>}
