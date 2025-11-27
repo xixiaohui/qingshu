@@ -51,11 +51,11 @@ export default function PDFButton({ blog }: { blog: CardItem }) {
     }
 
     let y = margin;
-    doc.setFontSize(20);
+    doc.setFontSize(18);
     doc.text(blog.title, margin, y);
     y += 25;
 
-    doc.setFontSize(14);
+    doc.setFontSize(12);
     doc.text(blog.authors[0].name, margin, y);
     y += 20;
 
