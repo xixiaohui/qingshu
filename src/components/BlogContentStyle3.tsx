@@ -12,11 +12,10 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
-import BlogContentMarkdown from "./BlogContentMarkdown";
 import { formatDateSmart, splitByLineLength, splitBySpecial } from "@/lib/util";
-import { blue } from "@mui/material/colors";
 import LongTextPagination from "./LongTextPagination";
 import PDFButton from "./PDFButton";
+
 
 const cardData = [
   {
@@ -33,6 +32,8 @@ const cardData = [
     content: "## QS",
   },
 ];
+
+
 
 function BlogCotentMain({ identifier }: { identifier: string }) {
   const [blogData, setblogData] = useState<CardItem>();

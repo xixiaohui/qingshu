@@ -4,8 +4,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 import theme from '@/theme';
-import ModeSwitch from '@/components/ModeSwitch';
-
 import './globals.css'
 
 export default function RootLayout(props: { children: React.ReactNode }) {

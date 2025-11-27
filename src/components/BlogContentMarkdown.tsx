@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
@@ -6,16 +6,23 @@ import remarkBreaks from "remark-breaks";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
+import { Noto_Sans_Mono } from "next/font/google";
+import { Fira_Code } from "next/font/google";
+
+const notoMono = Noto_Sans_Mono({ subsets: ["latin"], weight: ["400"] });
+const fira = Fira_Code({ subsets: ["latin"], weight: ["400", "500","700"] });
+
+
+
 function BlogContentMoblie({ content }: { content: string }) {
   return (
     <>
       <Box
         sx={{
           // 基础排版
-          fontFamily: `"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif`,
+          fontFamily: `${fira.style.fontFamily}, ${notoMono.style.fontFamily}, monospace`,
           fontSize: { xs: "1.05rem", sm: "1.1rem" }, // ← 手机更大一点
           lineHeight: { xs: 1.95, sm: 1.85 }, // ← 中文更舒适的行距
-         
           color: "#373737",
           px: { xs: 1, sm: 2 }, // ← 手机保留留白
 
@@ -103,17 +110,16 @@ function BlogContentMoblie({ content }: { content: string }) {
   );
 }
 
-
-
 function BlogContentPC({ content }: { content: string }) {
   return (
     <>
       <Box
         sx={{
           lineHeight: 1.2, // ← 更适合中文
-          fontSize: "1.05rem", // ← 微调舒适阅读字号
+          fontSize: { xs: "1.05rem", sm: "1.1rem" }, // ← 手机更大一点
           color: "#373737",
-          fontFamily: `"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif`, // ← 中文更漂亮
+          fontFamily: `${fira.style.fontFamily}, ${notoMono.style.fontFamily}, monospace`,
+          fontWeight:"700",
 
           // PC端限制高度，让内容在 Box 内滚动
 
@@ -197,7 +203,6 @@ function BlogContentPC({ content }: { content: string }) {
     </>
   );
 }
-
 
 export default function BlogContentCardUseMarkdown({
   content,
