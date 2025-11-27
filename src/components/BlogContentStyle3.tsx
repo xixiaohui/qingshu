@@ -8,6 +8,7 @@ import {
   Card,
   CardMedia,
   Button,
+  Paper,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
@@ -15,6 +16,7 @@ import BlogContentMarkdown from "./BlogContentMarkdown";
 import { formatDateSmart, splitByLineLength, splitBySpecial } from "@/lib/util";
 import { blue } from "@mui/material/colors";
 import LongTextPagination from "./LongTextPagination";
+import PDFButton from "./PDFButton";
 
 const cardData = [
   {
@@ -68,28 +70,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
     }
     load();
   }, [identifier]);
-
-  const handleTranslate = async (textToTranslate: string) => {
-    try {
-      const res = await fetch("/api/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          text: textToTranslate,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`翻译请求失败: ${res.status}`);
-      }
-
-      const data: { result: string } = await res.json();
-      setResult(data.result);
-    } catch (error) {
-      console.error("翻译出错:", error);
-      setResult("翻译失败，请重试");
-    }
-  };
 
   return (
     <>
@@ -178,9 +158,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               gap: 2,
             }}
           >
-            <Grid size={{ xs: 12, md: 1 }}>
-
-            </Grid>
+            <Grid size={{ xs: 12, md: 1 }}></Grid>
             <Grid size={{ xs: 12, md: 10 }}>
               <Box>
                 <LongTextPagination content={blogData?.content || ""} />
@@ -209,6 +187,15 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                   }}
                 />
               </Card>
+
+              <Box
+                sx={{
+                  mt: 6,
+                  bgcolor:"transparent"
+                }}
+              >
+                {blogData && <PDFButton blog={blogData}></PDFButton>}
+              </Box>
             </Grid>
           </Box>
         </Box>
