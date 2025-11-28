@@ -15,7 +15,7 @@ import { Author, CardItem } from "./test/MainContentCard";
 import { formatDateSmart, splitByLineLength, splitBySpecial } from "@/lib/util";
 import LongTextPagination from "./LongTextPagination";
 import PDFButton from "./PDFButton";
-
+import LongTextPaginationTwo from "./LongTextPaginationTwo";
 
 const cardData = [
   {
@@ -33,13 +33,8 @@ const cardData = [
   },
 ];
 
-
-
-function BlogCotentMain({ identifier }: { identifier: string }) {
+function BlogContentMain({ identifier }: { identifier: string }) {
   const [blogData, setblogData] = useState<CardItem>();
-  const [currentImage, setCurrentImage] = useState<string>("");
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [result, setResult] = useState("");
 
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
@@ -58,15 +53,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
         setblogData(errorData);
       } else {
         setblogData(data);
-
-        // ✅ 如果数据库有图片，就用数据库的
-        if (data?.img) {
-          setCurrentImage(data.img);
-        } else {
-          // ✅ 首次加载时生成固定随机图片
-          const fixedSeed = Math.floor(Math.random() * 10000);
-          setCurrentImage(`https://picsum.photos/seed/${fixedSeed}/800/450`);
-        }
       }
     }
     load();
@@ -85,7 +71,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: 7,
+            gap: 1,
             minHeight: "100vh",
           }}
         >
@@ -94,9 +80,10 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               gap: 1,
-              justifyContent: "flex-start", // 横向靠右
-              alignItems: "flex-end", // 纵向靠下
-              mt: 2,
+              justifyContent: "flex-start",
+              alignItems: "flex-end",
+              mt: 1,
+              mx: 1,
             }}
           >
             <Grid size={{ xs: 12, md: 6 }}>
@@ -104,13 +91,17 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "flex-start",
-                  m: 2,
                 }}
               >
-                <p className="text-5xl tracking-tighter text-balance text-[#373737]">
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontWeight: 700,
+                    color: "#373737",
+                  }}
+                >
                   {blogData?.title}
-                </p>
+                </Typography>
               </Box>
             </Grid>
 
@@ -119,7 +110,7 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-start",
+                  gap: 1,
                 }}
               >
                 <Typography variant="body2" gutterBottom>
@@ -137,8 +128,6 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-start",
-                  alignItems: "flex-start",
                   gap: 1,
                 }}
               >
@@ -157,25 +146,45 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               gap: 1,
+              mx: 1,
             }}
           >
-            <Grid size={{ xs: 12, md: 1 }} sx={{ ml: 2 }}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  alt={blogData?.title}
-                  image={blogData?.img}
+            <Grid
+              size={{ xs: 12, md: 1 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Card
                   sx={{
-                    aspectRatio: "9 / 16",
-                    borderBottom: "1px solid",
-                    borderColor: "divider",
+                    width: "50%",
                   }}
-                />
-              </Card>
+                >
+                  <CardMedia
+                    component="img"
+                    alt={blogData?.title}
+                    image={blogData?.img}
+                    sx={{
+                      aspectRatio: "9 / 16",
+                      borderBottom: "1px solid",
+                      borderColor: "divider",
+                    }}
+                  />
+                </Card>
+              </Box>
             </Grid>
-            <Grid size={{ xs: 12, md: 10 }}>
+            <Grid size={{ xs: 12, md: 10 }} sx={{ minHeight: "30px" }}>
               <Box>
-                <LongTextPagination content={blogData?.content || ""} />
+                <LongTextPaginationTwo content={blogData?.content || ""} />
               </Box>
             </Grid>
 
@@ -190,6 +199,9 @@ function BlogCotentMain({ identifier }: { identifier: string }) {
               <Box
                 sx={{
                   bgcolor: "transparent",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
                 }}
               >
                 {blogData && <PDFButton blog={blogData}></PDFButton>}
@@ -210,7 +222,7 @@ export default function BlogContentStyle3({
   return (
     <>
       <Grid container spacing={2} columns={12} sx={{ my: 12 }}>
-        <BlogCotentMain identifier={identifier}></BlogCotentMain>
+        <BlogContentMain identifier={identifier}></BlogContentMain>
       </Grid>
     </>
   );

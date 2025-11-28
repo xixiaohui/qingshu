@@ -41,15 +41,17 @@ export default function LongTextPagination({ content }: { content: string }) {
         justifyContent: "space-between",
       }}
     >
-      <Box sx={{ minHeight: "67vh"}}>
+      <Box sx={{ minHeight: "75vh"}}>
         <Grid container columns={12}>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box sx={{ display:"flex", justifyContent: "center", }}>
-              <BlogContentMarkdown content={pages[page - 1]}></BlogContentMarkdown>
+          <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <BlogContentMarkdown
+                content={pages[page - 1]}
+              ></BlogContentMarkdown>
             </Box>
           </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box sx={{ display:"flex", justifyContent: "center", }}>
+          <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <BlogContentMarkdown content={pages[page]}></BlogContentMarkdown>
             </Box>
           </Grid>

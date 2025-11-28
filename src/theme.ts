@@ -8,6 +8,10 @@ const roboto = Roboto({
   display: 'swap',
 });
 
+const borderStyle = {
+  border: "1px solid red",
+};
+
 const theme = createTheme({
   colorSchemes: { light: true, dark: true },
   cssVariables: {
@@ -31,6 +35,10 @@ const theme = createTheme({
         },
       },
     },
+    // MuiPaper: { styleOverrides: { root: borderStyle } },
+    // MuiCard: { styleOverrides: { root: borderStyle } },
+    // MuiContainer: { styleOverrides: { root: borderStyle } },
+    // MuiGrid: { styleOverrides: { root: borderStyle } },
   },
 });
 
