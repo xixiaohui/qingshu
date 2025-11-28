@@ -118,6 +118,9 @@ export default function Footer() {
           <Link color="text.secondary" variant="body2" href="/blog_zh">
             中文文章
           </Link>
+          <Link color="text.secondary" variant="body2" href="/shakespeare">
+            莎士比亚
+          </Link>
         </Box>
         <Box
           sx={{

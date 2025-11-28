@@ -9,6 +9,7 @@ import {
   CardMedia,
   Button,
   Paper,
+  Link,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
@@ -117,9 +118,13 @@ function BlogContentMain({ identifier }: { identifier: string }) {
                   {blogData?.description}
                 </Typography>
 
-                <Typography gutterBottom variant="body2" component="div">
-                  {blogData?.authors[0].name}
-                </Typography>
+                {blogData?.authors?.map((a) => (
+                  <Link key={a.name} href={`/author/${encodeURIComponent(a.name)}`}>
+                    <Typography gutterBottom variant="body2" color="primary" display="inline" mr={1}>
+                      {a.name}
+                    </Typography>
+                  </Link>
+                ))}
               </Box>
             </Grid>
 
