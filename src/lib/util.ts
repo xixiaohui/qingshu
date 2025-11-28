@@ -71,7 +71,7 @@ export const mainKeyWords =[
   "心绪日记",
   "情书博物馆",
   "Shakespeare",
-  "Elizabeth Barrett Browning",
+  "Elizabeth",
   "Christina",
   "Byron",
   "gutenberg",
