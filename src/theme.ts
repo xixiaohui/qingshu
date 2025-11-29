@@ -1,12 +1,6 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
-import { Roboto } from 'next/font/google';
 
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 const borderStyle = {
   border: "1px solid red",
@@ -18,7 +12,8 @@ const theme = createTheme({
     colorSchemeSelector: 'class',
   },
   typography: {
-    fontFamily: roboto.style.fontFamily,
+    // fontFamily: roboto.style.fontFamily,
+    fontFamily:"var(--font-noto-serif-tc), var(--font-fira-code),sans-serif",
   },
   components: {
     MuiAlert: {

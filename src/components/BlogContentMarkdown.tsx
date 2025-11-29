@@ -5,23 +5,22 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { useMediaQuery, useTheme } from "@mui/material";
 
-import { Fira_Code } from "next/font/google";
-import { Noto_Serif_TC } from "next/font/google";
+// import { Fira_Code } from "next/font/google";
+// import { Noto_Serif_TC } from "next/font/google";
 
-// 英文字体
-const fira = Fira_Code({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-en",
-});
+// // 英文字体
+// const fira = Fira_Code({
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600"],
+//   variable: "--font-en",
+// });
 
-// 中文字体
-const notoSerif = Noto_Serif_TC({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-cn",
-});
-
+// // 中文字体
+// const notoSerif = Noto_Serif_TC({
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600"],
+//   variable: "--font-cn",
+// });
 
 function BlogContentMoblie({ content }: { content: string }) {
   return (
@@ -29,7 +28,8 @@ function BlogContentMoblie({ content }: { content: string }) {
       <Box
         sx={{
           // 基础排版
-          fontFamily: `${fira.style.fontFamily}, ${notoSerif.style.fontFamily}, monospace`,
+          fontFamily:
+            "var(--font-noto-serif-tc), var(--font-fira-code),sans-serif",
           fontSize: { xs: "1.05rem", sm: "1.1rem" }, // ← 手机更大一点
           lineHeight: { xs: 1.95, sm: 1.85 }, // ← 中文更舒适的行距
           color: "#373737",
@@ -122,20 +122,15 @@ function BlogContentMoblie({ content }: { content: string }) {
 function BlogContentPC({ content }: { content: string }) {
   return (
     <Box
-      
       sx={{
         lineHeight: 1.2,
         color: "#373737",
 
         // 英文 → Fira Code
         // 中文 → Noto Serif TC
-        fontFamily: `
-          ${fira.style.fontFamily},
-          ${notoSerif.style.fontFamily},
-          sans-serif
-        `,
-        fontSize: { xs: "1.05rem", sm: "1.2rem" },
-        fontWeight: 500,
+        fontFamily: `"Fira Code","Noto Serif TC",sans-serif`,
+        fontSize: { xs: "1.05rem", sm: "1.3rem" },
+        fontWeight: 700,
 
         "& p": {
           marginBottom: "1.2em",
@@ -144,7 +139,7 @@ function BlogContentPC({ content }: { content: string }) {
 
         // 标题：固定使用 Noto Sans TC
         "& h1, & h2, & h3": {
-          fontFamily: `${notoSerif.style.fontFamily}, sans-serif`,
+          fontFamily: `var(--font-noto-serif-tc), sans-serif`,
           fontWeight: 600,
         },
         "& h1": { fontSize: "1.75rem", mt: 4, mb: 2 },
@@ -186,7 +181,7 @@ function BlogContentPC({ content }: { content: string }) {
           padding: "2px 6px",
           borderRadius: "6px",
           fontSize: "0.9rem",
-          fontFamily: `${fira.style.fontFamily}, monospace`,
+          fontFamily: `var(--font-fira-code), monospace`,
         },
 
         whiteSpace: "pre-wrap",

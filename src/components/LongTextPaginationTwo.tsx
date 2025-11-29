@@ -14,7 +14,7 @@ function paginateByLines(text: string, linesPerPage: number = 20) {
   return pages;
 }
 
-export default function LongTextPagination({ content }: { content: string }) {
+export default function  LongTextPagination({ content }: { content: string }) {
   const [group, setGroup] = useState(1); // ← 当前“组”
 
   const pages = useMemo(() => paginateByLines(content, 14), [content]);
