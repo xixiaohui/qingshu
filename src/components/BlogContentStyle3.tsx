@@ -10,6 +10,7 @@ import {
   Button,
   Paper,
   Link,
+  Backdrop,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
@@ -17,6 +18,10 @@ import { formatDateSmart, splitByLineLength, splitBySpecial } from "@/lib/util";
 import LongTextPagination from "./LongTextPagination";
 import PDFButton from "./PDFButton";
 import LongTextPaginationTwo from "./LongTextPaginationTwo";
+
+import { useTextSelectionPoster } from "./feature/text-poster/useTextSelectionPoster";
+import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
+import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
 
 const cardData = [
   {
@@ -40,6 +45,8 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
+  
+
   useEffect(() => {
     async function load() {
       const { data, error } = await supabase
@@ -59,6 +66,8 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
+  const { selection, open, openPoster, closePoster } = useTextSelectionPoster();
+  
   return (
     <>
       <Grid
@@ -68,6 +77,23 @@ function BlogContentMain({ identifier }: { identifier: string }) {
           color: "#373737",
         }}
       >
+        <Box>
+          {/* 海报模式 Backdrop */}
+          <Backdrop
+            sx={{
+              zIndex: (theme) => theme.zIndex.modal + 10,
+              color: "#fff",
+              backdropFilter: "blur(4px)",
+            }}
+            open={open}
+            onClick={closePoster}
+          >
+            <PosterModalContent
+              text={`${selection?.text ?? ""}\n\n《${blogData?.title ?? ""}》`}
+              onClose={closePoster}
+            />
+          </Backdrop>
+        </Box>
         <Box
           sx={{
             display: "flex",
@@ -119,8 +145,17 @@ function BlogContentMain({ identifier }: { identifier: string }) {
                 </Typography>
 
                 {blogData?.authors?.map((a) => (
-                  <Link key={a.name} href={`/author/${encodeURIComponent(a.name)}`}>
-                    <Typography gutterBottom variant="body2" color="primary" display="inline" mr={1}>
+                  <Link
+                    key={a.name}
+                    href={`/author/${encodeURIComponent(a.name)}`}
+                  >
+                    <Typography
+                      gutterBottom
+                      variant="body2"
+                      color="primary"
+                      display="inline"
+                      mr={1}
+                    >
                       {a.name}
                     </Typography>
                   </Link>
@@ -191,6 +226,14 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               <Box>
                 <LongTextPaginationTwo content={blogData?.content || ""} />
               </Box>
+
+              {/* 选中文字后的浮动按钮 */}
+              {selection && !open && (
+                <TextSelectionToolbar
+                  selection={selection}
+                  onGenerate={openPoster}
+                />
+              )}
             </Grid>
 
             <Grid
@@ -209,7 +252,10 @@ function BlogContentMain({ identifier }: { identifier: string }) {
                   justifyContent: "flex-end",
                 }}
               >
+              
                 {blogData && <PDFButton blog={blogData}></PDFButton>}
+
+                
               </Box>
             </Grid>
           </Box>

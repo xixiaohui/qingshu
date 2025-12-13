@@ -77,3 +77,5 @@ export const mainKeyWords =[
   "gutenberg",
 ];
 
+export const SHARE_IAMGE_WIDTH = 1280;
+export const SHARE_IAMGE_HEIGHT = 1707;
