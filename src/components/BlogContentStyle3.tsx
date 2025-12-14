@@ -89,7 +89,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             onClick={closePoster}
           >
             <PosterModalContent
-              text={`${selection?.text ?? ""}\n\n《${blogData?.title ?? ""}》`}
+              text={`《${blogData?.title ?? ""}\n\n${selection?.text ?? ""}`}
               onClose={closePoster}
             />
           </Backdrop>

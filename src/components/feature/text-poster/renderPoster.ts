@@ -22,8 +22,8 @@ export async function renderPoster(
   drawMultilineTextLeft(ctx, text, padding, topPadding, width - padding * 2, lineHeight);
 
   // 水印
-  ctx.font = "24px 'PingFang SC', 'Heiti SC', 'Songti SC', sans-serif";
+  ctx.font = "27px 'PingFang SC', 'Heiti SC', 'Songti SC', sans-serif";
   ctx.fillStyle = "rgba(0,0,0,0.4)";
   ctx.textAlign = "left";
-  ctx.fillText("qinshu.shop", padding, height - 80);
+  ctx.fillText("readmeet.club", padding, height - 80);
 }

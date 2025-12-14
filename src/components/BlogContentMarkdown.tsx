@@ -130,7 +130,7 @@ function BlogContentPC({ content }: { content: string }) {
         // 中文 → Noto Serif TC
         fontFamily: `"Fira Code","Noto Serif TC",sans-serif`,
         fontSize: { xs: "1.05rem", sm: "1.3rem" },
-        fontWeight: 700,
+        fontWeight: 500,
 
         "& p": {
           marginBottom: "1.2em",
@@ -140,7 +140,7 @@ function BlogContentPC({ content }: { content: string }) {
         // 标题：固定使用 Noto Sans TC
         "& h1, & h2, & h3": {
           fontFamily: `var(--font-noto-serif-tc), sans-serif`,
-          fontWeight: 600,
+          fontWeight: 700,
         },
         "& h1": { fontSize: "1.75rem", mt: 4, mb: 2 },
         "& h2": { fontSize: "1.5rem", mt: 3, mb: 2 },
