@@ -30,7 +30,8 @@ export function PosterModalContent({
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "qinshu-poster.png";
+      const title = text.split("/7/7/7/7")[0].replace("《","").replace("》","");
+      a.download = `${title}-poster.png`;
       a.click();
       URL.revokeObjectURL(url);
     });
