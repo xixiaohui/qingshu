@@ -120,7 +120,7 @@ function BlogContentMoblie({ content }: { content: string }) {
 }
 
 function BlogContentPC({ content }: { content: string }) {
-
+  
   return (
     <Box
       sx={{
