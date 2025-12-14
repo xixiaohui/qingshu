@@ -1,5 +1,5 @@
 import { SHARE_IAMGE_HEIGHT, SHARE_IAMGE_WIDTH } from "@/lib/util";
-import { drawMultilineText, drawMultilineTextLeft } from "./drawMultilineText";
+import { drawAutoSizedText, drawMultilineText, drawMultilineTextLeft } from "./drawMultilineText";
 
 export async function renderPoster(
   ctx: CanvasRenderingContext2D,
@@ -14,16 +14,46 @@ export async function renderPoster(
 
   // 中文文本 - 左对齐
   ctx.fillStyle = "#373737";
-  ctx.font = "47px 'PingFang SC', 'Heiti SC', 'Songti SC', sans-serif";
+  ctx.font = "bold 57px 'Songti SC', 'SimSun', 'STSong', serif";
   ctx.textAlign = "left"; // 左对齐
   const padding = 80; // 左右边距
-  const topPadding = 170; // 文字起点
-  const lineHeight = 72;  // 正文字号对应行高
-  drawMultilineTextLeft(ctx, text, padding, topPadding, width - padding * 2, lineHeight);
+  const topPadding = 170;
+  const text_results = text.split("/7/7/7/7");
+  const title = text_results[0];
+  const content = text_results[1];
+  // console.log(text_results);
+  const lineHeight = 70;
+
+  // const lineHeight = 100; // 正文字号对应行高
+  ctx.strokeText(title, padding, topPadding);
+  drawMultilineTextLeft(
+    ctx,
+    title,
+    padding,
+    topPadding,
+    width - padding * 2,
+    lineHeight
+  );
+  
+
+  drawAutoSizedText({
+    ctx,
+    text: content,
+    box: {
+      x: padding,
+      y: topPadding + lineHeight,
+      width: width - padding * 2,
+      height: height - (topPadding + lineHeight) * 2,
+    },
+    maxFontSize: 67,
+    minFontSize: 17,
+    color: "#373737",
+  });
 
   // 水印
-  ctx.font = "27px 'PingFang SC', 'Heiti SC', 'Songti SC', sans-serif";
-  ctx.fillStyle = "rgba(0,0,0,0.4)";
+  (ctx.font = "37px 'Songti SC', 'SimSun', 'STSong', serif"),
+    (ctx.fillStyle = "#373737");
   ctx.textAlign = "left";
-  ctx.fillText("readmeet.club", padding, height - 80);
+  ctx.fillText("readmeet.club", padding, height - lineHeight);
 }
+

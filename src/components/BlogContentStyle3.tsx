@@ -45,8 +45,6 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
-  
-
   useEffect(() => {
     async function load() {
       const { data, error } = await supabase
@@ -67,7 +65,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   }, [identifier]);
 
   const { selection, open, openPoster, closePoster } = useTextSelectionPoster();
-  
+
   return (
     <>
       <Grid
@@ -89,7 +87,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             onClick={closePoster}
           >
             <PosterModalContent
-              text={`《${blogData?.title ?? ""}\n\n${selection?.text ?? ""}`}
+              text={`《${blogData?.title ?? ""}》/7/7/7/7${selection?.text ?? ""}`}
               onClose={closePoster}
             />
           </Backdrop>
@@ -252,10 +250,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
                   justifyContent: "flex-end",
                 }}
               >
-              
                 {blogData && <PDFButton blog={blogData}></PDFButton>}
-
-                
               </Box>
             </Grid>
           </Box>

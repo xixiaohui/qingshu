@@ -55,7 +55,7 @@ export function PosterModalContent({
           position: "absolute",
           top: 8,
           right: 8,
-          color: "#fff",
+          color: "#000",
           zIndex: 2,
         }}
       >
