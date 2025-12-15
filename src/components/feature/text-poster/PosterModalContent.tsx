@@ -5,6 +5,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { useEffect, useRef } from "react";
 import { renderPoster } from "./renderPoster";
 import { SHARE_IAMGE_HEIGHT, SHARE_IAMGE_WIDTH } from "@/lib/util";
+import { prepareHiDPICanvas } from "./drawMultilineText";
 
 export function PosterModalContent({
   text,
@@ -16,8 +17,15 @@ export function PosterModalContent({
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const ctx = canvasRef.current?.getContext("2d");
+    const canvas = canvasRef.current;
+
+    if (!canvas) return;
+    const width = SHARE_IAMGE_WIDTH;
+    const height = SHARE_IAMGE_HEIGHT;
+    const ctx = prepareHiDPICanvas(canvas, width, height);
+
     if (!ctx) return;
+
     renderPoster(ctx, text);
   }, [text]);
 
@@ -25,16 +33,23 @@ export function PosterModalContent({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      const title = text.split("/7/7/7/7")[0].replace("《","").replace("》","");
-      a.download = `${title}-poster.png`;
-      a.click();
-      URL.revokeObjectURL(url);
-    });
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        const title = text
+          .split("/7/7/7/7")[0]
+          .replace("《", "")
+          .replace("》", "");
+        a.download = `${title}-poster.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+      },
+      "image/png",
+      1
+    );
   };
 
   return (
@@ -70,16 +85,16 @@ export function PosterModalContent({
           borderRadius: 2,
           overflow: "hidden",
           mb: 2,
+          backgroundColor: "#000", // 可选，便于对比
+          aspectRatio: `${SHARE_IAMGE_WIDTH} / ${SHARE_IAMGE_HEIGHT}`,
         }}
       >
         <canvas
           ref={canvasRef}
-          width={SHARE_IAMGE_WIDTH}
-          height={SHARE_IAMGE_HEIGHT}
           style={{
             width: "100%",
-            height: "auto",
-            display: "block",
+            height:"100%",
+            display:"block",
           }}
         />
       </Box>

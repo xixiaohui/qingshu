@@ -190,3 +190,24 @@ export function breakLines(
 
   return lines;
 }
+
+export function prepareHiDPICanvas(
+  canvas: HTMLCanvasElement,
+  width: number,
+  height: number,
+  scale = 3
+) {
+  const dpr = window.devicePixelRatio || 1;
+  const ratio = dpr * scale;
+
+  // canvas.style.width = width + "px";
+  // canvas.style.height = height + "px";
+  canvas.width = width * ratio;
+  canvas.height = height * ratio;
+
+  const ctx = canvas.getContext("2d")!;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(ratio, ratio);
+
+  return ctx;
+}

@@ -9,6 +9,7 @@ export async function renderPoster(
   ctx: CanvasRenderingContext2D,
   text: string
 ) {
+
   const width = SHARE_IAMGE_WIDTH;
   const height = SHARE_IAMGE_HEIGHT;
 
