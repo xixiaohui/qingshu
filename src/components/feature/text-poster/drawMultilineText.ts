@@ -198,7 +198,10 @@ export function prepareHiDPICanvas(
   scale = 3
 ) {
   const dpr = window.devicePixelRatio || 1;
-  const ratio = dpr * scale;
+
+  const MAX_RATIO = 4;
+  const ratio = Math.min(dpr * scale, MAX_RATIO);
+
 
   // canvas.style.width = width + "px";
   // canvas.style.height = height + "px";
