@@ -19,7 +19,7 @@ export async function renderPoster(
 
   // 中文文本 - 左对齐
   ctx.fillStyle = "#373737";
-  ctx.font = "bold 57px 'Songti SC', 'SimSun', 'STSong', serif";
+  ctx.font = "bold 67px 'Songti SC', 'SimSun', 'STSong', serif";
   ctx.textAlign = "left"; // 左对齐
   const padding = 80; // 左右边距
   const topPadding = 170;
@@ -55,7 +55,7 @@ export async function renderPoster(
   });
 
   // 水印
-  ctx.font = "37px 'Songti SC', 'SimSun', 'STSong', serif";
+  ctx.font = "37px 'Noto Serif TC','Songti SC', 'SimSun', 'STSong', serif";
   ctx.fillStyle = "#373737";
   ctx.textAlign = "left";
 
@@ -64,7 +64,7 @@ export async function renderPoster(
 
   // 先量文字宽度
   const metrics = ctx.measureText(logo_text);
-  const textWidth = metrics.width * 0.7;
+  const textWidth = metrics.width * 0.618;
 
   // 画文字
   ctx.fillText(logo_text, padding, textY);
@@ -75,6 +75,6 @@ export async function renderPoster(
     padding,        // x：和文字左对齐
     height - topPadding - lineHeight,       // y：文字上方
     textWidth,       // ⭐ 宽度等于文字宽度
-    10                // 高度
+    17                // 高度
   );
 }
