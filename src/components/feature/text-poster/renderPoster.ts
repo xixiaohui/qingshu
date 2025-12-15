@@ -59,7 +59,7 @@ export async function renderPoster(
   ctx.fillStyle = "#373737";
   ctx.textAlign = "left";
 
-  const logo_text = "readmeet.club";
+  const logo_text = getDomain()==="localhost"?"readmeet.club":getDomain();
   const textY = height - lineHeight;
 
   // 先量文字宽度
@@ -78,3 +78,22 @@ export async function renderPoster(
     17                // 高度
   );
 }
+
+function useCurrentUrl() {
+  if (typeof window === "undefined") return ""; // SSR 时防止报错
+  return window.location.href;
+}
+
+function useHost() {
+  if (typeof window === "undefined") return "";
+  return window.location.origin;
+}
+
+export const getDomain = (req?: any) => {
+  if (typeof window !== "undefined") {
+    return window.location.hostname;
+  } else if (req) {
+    return req.headers.host.split(":")[0];
+  }
+  return "";
+};
