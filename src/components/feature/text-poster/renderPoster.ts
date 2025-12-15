@@ -59,7 +59,8 @@ export async function renderPoster(
   ctx.fillStyle = "#373737";
   ctx.textAlign = "left";
 
-  const logo_text = getDomain()==="localhost"?"readmeet.club":getDomain();
+  const logo_text = getDomain()==="localhost"?"www.readmeet.club":getDomain();
+
   const textY = height - lineHeight;
 
   // 先量文字宽度
