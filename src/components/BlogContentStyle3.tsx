@@ -22,6 +22,8 @@ import LongTextPaginationTwo from "./LongTextPaginationTwo";
 import { useTextSelectionPoster } from "./feature/text-poster/useTextSelectionPoster";
 import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
 import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
+import { useTextSelectionEditor } from "./feature/text-poster/useTextSelectionEditor";
+import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
 
 const cardData = [
   {
@@ -50,7 +52,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
       const { data, error } = await supabase
         .from("blogs")
         .select("*")
-        .order("created_at", { ascending: false }) // false = 倒序
+        .order("created_at", { ascending: false })
         .eq(isId ? "id" : "slug", identifier)
         .maybeSingle();
       if (error) {
@@ -64,8 +66,9 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
-  const { selection, open, openPoster, closePoster } = useTextSelectionPoster();
+  const { selection:selection_p, open:open_p, openPoster, closePoster } = useTextSelectionPoster();
 
+  const { selection:selection_e, open:open_e, openEditor, closeEditor } = useTextSelectionEditor();
   return (
     <>
       <Grid
@@ -83,14 +86,41 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               color: "#fff",
               backdropFilter: "blur(4px)",
             }}
-            open={open}
+            open={open_p}
             onClick={closePoster}
           >
-            <PosterModalContent
-              text={`《${blogData?.title ?? ""}》/7/7/7/7${selection?.text ?? ""}`}
-              onClose={closePoster}
-            />
+              <PosterModalContent
+                text={`《${blogData?.title ?? ""}》/7/7/7/7${
+                  selection_p?.text ?? ""
+                }`}
+                onClose={closePoster}
+              />
           </Backdrop>
+          
+          {/* 摘要模式 Backdrop */}
+          <Backdrop
+            sx={{
+              zIndex: (theme) => theme.zIndex.modal + 10,
+              color: "#fff",
+              backdropFilter: "blur(4px)",
+            }}
+            open={open_e}
+            onClick={closeEditor}
+          >
+              <EditorModalContent
+                text={selection_e?.text ?? ""}
+                onClose={closeEditor}
+              />
+          </Backdrop>
+
+          {/* 选中文字后的浮动按钮 */}
+          {selection_p && (!open_p ||!open_e) && (
+            <TextSelectionToolbar
+              selection={selection_p}
+              onGenerate={openPoster}
+              onEditor={openEditor}
+            />
+          )}
         </Box>
         <Box
           sx={{
@@ -224,14 +254,6 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               <Box>
                 <LongTextPaginationTwo content={blogData?.content || ""} />
               </Box>
-
-              {/* 选中文字后的浮动按钮 */}
-              {selection && !open && (
-                <TextSelectionToolbar
-                  selection={selection}
-                  onGenerate={openPoster}
-                />
-              )}
             </Grid>
 
             <Grid

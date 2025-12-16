@@ -26,7 +26,7 @@ export async function renderPoster(
   const text_results = text.split("/7/7/7/7");
   const title = text_results[0];
   const content = text_results[1].replace(/(?<!\n)\n\n(?!\n)/g, "");
-  console.log(content);
+  // console.log(content);
   const lineHeight = 70;
 
   // const lineHeight = 100; // 正文字号对应行高

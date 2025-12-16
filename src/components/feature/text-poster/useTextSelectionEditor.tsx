@@ -5,7 +5,7 @@ export interface TextSelection {
   rect: DOMRect;
 }
 
-export function useTextSelectionPoster() {
+export function useTextSelectionEditor() {
   const [selection, setSelection] = useState<TextSelection | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -33,10 +33,10 @@ export function useTextSelectionPoster() {
   return {
     selection:selection,
     open:open,
-    openPoster: () => {
-      console.log("打开海报");
+    openEditor: () => {
+      console.log("打开摘要编辑");
       setOpen(true)
     },
-    closePoster: () => setOpen(false),
+    closeEditor: () => setOpen(false),
   };
 }
