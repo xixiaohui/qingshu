@@ -4,11 +4,11 @@ import { getDesignTokens } from "../../../shared-theme/themePrimitives";
 export function TextSelectionToolbar({
   selection,
   onGenerate,
-  onEditor,
+  onAddHighlight,
 }: {
   selection: { rect: DOMRect };
   onGenerate: () => void;
-  onEditor: () => void;
+  onAddHighlight: () => void;
 }) {
   return (
     <Box
@@ -21,22 +21,48 @@ export function TextSelectionToolbar({
       }}
       onClick={(e) => e.stopPropagation()}
     >
+      {/* 添加摘要 */}
       <Button
         size="small"
         variant="contained"
         color="inherit"
         sx={{
-          bgcolor: "primary",
+          bgcolor: "#1976d2",
           color: "#fff",
           textTransform: "none",
           borderRadius: 1,
           px: 1.5,
           py: 0.5,
-          mr:1,
           fontSize: 13,
           boxShadow: 3,
           "&:hover": {
-            bgcolor: "#000",
+            bgcolor: "#115293",
+          },
+        }}
+        onClick={() => {
+          console.log("点击添加摘要");
+          onAddHighlight();
+        }}
+      >
+        <Typography variant="subtitle1">添加摘要</Typography>
+      </Button>
+
+      <Button
+        size="small"
+        variant="contained"
+        color="inherit"
+        sx={{
+          bgcolor: "#1976d2",
+          color: "#fff",
+          textTransform: "none",
+          borderRadius: 1,
+          px: 1.5,
+          py: 0.5,
+          ml:1,
+          fontSize: 13,
+          boxShadow: 3,
+          "&:hover": {
+            bgcolor: "#115293",
           },
         }}
         onClick={() => {
@@ -46,31 +72,7 @@ export function TextSelectionToolbar({
       >
         <Typography variant="subtitle1">生成海报</Typography>
       </Button>
-      <Button
-        size="small"
-        variant="contained"
-        color="inherit"
-        sx={{
-          bgcolor: "primary",
-          color: "#fff",
-          textTransform: "none",
-          borderRadius: 1,
-          px: 1.5,
-          py: 0.5,
-          mr:1,
-          fontSize: 13,
-          boxShadow: 3,
-          "&:hover": {
-            bgcolor: "#000",
-          },
-        }}
-        onClick={() => {
-          console.log("点击编辑摘要");
-          onEditor();
-        }}
-      >
-        <Typography variant="subtitle1">✍ 做摘要</Typography>
-      </Button>
+     
     </Box>
   );
 }

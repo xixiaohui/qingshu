@@ -79,3 +79,6 @@ export const mainKeyWords =[
 
 export const SHARE_IAMGE_WIDTH = 1280;
 export const SHARE_IAMGE_HEIGHT = 1707;
+
+export const BEIJING_COLOR = '#F3F0E6';
+export const FONT_COLOR = '#373737';

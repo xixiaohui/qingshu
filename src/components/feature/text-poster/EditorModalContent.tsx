@@ -1,11 +1,21 @@
 // feature/text-poster/PosterModalContent.tsx
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import DownloadIcon from "@mui/icons-material/Download";
-import { useEffect, useRef } from "react";
-import { renderPoster } from "./renderPoster";
-import { SHARE_IAMGE_HEIGHT, SHARE_IAMGE_WIDTH } from "@/lib/util";
-import { prepareHiDPICanvas } from "./drawMultilineText";
+import {  useState } from "react";
+
+import {
+  SHARE_IAMGE_HEIGHT,
+  SHARE_IAMGE_WIDTH,
+} from "@/lib/util";
+
 
 export function EditorModalContent({
   text,
@@ -14,50 +24,14 @@ export function EditorModalContent({
   text: string;
   onClose: () => void;
 }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-
-    if (!canvas) return;
-    const width = SHARE_IAMGE_WIDTH;
-    const height = SHARE_IAMGE_HEIGHT;
-    const ctx = prepareHiDPICanvas(canvas, width, height);
-
-    if (!ctx) return;
-
-    renderPoster(ctx, text);
-  }, [text]);
-
-  const handleDownload = async () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    canvas.toBlob(
-      (blob) => {
-        if (!blob) return;
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        const title = text
-          .split("/7/7/7/7")[0]
-          .replace("《", "")
-          .replace("》", "");
-        a.download = `${title}-poster.png`;
-        a.click();
-        URL.revokeObjectURL(url);
-      },
-      "image/png",
-      1
-    );
-  };
+  const [summary, setSummary] = useState("");
 
   return (
     <Box
       onClick={(e) => e.stopPropagation()}
       sx={{
         position: "relative",
-        bgcolor: "#111",
+        bgcolor: "#373737",
         borderRadius: 3,
         p: 2,
         boxShadow: 24,
@@ -80,16 +54,29 @@ export function EditorModalContent({
 
       {/* 编辑区域 */}
       <Box
+        onClick={(e) => e.stopPropagation()}
         sx={{
-          width: '30vw',
+          width: { md: "50vw" },
           borderRadius: 2,
           overflow: "hidden",
           mb: 2,
-          backgroundColor: "#000", // 可选，便于对比
-          aspectRatio: `${SHARE_IAMGE_WIDTH} / ${SHARE_IAMGE_WIDTH}`,
+          mt: 10,
+          backgroundColor: "#373737", // 可选，便于对比
+          color: "#F3F0E6",
+          aspectRatio: `${SHARE_IAMGE_HEIGHT} / ${SHARE_IAMGE_WIDTH}`,
         }}
       >
         <Typography variant="body1">{text}</Typography>
+
+        <TextField
+          fullWidth
+          multiline
+          minRows={3}
+          placeholder="用你自己的话写一句理解…"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+        />
       </Box>
 
       {/* 操作区 */}
@@ -97,7 +84,7 @@ export function EditorModalContent({
         <Button
           variant="contained"
           startIcon={<DownloadIcon />}
-          onClick={handleDownload}
+          onClick={() => {}}
           sx={{
             bgcolor: "#fff",
             color: "#000",

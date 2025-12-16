@@ -19,10 +19,10 @@ import LongTextPagination from "./LongTextPagination";
 import PDFButton from "./PDFButton";
 import LongTextPaginationTwo from "./LongTextPaginationTwo";
 
-import { useTextSelectionPoster } from "./feature/text-poster/useTextSelectionPoster";
+import { useTextSelectionPoster } from "./feature/text-poster/useSelectionEditor";
 import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
 import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
-import { useTextSelectionEditor } from "./feature/text-poster/useTextSelectionEditor";
+import { useTextSelectionEditor } from "./feature/text-poster/useTextHighlight";
 import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
 
 const cardData = [
@@ -66,9 +66,14 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
-  const { selection:selection_p, open:open_p, openPoster, closePoster } = useTextSelectionPoster();
+  const {
+    selection,
+    mode,
+    openPoster,
+    openHighlight,
+    closeEditor,
+  } = useTextSelectionPoster();
 
-  const { selection:selection_e, open:open_e, openEditor, closeEditor } = useTextSelectionEditor();
   return (
     <>
       <Grid
@@ -86,39 +91,44 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               color: "#fff",
               backdropFilter: "blur(4px)",
             }}
-            open={open_p}
-            onClick={closePoster}
+            open={mode=='poster'}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeEditor();
+            }}
           >
-              <PosterModalContent
-                text={`《${blogData?.title ?? ""}》/7/7/7/7${
-                  selection_p?.text ?? ""
-                }`}
-                onClose={closePoster}
-              />
+            <PosterModalContent
+              text={`《${blogData?.title ?? ""}》/7/7/7/7${
+                selection?.text ?? ""
+              }`}
+              onClose={closeEditor}
+            />
           </Backdrop>
-          
-          {/* 摘要模式 Backdrop */}
+          {/* 添加摘要 Backdrop */}
           <Backdrop
             sx={{
               zIndex: (theme) => theme.zIndex.modal + 10,
               color: "#fff",
               backdropFilter: "blur(4px)",
             }}
-            open={open_e}
-            onClick={closeEditor}
+            open={mode=='highlight'}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeEditor();
+            }}
           >
-              <EditorModalContent
-                text={selection_e?.text ?? ""}
-                onClose={closeEditor}
-              />
+            <EditorModalContent
+              text={selection?.text ?? ""}
+              onClose={closeEditor}
+            />
           </Backdrop>
 
           {/* 选中文字后的浮动按钮 */}
-          {selection_p && (!open_p ||!open_e) && (
+          {selection &&(
             <TextSelectionToolbar
-              selection={selection_p}
+              selection={selection!}
               onGenerate={openPoster}
-              onEditor={openEditor}
+              onAddHighlight={openHighlight}
             />
           )}
         </Box>

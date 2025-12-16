@@ -81,7 +81,7 @@ export function PosterModalContent({
       {/* 海报预览 */}
       <Box
         sx={{
-          width: 360,
+          width: {md:'30vw'},
           borderRadius: 2,
           overflow: "hidden",
           mb: 2,
