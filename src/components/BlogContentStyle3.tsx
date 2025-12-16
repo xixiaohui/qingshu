@@ -22,7 +22,6 @@ import LongTextPaginationTwo from "./LongTextPaginationTwo";
 import { useTextSelectionPoster } from "./feature/text-poster/useSelectionEditor";
 import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
 import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
-import { useTextSelectionEditor } from "./feature/text-poster/useTextHighlight";
 import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
 
 const cardData = [
