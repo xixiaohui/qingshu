@@ -9,6 +9,7 @@ export const notoSerifTC = localFont({
     },
   ],
   variable: "--font-noto-serif-tc",
+  display: "swap",
 });
 
 export const firaCode = localFont({
@@ -20,4 +21,5 @@ export const firaCode = localFont({
     },
   ],
   variable: "--font-fira-code",
+  display: "swap",
 });

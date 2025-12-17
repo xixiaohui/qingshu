@@ -164,6 +164,9 @@ export default function Footer() {
           <Link color="text.secondary" variant="body2" href="#">
             联系
           </Link>
+          <Link color="text.secondary" variant="body2" href="/devlog">
+            开发
+          </Link>
         </Box>
       </Box>
       <Box
