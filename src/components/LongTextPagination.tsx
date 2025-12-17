@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Box, Grid, Pagination, Typography } from "@mui/material";
 import BlogContentMarkdown from "./BlogContentMarkdown";
 import BlogContentMarkdownWithAnnotation from "./BlogContentAnnotation";
+import { paginateByLinesWithOffset } from "./LongTextPaginationTwo";
 
 function splitTextToPages(text: string, size: number = 1000) {
   const pages = [];
@@ -30,7 +31,7 @@ export function paginateByLines(text: string, linesPerPage: number = 20) {
 export default function LongTextPagination({ content }: { content: string }) {
   const [page, setPage] = useState(1);
 
-  const pages = useMemo(() => paginateByLines(content, 14), [content]);
+  const pages = useMemo(() => paginateByLinesWithOffset(content, 14), [content]);
 
   return (
     <Box
@@ -46,7 +47,7 @@ export default function LongTextPagination({ content }: { content: string }) {
           <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <BlogContentMarkdown
-                content={pages[page - 1]}
+                content={pages[page - 1]} 
               ></BlogContentMarkdown>
             </Box>
           </Grid>

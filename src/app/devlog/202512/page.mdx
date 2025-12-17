@@ -1,5 +1,235 @@
 
 
-# 摘要的高亮与存储功能
+# 情书 划线 注释 存储 持久化方案
+
+
+核心思想：
+原文只存一次，所有「划线 / 注释」都是“附着在文本上的结构化数据”
+
+
+"展示工具"升级为"内容生产系统"
+
+取词 → 摘要 → 标注 → 永久保存
+
+
+一、核心设计原则（先定方向）
+
+原文不动，所有衍生内容都是“附着物”
+原文：只存一次
+选中的词句：用 字符 index
+摘要：独立存储（可人工 / AI）
+颜色：样式属性，不影响语义
+所有数据都能 重复渲染 / 导出 / Canvas 化
+
+二、未来可以发展的方向
+✨ 情书摘录集
+✨ 阅读笔记
+✨ 精选句子卡片
+✨ 情绪地图（按颜色）
+✨ 时间轴回顾
+
+这不是一次性方案，是“文本资产系统”。
+
+三、永久资产
+```sql
+新表：选中文字 + 背景色（核心）
+create table blog_marks (
+  id uuid primary key default gen_random_uuid(),
+  blog_id int references blogs(id) on delete cascade,
+
+  start int not null,
+  "end" int not null,
+
+  bg_color text default '#FFE082',
+  text_color text,
+  style text default 'highlight',
+
+  excerpt text,                -- 当时选中的文字快照
+  created_at timestamp default now()
+);
+
+新表：摘要（基于选中内容）
+create table blog_summaries (
+  id uuid primary key default gen_random_uuid(),
+  blog_id int references blogs(id) on delete cascade,
+  mark_id uuid references blog_marks(id) on delete cascade,
+
+  content text not null,       -- 摘要文本
+  author text default 'user',  -- user / ai
+  created_at timestamp default now()
+);
+
+export type BlogMark = {
+  id: string;
+  blog_id: number;
+  start: number;
+  end: number;
+  bg_color: string;
+  text_color?: string;
+  style: "highlight" | "underline";
+  excerpt?: string;
+  created_at: string;
+};
+
+export type BlogSummary = {
+  id: string;
+  blog_id: number;
+  mark_id: string;
+  content: string;
+  author: "user" | "ai";
+  created_at: string;
+};
+
+四、如何计算start 和 end 的 index
+
+**start / end 一定要基于「原始 blog.content 的纯文本」计算**
+
+渲染 blog.content 时，包一层 data-index
+```js
+function RenderContent({ content }: { content: string }) {
+  return (
+    <p>
+      {content.split("").map((char, i) => (
+        <span key={i} data-index={i}>
+          {char}
+        </span>
+      ))}
+    </p>
+  );
+}
+```
+通过 Selection 拿 start / end
+```js
+function getSelectionIndex() {
+  const sel = window.getSelection();
+  if (!sel || sel.rangeCount === 0) return null;
+
+  const range = sel.getRangeAt(0);
+
+  const startNode = range.startContainer.parentElement;
+  const endNode = range.endContainer.parentElement;
+
+  const start = Number(startNode?.dataset.index);
+  const end = Number(endNode?.dataset.index) + 1;
+
+  if (Number.isNaN(start) || Number.isNaN(end)) return null;
+
+  return { start, end };
+}
+```
+
+
+
+
+```js
+interface MyPage {
+  text: string;
+  start: number; // 在全文中的起始 index
+  end: number;
+}
+
+function paginateByLinesWithOffset(
+  text: string,
+  linesPerPage = 20
+): MyPage[] {
+  const lines = text.split(/\r?\n/);
+  const pages: Page[] = [];
+
+  let cursor = 0;
+
+  for (let i = 0; i < lines.length; i += linesPerPage) {
+    const slice = lines.slice(i, i + linesPerPage);
+    const pageText = slice.join("\n");
+
+    const start = cursor;
+    const end = start + pageText.length;
+
+    pages.push({ text: pageText, start, end });
+
+    // ⚠️ +1 是因为 split 去掉了 \n，要补回来
+    cursor = end + 1;
+  }
+
+  return pages;
+}
+
+
+
+function getSelectionIndex(container: HTMLElement, page: MyPage) {
+  const sel = window.getSelection();
+  if (!sel || sel.rangeCount === 0) return null;
+
+  const range = sel.getRangeAt(0);
+  if (range.collapsed) return null;
+
+  let start = -1;
+  let end = -1;
+  let cursor = 0;
+
+  // 遍历当前 container 的所有 text node
+  const walker = document.createTreeWalker(
+    container,
+    NodeFilter.SHOW_TEXT,
+    null
+  );
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode as Text;
+    const len = node.textContent?.length ?? 0;
+
+    if (node === range.startContainer) {
+      start = page.start + cursor + range.startOffset;
+    }
+
+    if (node === range.endContainer) {
+      end = page.start + cursor + range.endOffset;
+      break;
+    }
+
+    cursor += len;
+  }
+
+  if (start === -1 || end === -1) return null;
+  return { start, end };
+}
+```
+
+```js
+在BlogContentPC里使用
+
+function BlogContentPC({ content }: { content: MyPage }) {
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseUp = () => {
+    if (!containerRef.current || !content) return;
+
+    const selIndex = getSelectionIndex(containerRef.current, content);
+    if (!selIndex) return;
+
+    //成功获取了start 和end 索引值
+    console.log("全文 start:", selIndex.start, "全文 end:", selIndex.end);
+  };
+
+  return (
+    <Box
+      ref={containerRef}
+      onMouseUp={handleMouseUp}
+      sx={{
+pass
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

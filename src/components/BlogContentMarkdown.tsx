@@ -4,6 +4,9 @@ import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { MyPage } from "./LongTextPaginationTwo";
+import { useEffect, useRef } from "react";
+import { useTextSelection } from "./feature/text-poster/useTextSelection";
 
 // import { Fira_Code } from "next/font/google";
 // import { Noto_Serif_TC } from "next/font/google";
@@ -22,7 +25,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 //   variable: "--font-cn",
 // });
 
-function BlogContentMoblie({ content }: { content: string }) {
+function BlogContentMoblie({ content }: { content: MyPage }) {
   return (
     <>
       <Box
@@ -113,16 +116,80 @@ function BlogContentMoblie({ content }: { content: string }) {
           whiteSpace: "pre-wrap",
         }}
       >
-        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content?.text}</ReactMarkdown>
       </Box>
     </>
   );
 }
 
-function BlogContentPC({ content }: { content: string }) {
-  
+// function getSelectionIndex(container: HTMLElement, page: MyPage) {
+//   const sel = window.getSelection();
+//   if (!sel || sel.rangeCount === 0) return null;
+
+//   const range = sel.getRangeAt(0);
+//   if (range.collapsed) return null;
+
+//   let start = -1;
+//   let end = -1;
+//   let cursor = 0;
+
+//   // 遍历当前 container 的所有 text node
+//   const walker = document.createTreeWalker(
+//     container,
+//     NodeFilter.SHOW_TEXT,
+//     null
+//   );
+
+//   while (walker.nextNode()) {
+//     const node = walker.currentNode as Text;
+//     const len = node.textContent?.length ?? 0;
+
+//     if (node === range.startContainer) {
+//       start = page.start + cursor + range.startOffset;
+//     }
+
+//     if (node === range.endContainer) {
+//       end = page.start + cursor + range.endOffset;
+//       break;
+//     }
+
+//     cursor += len;
+//   }
+
+//   if (start === -1 || end === -1) return null;
+//   return { start, end };
+// }
+
+
+
+function BlogContentPC({ content ,blogid}: { content: MyPage ,blogid?:number}) {
+
+  // const containerRef = useRef<HTMLDivElement>(null);
+
+  // const handleMouseUp = () => {
+  //   if (!containerRef.current || !content) return;
+
+  //   const selIndex = getSelectionIndex(containerRef.current, content);
+  //   if (!selIndex) return;
+
+  //   console.log("全文 start:", selIndex.start, "全文 end:", selIndex.end);
+  // };
+
+  const { containerRef, selection } = useTextSelection(content);
+
+  useEffect(() => {
+    if (selection) {
+      console.log("全文 start:", selection.start, "全文 end:", selection.end);
+      console.log("选中的文字:", selection.excerpt);
+      // TODO: 调用存储接口，保存高亮/注释
+
+
+    }
+  }, [selection]);
+
   return (
     <Box
+      ref={containerRef}
       sx={{
         lineHeight: 1.2,
         color: "#373737",
@@ -188,15 +255,17 @@ function BlogContentPC({ content }: { content: string }) {
         whiteSpace: "pre-wrap",
       }}
     >
-      <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content?.text}</ReactMarkdown>
     </Box>
   );
 }
 
 export default function BlogContentCardUseMarkdown({
   content,
+  blogId
 }: {
-  content: string;
+  content: MyPage;
+  blogId?:number
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

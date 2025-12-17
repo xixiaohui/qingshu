@@ -68,8 +68,6 @@
 
 🌏 国际化扩展：英文/日文/法文版本（Love Letter Archive）
 
-
-
 # 添加一个批注表 用来存储批注的
 
 create table annotations (
@@ -81,4 +79,3 @@ create table annotations (
   type text not null, -- highlight | underline
   created_at timestamp default now()
 );
-

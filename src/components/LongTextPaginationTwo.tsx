@@ -4,6 +4,37 @@ import { useState, useMemo } from "react";
 import { Box, Grid, Pagination } from "@mui/material";
 import BlogContentMarkdown from "./BlogContentMarkdown";
 
+export interface MyPage {
+  text: string;
+  start: number; // 在全文中的起始 index
+  end: number;
+}
+
+export function paginateByLinesWithOffset(
+  text: string,
+  linesPerPage = 20
+): MyPage[] {
+  const lines = text.split(/\r?\n/);
+  const pages: MyPage[] = [];
+
+  let cursor = 0;
+
+  for (let i = 0; i < lines.length; i += linesPerPage) {
+    const slice = lines.slice(i, i + linesPerPage);
+    const pageText = slice.join("\n");
+
+    const start = cursor;
+    const end = start + pageText.length;
+
+    pages.push({ text: pageText, start, end });
+
+    // ⚠️ +1 是因为 split 去掉了 \n，要补回来
+    cursor = end + 1;
+  }
+
+  return pages;
+}
+
 function paginateByLines(text: string, linesPerPage: number = 20) {
   const lines = text.split(/\r?\n/);
   const pages: string[] = [];
@@ -14,11 +45,11 @@ function paginateByLines(text: string, linesPerPage: number = 20) {
   return pages;
 }
 
-export default function  LongTextPagination({ content }: { content: string }) {
+export default function  LongTextPagination({ content , id}: { content: string,id: number}) {
   const [group, setGroup] = useState(1); // ← 当前“组”
 
   // const content_next = content.replace(/(?<!\n)\n\n(?!\n)/g, "");
-  const pages = useMemo(() => paginateByLines(content, 14), [content]);
+  const pages = useMemo(() => paginateByLinesWithOffset(content, 14), [content]);
 
   const totalGroups = Math.ceil(pages.length / 2); // ← 总组数
 
@@ -38,12 +69,12 @@ export default function  LongTextPagination({ content }: { content: string }) {
         <Grid container columns={12}>
           {/* 左页 */}
           <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
-            <BlogContentMarkdown content={pages[leftIndex] ?? ""} />
+            <BlogContentMarkdown content={pages[leftIndex]} />
           </Grid>
 
           {/* 右页 */}
           <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
-            <BlogContentMarkdown content={pages[rightIndex] ?? ""} />
+            <BlogContentMarkdown content={pages[rightIndex]} />
           </Grid>
         </Grid>
       </Box>

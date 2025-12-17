@@ -65,6 +65,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
+  //取词
   const {
     selection,
     mode,
@@ -261,7 +262,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             </Grid>
             <Grid size={{ xs: 12, md: 10 }} sx={{ minHeight: "30px" }}>
               <Box>
-                <LongTextPaginationTwo content={blogData?.content || ""} />
+                <LongTextPaginationTwo content={blogData?.content || ""} id={blogData?.id || 0} />
               </Box>
             </Grid>
 

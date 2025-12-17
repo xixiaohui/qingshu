@@ -82,3 +82,24 @@ export const SHARE_IAMGE_HEIGHT = 1707;
 
 export const BEIJING_COLOR = '#F3F0E6';
 export const FONT_COLOR = '#373737';
+
+export type BlogMark = {
+  id: string;
+  blog_id: number;
+  start: number;
+  end: number;
+  bg_color: string;
+  text_color?: string;
+  style: "highlight" | "underline";
+  excerpt?: string;
+  created_at: string;
+};
+
+export type BlogSummary = {
+  id: string;
+  blog_id: number;
+  mark_id: string;
+  content: string;
+  author: "user" | "ai";
+  created_at: string;
+};
