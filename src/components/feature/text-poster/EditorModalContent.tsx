@@ -2,6 +2,10 @@
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Stack,
   TextField,
@@ -9,22 +13,68 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import DownloadIcon from "@mui/icons-material/Download";
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 
-import {
-  SHARE_IAMGE_HEIGHT,
-  SHARE_IAMGE_WIDTH,
-} from "@/lib/util";
+import { BlogMark, SHARE_IAMGE_HEIGHT, SHARE_IAMGE_WIDTH } from "@/lib/util";
+import { TextSelection } from "./useSelectionEditor";
 
+import { LoadingButton } from "@mui/lab";
 
 export function EditorModalContent({
-  text,
+  selection,
+  blogId,
   onClose,
 }: {
-  text: string;
+  selection: TextSelection;
+  blogId: number;
   onClose: () => void;
 }) {
   const [summary, setSummary] = useState("");
+
+  const [newMark, setNewMark] = useState<BlogMark>();
+
+  const [saving, setSaving] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selection) return;
+
+    const newMarkUse: BlogMark = {
+      id: crypto.randomUUID(),
+      blog_id: blogId,
+      start: selection.start!,
+      end: selection.end!,
+      bg_color: "#ffe58f",
+      style: "highlight",
+      excerpt: selection.text,
+      created_at: new Date().toISOString(),
+    };
+    setNewMark(newMarkUse);
+  }, [selection]);
+
+  const saveHighlight = async (mark: BlogMark) => {
+    try {
+      setSaving(true);
+
+      const res = await fetch("/api/blogMark", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(mark),
+      });
+
+      if (!res.ok) throw new Error("保存失败");
+
+      // ✅ 成功
+      onClose(); // 清空选区
+    } catch (err) {
+      console.error("保存高亮失败", err);
+      alert("保存失败，请重试");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <Box
@@ -66,7 +116,7 @@ export function EditorModalContent({
           aspectRatio: `${SHARE_IAMGE_HEIGHT} / ${SHARE_IAMGE_WIDTH}`,
         }}
       >
-        <Typography variant="body1">{text}</Typography>
+        {selection && <Typography variant="body1">{selection.text}</Typography>}
 
         <TextField
           fullWidth
@@ -81,22 +131,108 @@ export function EditorModalContent({
 
       {/* 操作区 */}
       <Stack direction="row" spacing={2} justifyContent="center">
-        <Button
+        <LoadingButton
           variant="contained"
-          startIcon={<DownloadIcon />}
-          onClick={() => {}}
+          size="small"
+          loading={saving}
           sx={{
-            bgcolor: "#fff",
-            color: "#000",
-            fontWeight: 500,
-            "&:hover": {
-              bgcolor: "#f3f3f3",
-            },
+            bgcolor: "#1976d2",
+            color: "#fff",
+            textTransform: "none",
+            borderRadius: 1,
+            px: 1.5,
+            py: 0.5,
+            fontSize: 13,
+          }}
+          onClick={() => {
+            setOpenDialog(true);
+            // saveHighlight(newMark!);
           }}
         >
           提交摘要
-        </Button>
+        </LoadingButton>
       </Stack>
+      <Dialog
+        open={openDialog}
+        onClose={() => {
+          !saving && setOpenDialog(false);
+          setError(null);
+          setAnswer("");
+          onClose();
+        }}
+        maxWidth="sm"
+        fullWidth
+        sx={{
+          zIndex: (theme) => theme.zIndex.modal + 11,
+        }}
+      >
+        <DialogTitle>提交前请回答</DialogTitle>
+
+        <DialogContent>
+          <Typography sx={{ mb: 1 }}>
+            请回答问题后才能提交摘要：
+          </Typography>
+
+          <Typography sx={{ mb: 1 }}>
+            为什么选择这段话~~
+          </Typography>
+
+          <TextField
+            fullWidth
+            autoFocus
+            value={answer}
+            onChange={(e) => {
+              setAnswer(e.target.value);
+              setError(null);
+            }}
+            error={!!error}
+            helperText={error}
+            placeholder="请输入你的回答"
+          />
+
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} disabled={saving}>
+            取消
+          </Button>
+
+          <LoadingButton
+            variant="contained"
+            loading={saving}
+            // disabled={!answer.trim()}
+            onClick={async () => {
+
+              if (!validateAnswer(answer)) {
+                setError("回答不符合要求");
+                return;
+              }
+
+              try {
+                setSaving(true);
+
+                saveHighlight(newMark!);
+
+                setOpenDialog(false);
+                setAnswer("");
+              } catch (e) {
+                console.error(e);
+              } finally {
+                setSaving(false);
+              }
+            }}
+          >
+            确认提交
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
+}
+
+
+function validateAnswer(input: string) {
+  if (input.length < 3) return false;
+  if (!input.includes("x")) return false;
+  return true;
 }

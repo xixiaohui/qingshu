@@ -3,19 +3,29 @@ import { supabase } from "@/lib/supabaseClient";
 import { BlogMark } from "@/lib/util";
 
 
-// POST: 存储高亮
+/**
+ * POST /api/highlight
+ */
 export async function POST(req: NextRequest) {
   try {
     const mark: BlogMark = await req.json();
 
-    const { data, error } = await supabase.from("blog_marks").insert([mark]);
+    const { error } = await supabase
+      .from("blog_marks")
+      .insert([mark]);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { error: error.message },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json({ data }, { status: 200 });
+    return NextResponse.json({ success: true });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message || "未知错误" }, { status: 500 });
+    return NextResponse.json(
+      { error: err?.message ?? "Unknown error" },
+      { status: 500 }
+    );
   }
 }

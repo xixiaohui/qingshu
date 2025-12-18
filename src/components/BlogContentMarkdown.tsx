@@ -5,8 +5,11 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { MyPage } from "./LongTextPaginationTwo";
-import { useEffect, useRef } from "react";
-import { useTextSelection } from "./feature/text-poster/useTextSelection";
+import { useEffect, useRef, useState } from "react";
+import { clearSelection, useTextSelection } from "./feature/text-poster/useTextSelection";
+import { renderTextWithMarks } from "./feature/text-poster/useSelectionEditor";
+import React from "react";
+import { BlogMark } from "@/lib/util";
 
 // import { Fira_Code } from "next/font/google";
 // import { Noto_Serif_TC } from "next/font/google";
@@ -116,80 +119,48 @@ function BlogContentMoblie({ content }: { content: MyPage }) {
           whiteSpace: "pre-wrap",
         }}
       >
-        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content?.text}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+          {content?.text}
+        </ReactMarkdown>
       </Box>
     </>
   );
 }
 
-// function getSelectionIndex(container: HTMLElement, page: MyPage) {
-//   const sel = window.getSelection();
-//   if (!sel || sel.rangeCount === 0) return null;
-
-//   const range = sel.getRangeAt(0);
-//   if (range.collapsed) return null;
-
-//   let start = -1;
-//   let end = -1;
-//   let cursor = 0;
-
-//   // 遍历当前 container 的所有 text node
-//   const walker = document.createTreeWalker(
-//     container,
-//     NodeFilter.SHOW_TEXT,
-//     null
-//   );
-
-//   while (walker.nextNode()) {
-//     const node = walker.currentNode as Text;
-//     const len = node.textContent?.length ?? 0;
-
-//     if (node === range.startContainer) {
-//       start = page.start + cursor + range.startOffset;
-//     }
-
-//     if (node === range.endContainer) {
-//       end = page.start + cursor + range.endOffset;
-//       break;
-//     }
-
-//     cursor += len;
-//   }
-
-//   if (start === -1 || end === -1) return null;
-//   return { start, end };
-// }
+function BlogContentPC({
+  content,
+  blogId,
+}: {
+  content: MyPage;
+  blogId?: number;
+}) {
+  
+  // const { containerRef, selection } = useTextSelection(content, blogId || 0);
+  const [marks, setMarks] = useState<BlogMark[]>([]);
 
 
+  // useEffect(() => {
+  //   if (selection) {
+  //     console.log("全文 start:", selection.start, "全文 end:", selection.end);
+  //     console.log("选中的文字:", selection.excerpt);
+  //     // TODO: 调用存储接口，保存高亮/注释
 
-function BlogContentPC({ content ,blogid}: { content: MyPage ,blogid?:number}) {
+  //     const handleAddHighlight = () => {
+  //       if (!selection) return;
 
-  // const containerRef = useRef<HTMLDivElement>(null);
+  //       setMarks(prev => [...prev, selection]);
 
-  // const handleMouseUp = () => {
-  //   if (!containerRef.current || !content) return;
+  //       console.log("clearSelection");
+  //       clearSelection(); // 👈 非常重要
+  //     };
 
-  //   const selIndex = getSelectionIndex(containerRef.current, content);
-  //   if (!selIndex) return;
-
-  //   console.log("全文 start:", selIndex.start, "全文 end:", selIndex.end);
-  // };
-
-  const { containerRef, selection } = useTextSelection(content);
-
-  useEffect(() => {
-    if (selection) {
-      console.log("全文 start:", selection.start, "全文 end:", selection.end);
-      console.log("选中的文字:", selection.excerpt);
-      // TODO: 调用存储接口，保存高亮/注释
-
-
-    }
-  }, [selection]);
+  //     handleAddHighlight();
+  //   }
+  // }, [selection]);
 
   return (
     <Box
-      ref={containerRef}
+      // ref={containerRef}
       sx={{
         lineHeight: 1.2,
         color: "#373737",
@@ -255,17 +226,34 @@ function BlogContentPC({ content ,blogid}: { content: MyPage ,blogid?:number}) {
         whiteSpace: "pre-wrap",
       }}
     >
-      <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content?.text}</ReactMarkdown>
+      <ReactMarkdown
+        remarkPlugins={[remarkBreaks]}
+        components={{
+          p({ children }) {
+            const raw = React.Children.toArray(children)
+              .map(c => (typeof c === "string" ? c : ""))
+              .join("");
+
+            return (
+              <p>
+                {renderTextWithMarks(raw, content.start, marks)}
+              </p>
+            );
+          },
+        }}
+      >
+        {content?.text}
+      </ReactMarkdown>
     </Box>
   );
 }
 
 export default function BlogContentCardUseMarkdown({
   content,
-  blogId
+  blogId,
 }: {
   content: MyPage;
-  blogId?:number
+  blogId?: number;
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -274,7 +262,7 @@ export default function BlogContentCardUseMarkdown({
       {isMobile ? (
         <BlogContentMoblie content={content} />
       ) : (
-        <BlogContentPC content={content} />
+        <BlogContentPC content={content} blogId={blogId} />
       )}
     </>
   );

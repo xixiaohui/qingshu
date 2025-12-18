@@ -1,21 +1,16 @@
 import { MyPage } from "@/components/LongTextPaginationTwo";
 import { BlogMark } from "@/lib/util";
 import { useState, useRef, useEffect } from "react";
+import { EditorMode, TextSelection } from "./useSelectionEditor";
 
-
-// export interface TextSelection {
-//   text: string;        // 用户选中的文字
-//   start: number;       // 全文 start
-//   end: number;         // 全文 end
-//   color?: string;      // 高亮颜色，可选
-// }
-
-
-export function useTextSelection(page: MyPage | null) {
+export function useTextSelection(page: MyPage | null, blogId: number) {
   const containerRef = useRef<HTMLElement | null>(null);
-  const [selection, setSelection] = useState<BlogMark  | null>(null);
+  const [selection, setSelection] = useState<BlogMark | null>(null);
 
-  const highlightSelection = (bg_color = "#ffe58f", style: "highlight" | "underline" = "highlight") => {
+  const highlightSelection = (
+    bg_color = "#ffe58f",
+    style: "highlight" | "underline" = "highlight"
+  ) => {
     const sel = window.getSelection();
     if (!sel || sel.rangeCount === 0) return;
 
@@ -46,13 +41,18 @@ export function useTextSelection(page: MyPage | null) {
     let end = -1;
     let cursor = 0;
 
-    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+    const walker = document.createTreeWalker(
+      container,
+      NodeFilter.SHOW_TEXT,
+      null
+    );
 
     while (walker.nextNode()) {
       const node = walker.currentNode as Text;
       const len = node.textContent?.length ?? 0;
 
-      if (node === range.startContainer) start = page.start + cursor + range.startOffset;
+      if (node === range.startContainer)
+        start = page.start + cursor + range.startOffset;
       if (node === range.endContainer) {
         end = page.start + cursor + range.endOffset;
         break;
@@ -81,15 +81,21 @@ export function useTextSelection(page: MyPage | null) {
     const handleMouseUp = () => {
       if (!containerRef.current || !page) return;
 
+      console.log("---handleMouseUp-----------1");
+
       const selIndex = getSelectionIndex(containerRef.current, page);
       if (!selIndex) return;
+
+      console.log("---handleMouseUp-----------2");
 
       const selText = window.getSelection()?.toString().trim();
       if (!selText) return;
 
+      console.log("---handleMouseUp-----------3");
+
       const newMark: BlogMark = {
         id: crypto.randomUUID(),
-        blog_id: 0,
+        blog_id: blogId,
         start: selIndex.start,
         end: selIndex.end,
         bg_color: "#ffe58f",
@@ -98,14 +104,18 @@ export function useTextSelection(page: MyPage | null) {
         created_at: new Date().toISOString(),
       };
 
+      console.log("---handleMouseUp-----------4");
+      console.log(newMark);
 
       setSelection(newMark);
 
       // 立即在页面显示高亮
-      highlightSelection(newMark.bg_color, newMark.style);
+      // highlightSelection(newMark.bg_color, newMark.style);
 
       // 存到 Supabase
-    //   saveHighlight(newMark);
+      // saveHighlight(newMark);
+
+      console.log("---handleMouseUp-----------5");
     };
 
     document.addEventListener("mouseup", handleMouseUp);
@@ -113,4 +123,162 @@ export function useTextSelection(page: MyPage | null) {
   }, [page]);
 
   return { containerRef, selection, setSelection };
+}
+
+export function getSelectionIndex(container: HTMLElement, page: MyPage) {
+  const sel = window.getSelection();
+  if (!sel || sel.rangeCount === 0) return null;
+
+  const range = sel.getRangeAt(0);
+  if (range.collapsed) return null;
+
+  let start = -1;
+  let end = -1;
+  let cursor = 0;
+
+  // 遍历当前 container 的所有 text node
+  const walker = document.createTreeWalker(
+    container,
+    NodeFilter.SHOW_TEXT,
+    null
+  );
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode as Text;
+    const len = node.textContent?.length ?? 0;
+
+    if (node === range.startContainer) {
+      start = page.start + cursor + range.startOffset;
+    }
+
+    if (node === range.endContainer) {
+      end = page.start + cursor + range.endOffset;
+      break;
+    }
+
+    cursor += len;
+  }
+
+  if (start === -1 || end === -1) return null;
+  return { start, end };
+}
+
+export function clearSelection() {
+  const sel = window.getSelection?.();
+  if (!sel) return;
+
+  if (sel.removeAllRanges) {
+    sel.removeAllRanges();
+  } else if ((sel as any).empty) {
+    // Safari / 老浏览器
+    (sel as any).empty();
+  }
+}
+
+function clearBrowserSelection() {
+  const sel = window.getSelection();
+  if (!sel) return;
+  sel.removeAllRanges();
+}
+
+export function useTextSelectionInfo(
+  containerRef: React.RefObject<HTMLElement | null>,
+  content: { text: string }
+) {
+  const [selection, setSelection] = useState<TextSelection | null>(null);
+  const [mode, setMode] = useState<EditorMode>(null);
+  const modeRef = useRef<EditorMode>(mode);
+
+  // 保证 ref 永远最新
+  useEffect(() => {
+    modeRef.current = mode;
+  }, [mode]);
+
+  
+
+  useEffect(() => {
+    const handleMouseUp = () => {
+      if (modeRef.current) return;
+
+      const container = containerRef.current;
+      if (!container) return;
+
+      const sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0) return;
+
+      const range = sel.getRangeAt(0);
+      if (range.collapsed) return;
+
+      const text = sel.toString().trim();
+      if (!text) return;
+
+      let cursor = 0;
+      let start = -1;
+      let end = -1;
+
+      const walker = document.createTreeWalker(
+        container,
+        NodeFilter.SHOW_TEXT,
+        null
+      );
+
+      while (walker.nextNode()) {
+        const node = walker.currentNode as Text;
+        const len = node.textContent?.length ?? 0;
+
+        if (node === range.startContainer) {
+          start = cursor + range.startOffset;
+        }
+
+        if (node === range.endContainer) {
+          end = cursor + range.endOffset;
+          break;
+        }
+
+        cursor += len;
+      }
+
+      if (start === -1 || end === -1) return;
+
+      const selectionUse = {
+        text,
+        start,
+        end,
+        rect: range.getBoundingClientRect(),
+      };
+      setSelection(selectionUse);
+
+      // console.log("setSelectionUse----------1");
+      // console.log(selectionUse);
+    };
+
+    document.addEventListener("mouseup", handleMouseUp);
+    return () => document.removeEventListener("mouseup", handleMouseUp);
+  }, [containerRef, content.text]);
+
+  // console.log("setSelection----------2");
+  // console.log(selection);
+
+  return {
+    selection,
+    mode,
+    /** 打开海报 */
+    openPoster: () => {
+      setMode("poster");
+      console.log("打开海报");
+    },
+
+    openHighlight: () => {
+      setMode("highlight");
+    },
+
+    closeEditor: () => {
+      setMode(null);
+      setSelection(null);
+    },
+    clearSelection: () => {
+      window.getSelection()?.removeAllRanges();
+      setSelection(null);
+    },
+  };
 }

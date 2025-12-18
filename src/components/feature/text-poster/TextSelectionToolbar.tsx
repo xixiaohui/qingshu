@@ -1,5 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
 import { getDesignTokens } from "../../../shared-theme/themePrimitives";
+import { useEffect } from "react";
+
+function clearBrowserSelection() {
+  const sel = window.getSelection();
+  if (!sel) return;
+  sel.removeAllRanges();
+}
 
 export function TextSelectionToolbar({
   selection,

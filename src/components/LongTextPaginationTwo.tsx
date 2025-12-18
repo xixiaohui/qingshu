@@ -45,7 +45,7 @@ function paginateByLines(text: string, linesPerPage: number = 20) {
   return pages;
 }
 
-export default function  LongTextPagination({ content , id}: { content: string,id: number}) {
+export default function  LongTextPaginationTwo({ content , blogId}: { content: string,blogId: number}) {
   const [group, setGroup] = useState(1); // ← 当前“组”
 
   // const content_next = content.replace(/(?<!\n)\n\n(?!\n)/g, "");
@@ -69,12 +69,12 @@ export default function  LongTextPagination({ content , id}: { content: string,i
         <Grid container columns={12}>
           {/* 左页 */}
           <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
-            <BlogContentMarkdown content={pages[leftIndex]} />
+            <BlogContentMarkdown content={pages[leftIndex]} blogId={blogId}/>
           </Grid>
 
           {/* 右页 */}
           <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
-            <BlogContentMarkdown content={pages[rightIndex]} />
+            <BlogContentMarkdown content={pages[rightIndex]} blogId={blogId}/>
           </Grid>
         </Grid>
       </Box>

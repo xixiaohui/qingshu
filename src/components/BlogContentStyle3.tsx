@@ -23,6 +23,7 @@ import { useTextSelectionPoster } from "./feature/text-poster/useSelectionEditor
 import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
 import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
 import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
+import { useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
 
 const cardData = [
   {
@@ -46,6 +47,8 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     async function load() {
       const { data, error } = await supabase
@@ -66,13 +69,18 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   }, [identifier]);
 
   //取词
-  const {
-    selection,
-    mode,
-    openPoster,
-    openHighlight,
-    closeEditor,
-  } = useTextSelectionPoster();
+  // const {
+  //   selection,
+  //   mode,
+  //   openPoster,
+  //   openHighlight,
+  //   closeEditor,
+  // } = useTextSelectionPoster();
+
+  const { selection, mode, openPoster, openHighlight, closeEditor,clearSelection } =
+    useTextSelectionInfo(containerRef, { text: blogData?.content || "" });
+
+  
 
   return (
     <>
@@ -91,10 +99,11 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               color: "#fff",
               backdropFilter: "blur(4px)",
             }}
-            open={mode=='poster'}
+            open={mode == "poster"}
             onClick={(e) => {
               e.stopPropagation();
               closeEditor();
+              clearSelection();
             }}
           >
             <PosterModalContent
@@ -111,20 +120,22 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               color: "#fff",
               backdropFilter: "blur(4px)",
             }}
-            open={mode=='highlight'}
+            open={mode == "highlight"}
             onClick={(e) => {
               e.stopPropagation();
               closeEditor();
+              clearSelection();
             }}
           >
             <EditorModalContent
-              text={selection?.text ?? ""}
+              selection={selection!}
+              blogId={blogData?.id!}
               onClose={closeEditor}
             />
           </Backdrop>
 
           {/* 选中文字后的浮动按钮 */}
-          {selection &&(
+          {selection && (
             <TextSelectionToolbar
               selection={selection!}
               onGenerate={openPoster}
@@ -138,6 +149,12 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             flexDirection: "column",
             gap: 1,
             minHeight: "100vh",
+          }}
+          onClick={() => {
+            console.log("mode",mode);
+            if(mode==null){
+              clearSelection();
+            }
           }}
         >
           <Box
@@ -261,8 +278,13 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }} sx={{ minHeight: "30px" }}>
-              <Box>
-                <LongTextPaginationTwo content={blogData?.content || ""} id={blogData?.id || 0} />
+              <Box 
+              ref={containerRef}
+              >
+                <LongTextPaginationTwo
+                  content={blogData?.content || ""}
+                  blogId={blogData?.id || 0}
+                />
               </Box>
             </Grid>
 
