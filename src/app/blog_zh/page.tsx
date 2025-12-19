@@ -60,7 +60,7 @@ export default function BlogZhPage() {
           ...data[id],
         }));
         setBlogs(blogsArray);
-        console.log(blogsArray);
+        // console.log(blogsArray);
       });
   }, []); //当标签变化时重新过滤
 

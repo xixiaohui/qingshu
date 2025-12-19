@@ -185,32 +185,56 @@ export function useTextSelectionInfo(
   containerRef: React.RefObject<HTMLElement | null>,
   content: { text: string }
 ) {
-  const [selection, setSelection] = useState<TextSelection | null>(null);
+  // const [selection, setSelection] = useState<TextSelection | null>(null);
   const [mode, setMode] = useState<EditorMode>(null);
   const modeRef = useRef<EditorMode>(mode);
+  const [selection,setSelection] = useState<TextSelection | null>(null);
 
   // 保证 ref 永远最新
   useEffect(() => {
     modeRef.current = mode;
   }, [mode]);
 
-  
+  const clearSlection = ()=>{
+      // setSelection(null);
+      // console.log('清空了selection');
+  }
 
   useEffect(() => {
     const handleMouseUp = () => {
-      if (modeRef.current) return;
+
+      if(mode != null){
+        return;
+      }
+
+      if (modeRef.current) {
+        clearSlection();
+        return;
+      };
 
       const container = containerRef.current;
-      if (!container) return;
+      if (!container) {
+        clearSlection();
+        return;
+      };
 
       const sel = window.getSelection();
-      if (!sel || sel.rangeCount === 0) return;
+      if (!sel || sel.rangeCount === 0){
+        clearSlection();
+        return;
+      }
 
       const range = sel.getRangeAt(0);
-      if (range.collapsed) return;
+      if (range.collapsed) {
+        clearSlection();
+        return;
+      }
 
       const text = sel.toString().trim();
-      if (!text) return;
+      if (!text) {
+        clearSlection();
+        return;
+      }
 
       let cursor = 0;
       let start = -1;
@@ -240,6 +264,13 @@ export function useTextSelectionInfo(
 
       if (start === -1 || end === -1) return;
 
+      // selectionRef.current = {
+      //   text,
+      //   start,
+      //   end,
+      //   rect: range.getBoundingClientRect(),
+      // };
+
       const selectionUse = {
         text,
         start,
@@ -248,19 +279,17 @@ export function useTextSelectionInfo(
       };
       setSelection(selectionUse);
 
-      // console.log("setSelectionUse----------1");
-      // console.log(selectionUse);
+
+     
     };
 
     document.addEventListener("mouseup", handleMouseUp);
     return () => document.removeEventListener("mouseup", handleMouseUp);
   }, [containerRef, content.text]);
 
-  // console.log("setSelection----------2");
-  // console.log(selection);
-
   return {
     selection,
+
     mode,
     /** 打开海报 */
     openPoster: () => {
@@ -273,10 +302,12 @@ export function useTextSelectionInfo(
     },
 
     closeEditor: () => {
+      console.log("--------------------4");
       setMode(null);
       setSelection(null);
     },
     clearSelection: () => {
+      console.log("--------------------5-----------");
       window.getSelection()?.removeAllRanges();
       setSelection(null);
     },

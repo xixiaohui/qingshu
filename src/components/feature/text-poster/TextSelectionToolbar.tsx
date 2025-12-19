@@ -13,10 +13,13 @@ export function TextSelectionToolbar({
   onGenerate,
   onAddHighlight,
 }: {
-  selection: { rect: DOMRect };
+  selection: TextSelection;
   onGenerate: () => void;
   onAddHighlight: () => void;
 }) {
+
+  if (!selection) return null;
+
   return (
     <Box
       sx={{

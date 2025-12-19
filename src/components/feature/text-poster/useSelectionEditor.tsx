@@ -1,4 +1,5 @@
 import { BlogMark } from "@/lib/util";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 
 export interface TextSelection {
@@ -26,17 +27,22 @@ export function useTextSelectionPoster() {
       if (modeRef.current) return;
 
       const sel = window.getSelection();
-      if (!sel || sel.rangeCount === 0) return setSelection(null);
+      if (!sel || sel.rangeCount === 0) {
+        console.log("-----------------1")
+        return setSelection(null);
+      }
 
       const text = sel.toString().trim();
-      if (!text) return setSelection(null);
+      if (!text) {
+        console.log("-----------------2")
+        return setSelection(null);
+      }
 
       const range = sel.getRangeAt(0);
       const rect = range.getBoundingClientRect();
 
       // 通过全文计算 start/end
-      const fullText = 
-      
+
       console.log("text is",text);
       console.log("rect is",rect);
       setSelection({ text, rect });
@@ -63,6 +69,7 @@ export function useTextSelectionPoster() {
     /** 关闭一切 */
     closeEditor: () => {
       setMode(null);
+      console.log("--------------------3");
       setSelection(null);
     },
   };
@@ -133,4 +140,85 @@ export function renderTextWithMarks(
   }
 
   return nodes;
+}
+
+export function renderTextWithMarksSecond(
+  children: React.ReactNode,
+  pageStart: number,
+  marks: BlogMark[],
+  offsetRef = { current: pageStart }
+): React.ReactNode {
+  return React.Children.map(children, child => {
+    // 1️⃣ 纯文本节点
+    if (typeof child === "string") {
+      const text = child;
+      const startOffset = offsetRef.current;
+      const endOffset = startOffset + text.length;
+
+      const relevant = marks
+        .filter(m => m.end > startOffset && m.start < endOffset)
+        .sort((a, b) => a.start - b.start);
+
+      offsetRef.current = endOffset;
+
+      // 没有 mark，直接返回原 text（保持 TextNode）
+      if (relevant.length === 0) {
+        return text;
+      }
+
+      const nodes: React.ReactNode[] = [];
+      let cursor = 0;
+
+      for (const mark of relevant) {
+        const start = Math.max(mark.start - startOffset, 0);
+        const end = Math.min(mark.end - startOffset, text.length);
+
+        if (start > cursor) {
+          nodes.push(text.slice(cursor, start));
+        }
+
+        nodes.push(
+          <span
+            key={`${mark.id}-${startOffset}-${start}`}
+            style={{
+              backgroundColor:
+                mark.style === "highlight" ? mark.bg_color : undefined,
+              textDecoration:
+                mark.style === "underline" ? "underline" : undefined,
+            }}
+            className="mark"
+          >
+            {text.slice(start, end)}
+          </span>
+        );
+
+        cursor = end;
+      }
+
+      if (cursor < text.length) {
+        nodes.push(text.slice(cursor));
+      }
+
+      return <>{nodes}</>;
+    }
+
+    // 2️⃣ React 元素：递归处理 children
+    if (React.isValidElement(child)) {
+      const element = child as React.ReactElement<{
+        children?: React.ReactNode;
+      }>;
+
+      return React.cloneElement(element, {
+        children: renderTextWithMarksSecond(
+          element.props.children,
+          pageStart,
+          marks,
+          offsetRef
+        ),
+      });
+    }
+
+    // 3️⃣ 其他节点
+    return child;
+  });
 }

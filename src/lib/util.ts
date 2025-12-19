@@ -93,6 +93,7 @@ export type BlogMark = {
   style: "highlight" | "underline";
   excerpt?: string;
   created_at: string;
+  rect?: DOMRect;
 };
 
 export type BlogSummary = {

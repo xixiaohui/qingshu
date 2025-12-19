@@ -47,7 +47,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  // const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function load() {
@@ -77,10 +77,30 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   //   closeEditor,
   // } = useTextSelectionPoster();
 
-  const { selection, mode, openPoster, openHighlight, closeEditor,clearSelection } =
-    useTextSelectionInfo(containerRef, { text: blogData?.content || "" });
+  // const { selection, toolbarPos, mode, openPoster, openHighlight, closeEditor,clearSelection } =
+  //   useTextSelectionInfo(containerRef, { text: blogData?.content || "" });
 
-  
+  // const {
+  //   selection,
+  //   mode,
+  //   openPoster,
+  //   openHighlight,
+  //   closeEditor,
+  //   clearSelection,
+  // } = {
+  //   selection: { text: "", rect: new DOMRect(0, 0, 0, 0)},
+  //   mode: null,
+  //   openPoster: () => {},
+  //   openHighlight: () => {},
+  //   closeEditor: () => {},
+  //   clearSelection: () => {
+  //     console.log("清空~~");
+  //   },
+  // };
+
+  // console.log("重新绘制");
+  // console.log(selection.current);
+  // console.log(mode);
 
   return (
     <>
@@ -91,8 +111,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
           color: "#373737",
         }}
       >
-        <Box>
-          {/* 海报模式 Backdrop */}
+        {/* <Box>
           <Backdrop
             sx={{
               zIndex: (theme) => theme.zIndex.modal + 10,
@@ -103,17 +122,17 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             onClick={(e) => {
               e.stopPropagation();
               closeEditor();
-              clearSelection();
+              // clearSelection();
             }}
           >
             <PosterModalContent
               text={`《${blogData?.title ?? ""}》/7/7/7/7${
-                selection?.text ?? ""
+                selection.current?.text ?? ""
               }`}
               onClose={closeEditor}
             />
           </Backdrop>
-          {/* 添加摘要 Backdrop */}
+ 
           <Backdrop
             sx={{
               zIndex: (theme) => theme.zIndex.modal + 10,
@@ -124,26 +143,26 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             onClick={(e) => {
               e.stopPropagation();
               closeEditor();
-              clearSelection();
+              // clearSelection();
             }}
           >
             <EditorModalContent
-              selection={selection!}
+              selection={selection.current!}
               blogId={blogData?.id!}
               onClose={closeEditor}
             />
           </Backdrop>
 
-          {/* 选中文字后的浮动按钮 */}
-          {selection && (
+          { selection.current && (
             <TextSelectionToolbar
-              selection={selection!}
+              selection={selection.current!}
               onGenerate={openPoster}
               onAddHighlight={openHighlight}
             />
           )}
-        </Box>
+        </Box> */}
         <Box
+          // ref={containerRef}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -151,10 +170,10 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             minHeight: "100vh",
           }}
           onClick={() => {
-            console.log("mode",mode);
-            if(mode==null){
-              clearSelection();
-            }
+            // console.log("mode",mode);
+            // if(mode==null){
+            //   clearSelection();
+            // }
           }}
         >
           <Box
@@ -278,12 +297,10 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }} sx={{ minHeight: "30px" }}>
-              <Box 
-              ref={containerRef}
-              >
+              <Box>
                 <LongTextPaginationTwo
                   content={blogData?.content || ""}
-                  blogId={blogData?.id || 0}
+                  blog={blogData!}
                 />
               </Box>
             </Grid>

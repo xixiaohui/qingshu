@@ -29,3 +29,14 @@
 [data-highlight]:hover {
   background-color: #ffd666;
 }
+
+/* 全局 */
+::selection {
+  background: rgba(250, 122, 3, 0.3);
+  color: inherit;
+}
+
+/* 或者只针对 markdown 区域 */
+.markdown ::selection {
+  background: rgba(15, 15, 15, 0.3);
+}

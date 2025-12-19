@@ -3,13 +3,17 @@
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Backdrop, useMediaQuery, useTheme } from "@mui/material";
 import { MyPage } from "./LongTextPaginationTwo";
 import { useEffect, useRef, useState } from "react";
-import { clearSelection, useTextSelection } from "./feature/text-poster/useTextSelection";
-import { renderTextWithMarks } from "./feature/text-poster/useSelectionEditor";
+import { clearSelection, useTextSelection, useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
+import { renderTextWithMarks, renderTextWithMarksSecond } from "./feature/text-poster/useSelectionEditor";
 import React from "react";
 import { BlogMark } from "@/lib/util";
+import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
+import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
+import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
+import { CardItem } from "./test/MainContentCard";
 
 // import { Fira_Code } from "next/font/google";
 // import { Noto_Serif_TC } from "next/font/google";
@@ -28,7 +32,7 @@ import { BlogMark } from "@/lib/util";
 //   variable: "--font-cn",
 // });
 
-function BlogContentMoblie({ content }: { content: MyPage }) {
+function BlogContentMoblie({ content }: { content: string }) {
   return (
     <>
       <Box
@@ -120,7 +124,7 @@ function BlogContentMoblie({ content }: { content: MyPage }) {
         }}
       >
         <ReactMarkdown remarkPlugins={[remarkBreaks]}>
-          {content?.text}
+          {content}
         </ReactMarkdown>
       </Box>
     </>
@@ -129,131 +133,104 @@ function BlogContentMoblie({ content }: { content: MyPage }) {
 
 function BlogContentPC({
   content,
-  blogId,
+  blog,
+
 }: {
-  content: MyPage;
-  blogId?: number;
+  content: string;
+  blog?: CardItem;
+
 }) {
-  
-  // const { containerRef, selection } = useTextSelection(content, blogId || 0);
-  const [marks, setMarks] = useState<BlogMark[]>([]);
 
 
-  // useEffect(() => {
-  //   if (selection) {
-  //     console.log("全文 start:", selection.start, "全文 end:", selection.end);
-  //     console.log("选中的文字:", selection.excerpt);
-  //     // TODO: 调用存储接口，保存高亮/注释
-
-  //     const handleAddHighlight = () => {
-  //       if (!selection) return;
-
-  //       setMarks(prev => [...prev, selection]);
-
-  //       console.log("clearSelection");
-  //       clearSelection(); // 👈 非常重要
-  //     };
-
-  //     handleAddHighlight();
-  //   }
-  // }, [selection]);
+  const mymask = new DOMRect(120, 320, 960, 24);
 
   return (
-    <Box
-      // ref={containerRef}
-      sx={{
-        lineHeight: 1.2,
-        color: "#373737",
+    <>
+      <Box
+        sx={{
+          lineHeight: 1.2,
+          color: "#373737",
 
-        // 英文 → Fira Code
-        // 中文 → Noto Serif TC
-        fontFamily: `"Fira Code","Noto Serif TC",sans-serif`,
-        fontSize: { xs: "1.05rem", sm: "1.3rem" },
-        fontWeight: 500,
-
-        "& p": {
-          marginBottom: "1.2em",
-          textAlign: "justify",
-        },
-
-        // 标题：固定使用 Noto Sans TC
-        "& h1, & h2, & h3": {
-          fontFamily: `var(--font-noto-serif-tc), sans-serif`,
-          fontWeight: 700,
-        },
-        "& h1": { fontSize: "1.75rem", mt: 4, mb: 2 },
-        "& h2": { fontSize: "1.5rem", mt: 3, mb: 2 },
-        "& h3": { fontSize: "1.3rem", mt: 3, mb: 1.5 },
-
-        "& ul, & ol": {
-          paddingLeft: "1.4em",
-          marginBottom: "1.2em",
-          lineHeight: 1.9,
-        },
-        "& li": { marginBottom: "0.4em" },
-
-        "& a": {
-          color: "primary.main",
-          textDecoration: "none",
+          // 英文 → Fira Code
+          // 中文 → Noto Serif TC
+          fontFamily: `"Fira Code","Noto Serif TC",sans-serif`,
+          fontSize: { xs: "1.05rem", sm: "1.3rem" },
           fontWeight: 500,
-          "&:hover": { textDecoration: "underline" },
-        },
 
-        "& img": {
-          maxWidth: "100%",
-          borderRadius: "10px",
-          margin: "20px 0",
-          display: "block",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-        },
-
-        "& blockquote": {
-          borderLeft: "4px solid #90caf9",
-          paddingLeft: "16px",
-          margin: "20px 0",
-          color: "text.secondary",
-          fontStyle: "italic",
-        },
-
-        "& code": {
-          background: "rgba(0,0,0,0.05)",
-          padding: "2px 6px",
-          borderRadius: "6px",
-          fontSize: "0.9rem",
-          fontFamily: `var(--font-fira-code), monospace`,
-        },
-
-        whiteSpace: "pre-wrap",
-      }}
-    >
-      <ReactMarkdown
-        remarkPlugins={[remarkBreaks]}
-        components={{
-          p({ children }) {
-            const raw = React.Children.toArray(children)
-              .map(c => (typeof c === "string" ? c : ""))
-              .join("");
-
-            return (
-              <p>
-                {renderTextWithMarks(raw, content.start, marks)}
-              </p>
-            );
+          "& p": {
+            marginBottom: "1.2em",
+            textAlign: "justify",
           },
+
+          // 标题：固定使用 Noto Sans TC
+          "& h1, & h2, & h3": {
+            fontFamily: `var(--font-noto-serif-tc), sans-serif`,
+            fontWeight: 700,
+          },
+          "& h1": { fontSize: "1.75rem", mt: 4, mb: 2 },
+          "& h2": { fontSize: "1.5rem", mt: 3, mb: 2 },
+          "& h3": { fontSize: "1.3rem", mt: 3, mb: 1.5 },
+
+          "& ul, & ol": {
+            paddingLeft: "1.4em",
+            marginBottom: "1.2em",
+            lineHeight: 1.9,
+          },
+          "& li": { marginBottom: "0.4em" },
+
+          "& a": {
+            color: "primary.main",
+            textDecoration: "none",
+            fontWeight: 500,
+            "&:hover": { textDecoration: "underline" },
+          },
+
+          "& img": {
+            maxWidth: "100%",
+            borderRadius: "10px",
+            margin: "20px 0",
+            display: "block",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          },
+
+          "& blockquote": {
+            borderLeft: "4px solid #90caf9",
+            paddingLeft: "16px",
+            margin: "20px 0",
+            color: "text.secondary",
+            fontStyle: "italic",
+          },
+
+          "& code": {
+            background: "rgba(0,0,0,0.05)",
+            padding: "2px 6px",
+            borderRadius: "6px",
+            fontSize: "0.9rem",
+            fontFamily: `var(--font-fira-code), monospace`,
+          },
+
+          whiteSpace: "pre-wrap",
         }}
       >
-        {content?.text}
-      </ReactMarkdown>
-    </Box>
+        <ReactMarkdown
+          remarkPlugins={[remarkBreaks]}
+        >
+          {content}
+        </ReactMarkdown>
+      </Box>
+     
+    </>
   );
 }
 
 export default function BlogContentCardUseMarkdown({
   content,
-  blogId,
+  blog,
+
 }: {
-  content: MyPage;
-  blogId?: number;
+  content: string;
+  blog: CardItem;
+
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -262,7 +239,7 @@ export default function BlogContentCardUseMarkdown({
       {isMobile ? (
         <BlogContentMoblie content={content} />
       ) : (
-        <BlogContentPC content={content} blogId={blogId} />
+        <BlogContentPC content={content} blog={blog} />
       )}
     </>
   );
