@@ -37,7 +37,7 @@ export function TextSelectionToolbar({
         variant="contained"
         color="inherit"
         sx={{
-          bgcolor: "#1976d2",
+          bgcolor: "#c43d6a",
           color: "#fff",
           textTransform: "none",
           borderRadius: 1,
@@ -46,7 +46,8 @@ export function TextSelectionToolbar({
           fontSize: 13,
           boxShadow: 3,
           "&:hover": {
-            bgcolor: "#115293",
+            bgcolor: "#ff0055",
+          
           },
         }}
         onClick={() => {
@@ -54,7 +55,7 @@ export function TextSelectionToolbar({
           onAddHighlight();
         }}
       >
-        <Typography variant="subtitle1">添加摘要</Typography>
+        <Typography variant="subtitle1">摘要</Typography>
       </Button>
 
       <Button
@@ -80,7 +81,7 @@ export function TextSelectionToolbar({
           onGenerate();
         }}
       >
-        <Typography variant="subtitle1">生成海报</Typography>
+        <Typography variant="subtitle1">海报</Typography>
       </Button>
      
     </Box>

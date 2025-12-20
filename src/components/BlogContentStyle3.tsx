@@ -71,6 +71,10 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
+
+
+
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const {
     selection,
@@ -87,11 +91,21 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   if (selection != null) {
     newRect = new DOMRect(
       selection.rect.left,
-      selection.rect.top - 40 ,
-      200,
+      selection.rect.top - 40,
+      150,
       40
     );
   }
+
+  useEffect(() => {
+    if (selection) {
+      lockPageScroll();
+    } else {
+      unlockPageScroll();
+    }
+
+    return unlockPageScroll;
+  }, [selection]);
 
   return (
     <>
@@ -128,8 +142,8 @@ function BlogContentMain({ identifier }: { identifier: string }) {
           }}
         >
           <Box>
-            <SelectionRectOverlay rect={expandRect(selection?.rect!,2)}></SelectionRectOverlay>
-            {/*<SelectionRectOverlay rect={newRect!}></SelectionRectOverlay> */}
+            {/* <SelectionRectOverlay rect={expandRect(selection?.rect!,2)}></SelectionRectOverlay> */}
+            {/* <SelectionRectOverlay rect={newRect!}></SelectionRectOverlay> */}
 
             {/* 海报模式 Backdrop */}
             <Backdrop
@@ -377,9 +391,9 @@ function SelectionRectOverlay({ rect }: { rect?: DOMRect }) {
         ) padding-box,
         linear-gradient(
           135deg,
-          rgba(100,181,246,0.6),
-          rgba(25,118,210,0.6),
-          rgba(13,71,161,0.6)
+          rgba(235, 252, 5, 0.28),
+          rgba(208, 255, 0, 0.35),
+          rgba(251, 255, 11, 0.32)
         ) border-box
       `
       }}
@@ -388,11 +402,24 @@ function SelectionRectOverlay({ rect }: { rect?: DOMRect }) {
 }
 
 function expandRect(rect: DOMRect, padding: number) {
-  if(!rect) return null;
+  if(!rect) return new DOMRect;
    return new DOMRect(
     rect.left - padding,
     rect.top - padding,
     rect.width + padding * 2,
     rect.height + padding * 2
   );
+}
+
+function lockPageScroll() {
+  const scrollbarWidth =
+    window.innerWidth - document.documentElement.clientWidth;
+
+  document.body.style.overflow = "hidden";
+  document.body.style.paddingRight = `${scrollbarWidth}px`;
+}
+
+function unlockPageScroll() {
+  document.body.style.overflow = "";
+  document.body.style.paddingRight = "";
 }
