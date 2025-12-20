@@ -37,7 +37,7 @@ export function TextSelectionToolbar({
         variant="contained"
         color="inherit"
         sx={{
-          bgcolor: "#c43d6a",
+          bgcolor: "#1976d2",
           color: "#fff",
           textTransform: "none",
           borderRadius: 1,
@@ -46,8 +46,7 @@ export function TextSelectionToolbar({
           fontSize: 13,
           boxShadow: 3,
           "&:hover": {
-            bgcolor: "#ff0055",
-          
+            bgcolor: "#115293",
           },
         }}
         onClick={() => {
@@ -83,7 +82,7 @@ export function TextSelectionToolbar({
       >
         <Typography variant="subtitle1">海报</Typography>
       </Button>
-     
+
     </Box>
   );
 }

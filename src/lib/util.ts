@@ -110,6 +110,9 @@ export function isPointInRect(
   y: number,
   rect: DOMRect
 ) {
+  if(!rect){
+    return false;
+  }
   return (
     x >= rect.left &&
     x <= rect.right &&

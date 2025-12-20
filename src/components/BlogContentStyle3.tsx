@@ -7,28 +7,25 @@ import {
   Grid,
   Card,
   CardMedia,
-  Button,
-  Paper,
   Link,
   Backdrop,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
 import {
+  BlogMark,
   formatDateSmart,
   isPointInRect,
-  splitByLineLength,
-  splitBySpecial,
 } from "@/lib/util";
-import LongTextPagination from "./LongTextPagination";
 import PDFButton from "./PDFButton";
 import LongTextPaginationTwo from "./LongTextPaginationTwo";
 
-import { useTextSelectionPoster } from "./feature/text-poster/useSelectionEditor";
 import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
 import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
 import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
 import { useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
+import { BlogMarksLayer } from "./BlogMarksLayer";
+
 
 const cardData = [
   {
@@ -48,6 +45,9 @@ const cardData = [
 
 function BlogContentMain({ identifier }: { identifier: string }) {
   const [blogData, setblogData] = useState<CardItem>();
+
+  const [marks, setMarks] = useState<BlogMark[]>();
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
@@ -72,9 +72,6 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   }, [identifier]);
 
 
-
-
-
   const containerRef = useRef<HTMLDivElement | null>(null);
   const {
     selection,
@@ -85,7 +82,12 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     clearSelection,
   } = useTextSelectionInfo(containerRef, { text: blogData?.content || "" });
 
-  // console.log("重新绘制");
+  if(selection){
+    console.log("重新绘制");
+    console.log(selection);
+  }
+  
+  
 
   let newRect = null;
   if (selection != null) {
@@ -107,6 +109,30 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     return unlockPageScroll;
   }, [selection]);
 
+
+  useEffect(() => {
+    if (!blogData?.id) return; // ⬅️ 关键保护
+
+    async function loadMarks() {
+      const { data, error } = await supabase
+        .from("blog_marks")
+        .select("*")
+        .eq("blog_id", blogData?.id)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("loadMasks error:", error);
+        return;
+      }
+
+      setMarks(data ?? []);
+    }
+
+    loadMarks();
+  }, [blogData?.id]); // ⬅️ 关键依赖
+
+  // console.log(marks);
+  // console.log("----------------------marks----------------");
   return (
     <>
       <Grid
@@ -131,9 +157,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             }
 
             const { clientX, clientY } = e;
-
             const inSelection = isPointInRect(clientX, clientY, newRect!);
-
             if (!inSelection && mode == null) {
               console.log("mode is ", mode);
               console.log("清除------------2");
@@ -191,7 +215,7 @@ function BlogContentMain({ identifier }: { identifier: string }) {
             {/* 选中文字后的浮动按钮 */}
             {selection && (
               <TextSelectionToolbar
-                selection={selection!}
+                selection={selection}
                 onGenerate={openPoster}
                 onAddHighlight={openHighlight}
               />
@@ -318,12 +342,16 @@ function BlogContentMain({ identifier }: { identifier: string }) {
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }} sx={{ minHeight: "30px" }}>
-              <Box>
+              <Box ref={contentRef}>
                 <LongTextPaginationTwo
                   content={blogData?.content || ""}
                   blog={blogData!}
                 />
               </Box>
+              {marks && 
+                <BlogMarksLayer rootRef={contentRef} marks={marks} />
+              }
+              
             </Grid>
 
             <Grid

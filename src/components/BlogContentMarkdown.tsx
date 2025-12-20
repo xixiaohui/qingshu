@@ -3,34 +3,11 @@
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
-import { Backdrop, useMediaQuery, useTheme } from "@mui/material";
-import { MyPage } from "./LongTextPaginationTwo";
-import { useEffect, useRef, useState } from "react";
-import { clearSelection, useTextSelection, useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
-import { renderTextWithMarks, renderTextWithMarksSecond } from "./feature/text-poster/useSelectionEditor";
-import React from "react";
-import { BlogMark } from "@/lib/util";
-import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
-import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
-import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
+import { useMediaQuery, useTheme } from "@mui/material";
 import { CardItem } from "./test/MainContentCard";
-
-// import { Fira_Code } from "next/font/google";
-// import { Noto_Serif_TC } from "next/font/google";
-
-// // 英文字体
-// const fira = Fira_Code({
-//   subsets: ["latin"],
-//   weight: ["400", "500", "600"],
-//   variable: "--font-en",
-// });
-
-// // 中文字体
-// const notoSerif = Noto_Serif_TC({
-//   subsets: ["latin"],
-//   weight: ["400", "500", "600"],
-//   variable: "--font-cn",
-// });
+import { useEffect, useRef, useState } from "react";
+import { BlogMark } from '../lib/util';
+import { supabase } from "@/lib/supabaseClient";
 
 function BlogContentMoblie({ content }: { content: string }) {
   return (
@@ -123,9 +100,7 @@ function BlogContentMoblie({ content }: { content: string }) {
           whiteSpace: "pre-wrap",
         }}
       >
-        <ReactMarkdown remarkPlugins={[remarkBreaks]}>
-          {content}
-        </ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content}</ReactMarkdown>
       </Box>
     </>
   );
@@ -134,15 +109,10 @@ function BlogContentMoblie({ content }: { content: string }) {
 function BlogContentPC({
   content,
   blog,
-
 }: {
   content: string;
   blog?: CardItem;
-
 }) {
-
-
-  const mymask = new DOMRect(120, 320, 960, 24);
 
   return (
     <>
@@ -212,13 +182,8 @@ function BlogContentPC({
           whiteSpace: "pre-wrap",
         }}
       >
-        <ReactMarkdown
-          remarkPlugins={[remarkBreaks]}
-        >
-          {content}
-        </ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content}</ReactMarkdown>
       </Box>
-     
     </>
   );
 }
@@ -226,11 +191,9 @@ function BlogContentPC({
 export default function BlogContentCardUseMarkdown({
   content,
   blog,
-
 }: {
   content: string;
   blog?: CardItem;
-
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

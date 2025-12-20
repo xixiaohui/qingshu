@@ -1,13 +1,9 @@
 "use client";
 
 import { useState, useMemo, useRef } from "react";
-import { Backdrop, Box, Grid, Pagination } from "@mui/material";
+import { Box, Grid, Pagination } from "@mui/material";
 import BlogContentMarkdown from "./BlogContentMarkdown";
 import { CardItem } from "./test/MainContentCard";
-import { useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
-import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
-import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
-import { TextSelectionToolbar } from "./feature/text-poster/TextSelectionToolbar";
 
 export interface MyPage {
   text: string;
@@ -70,18 +66,7 @@ export default function LongTextPaginationTwo({
   const leftIndex = (group - 1) * 2; // 左页
   const rightIndex = leftIndex + 1; // 右页
 
-  // const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // const {
-  //   selection,
-  //   mode,
-  //   openPoster,
-  //   openHighlight,
-  //   closeEditor,
-  //   clearSelection,
-  // } = useTextSelectionInfo(containerRef, { text: content || "" });
-
-  // console.log("重新绘制");
+ 
 
   return (
     <>
@@ -93,15 +78,6 @@ export default function LongTextPaginationTwo({
           maxWidth: "100%",
           justifyContent: "space-between",
         }}
-        // onMouseDown={e => {
-        //   // 只在点容器自身（不是选区/工具栏）
-        //   console.log('删除selection 111');
-        //   // if (e.target === e.currentTarget) {
-        //     clearSelection();
-        //     console.log('selection', selection);
-        //     console.log('删除selection 222');
-        //   // }
-        // }}
       >
         <Box sx={{ minHeight: "75vh" }}>
           <Grid container columns={12}>
@@ -142,58 +118,6 @@ export default function LongTextPaginationTwo({
           />
         </Box>
       </Box>
-
-      {/* <Box>
-  
-        <Backdrop
-          sx={{
-            zIndex: (theme) => theme.zIndex.modal + 10,
-            color: "#fff",
-            backdropFilter: "blur(4px)",
-          }}
-          open={mode == "poster"}
-          onClick={(e) => {
-            e.stopPropagation();
-            closeEditor();
-            // clearSelection();
-          }}
-        >
-          <PosterModalContent
-            text={`《${blog?.title ?? ""}》/7/7/7/7${
-              selection?.text ?? ""
-            }`}
-            onClose={closeEditor}
-          />
-        </Backdrop>
-
-        <Backdrop
-          sx={{
-            zIndex: (theme) => theme.zIndex.modal + 10,
-            color: "#fff",
-            backdropFilter: "blur(4px)",
-          }}
-          open={mode == "highlight"}
-          onClick={(e) => {
-            e.stopPropagation();
-            closeEditor();
-            // clearSelection();
-          }}
-        >
-          <EditorModalContent
-            selection={selection!}
-            blogId={blog?.id!}
-            onClose={closeEditor}
-          />
-        </Backdrop>
-
-        {selection && (
-          <TextSelectionToolbar
-            selection={selection!}
-            onGenerate={openPoster}
-            onAddHighlight={openHighlight}
-          />
-        )}
-      </Box> */}
     </>
   );
 }

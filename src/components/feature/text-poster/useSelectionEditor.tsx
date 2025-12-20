@@ -75,28 +75,6 @@ export function useTextSelectionPoster() {
   };
 }
 
-
-// export function highlightSelection(color = "#fff3a0") {
-//   const sel = window.getSelection();
-//   if (!sel || sel.rangeCount === 0) return;
-
-//   const range = sel.getRangeAt(0);
-//   if (range.collapsed) return;
-
-//   const content = range.extractContents();
-
-//   const span = document.createElement("span");
-//   span.style.backgroundColor = color;
-//   span.style.borderRadius = "2px";
-//   span.style.padding = "0 2px";
-//   span.dataset.highlight = "true";
-
-//   span.appendChild(content);
-//   range.insertNode(span);
-
-//   sel.removeAllRanges();
-// }
-
 export function renderTextWithMarks(
   text: string,
   pageStart: number,

@@ -46,13 +46,16 @@ export function EditorModalContent({
       blog_id: blogId,
       start: selection.start!,
       end: selection.end!,
-      bg_color: "#ffe58f",
+      bg_color: "#ffd666",
       style: "highlight",
       excerpt: selection.text,
       created_at: new Date().toISOString(),
     };
     setNewMark(newMarkUse);
-  }, [selection]);
+
+    console.log("selection",selection);
+    console.log("-----------------EditorModalContent----------------------");
+  }, [blogId]);
 
   const saveHighlight = async (mark: BlogMark) => {
     try {
