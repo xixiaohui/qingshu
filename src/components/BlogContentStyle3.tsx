@@ -14,7 +14,12 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Author, CardItem } from "./test/MainContentCard";
-import { formatDateSmart, splitByLineLength, splitBySpecial } from "@/lib/util";
+import {
+  formatDateSmart,
+  isPointInRect,
+  splitByLineLength,
+  splitBySpecial,
+} from "@/lib/util";
 import LongTextPagination from "./LongTextPagination";
 import PDFButton from "./PDFButton";
 import LongTextPaginationTwo from "./LongTextPaginationTwo";
@@ -47,8 +52,6 @@ function BlogContentMain({ identifier }: { identifier: string }) {
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
-  // const containerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     async function load() {
       const { data, error } = await supabase
@@ -68,39 +71,27 @@ function BlogContentMain({ identifier }: { identifier: string }) {
     load();
   }, [identifier]);
 
-  //取词
-  // const {
-  //   selection,
-  //   mode,
-  //   openPoster,
-  //   openHighlight,
-  //   closeEditor,
-  // } = useTextSelectionPoster();
-
-  // const { selection, toolbarPos, mode, openPoster, openHighlight, closeEditor,clearSelection } =
-  //   useTextSelectionInfo(containerRef, { text: blogData?.content || "" });
-
-  // const {
-  //   selection,
-  //   mode,
-  //   openPoster,
-  //   openHighlight,
-  //   closeEditor,
-  //   clearSelection,
-  // } = {
-  //   selection: { text: "", rect: new DOMRect(0, 0, 0, 0)},
-  //   mode: null,
-  //   openPoster: () => {},
-  //   openHighlight: () => {},
-  //   closeEditor: () => {},
-  //   clearSelection: () => {
-  //     console.log("清空~~");
-  //   },
-  // };
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const {
+    selection,
+    mode,
+    openPoster,
+    openHighlight,
+    closeEditor,
+    clearSelection,
+  } = useTextSelectionInfo(containerRef, { text: blogData?.content || "" });
 
   // console.log("重新绘制");
-  // console.log(selection.current);
-  // console.log(mode);
+
+  let newRect = null;
+  if (selection != null) {
+    newRect = new DOMRect(
+      selection.rect.left,
+      selection.rect.top - 40 ,
+      200,
+      40
+    );
+  }
 
   return (
     <>
@@ -111,71 +102,87 @@ function BlogContentMain({ identifier }: { identifier: string }) {
           color: "#373737",
         }}
       >
-        {/* <Box>
-          <Backdrop
-            sx={{
-              zIndex: (theme) => theme.zIndex.modal + 10,
-              color: "#fff",
-              backdropFilter: "blur(4px)",
-            }}
-            open={mode == "poster"}
-            onClick={(e) => {
-              e.stopPropagation();
-              closeEditor();
-              // clearSelection();
-            }}
-          >
-            <PosterModalContent
-              text={`《${blogData?.title ?? ""}》/7/7/7/7${
-                selection.current?.text ?? ""
-              }`}
-              onClose={closeEditor}
-            />
-          </Backdrop>
- 
-          <Backdrop
-            sx={{
-              zIndex: (theme) => theme.zIndex.modal + 10,
-              color: "#fff",
-              backdropFilter: "blur(4px)",
-            }}
-            open={mode == "highlight"}
-            onClick={(e) => {
-              e.stopPropagation();
-              closeEditor();
-              // clearSelection();
-            }}
-          >
-            <EditorModalContent
-              selection={selection.current!}
-              blogId={blogData?.id!}
-              onClose={closeEditor}
-            />
-          </Backdrop>
-
-          { selection.current && (
-            <TextSelectionToolbar
-              selection={selection.current!}
-              onGenerate={openPoster}
-              onAddHighlight={openHighlight}
-            />
-          )}
-        </Box> */}
         <Box
-          // ref={containerRef}
+          ref={containerRef}
           sx={{
             display: "flex",
             flexDirection: "column",
             gap: 1,
             minHeight: "100vh",
           }}
-          onClick={() => {
-            // console.log("mode",mode);
-            // if(mode==null){
-            //   clearSelection();
-            // }
+          onMouseDown={(e) => {
+            if (!selection?.rect) {
+              console.log(selection);
+              return;
+            }
+
+            const { clientX, clientY } = e;
+
+            const inSelection = isPointInRect(clientX, clientY, newRect!);
+
+            if (!inSelection && mode == null) {
+              console.log("mode is ", mode);
+              console.log("清除------------2");
+              clearSelection();
+            }
           }}
         >
+          <Box>
+            <SelectionRectOverlay rect={expandRect(selection?.rect!,2)}></SelectionRectOverlay>
+            {/*<SelectionRectOverlay rect={newRect!}></SelectionRectOverlay> */}
+
+            {/* 海报模式 Backdrop */}
+            <Backdrop
+              sx={{
+                zIndex: (theme) => theme.zIndex.modal + 10,
+                color: "#fff",
+                backdropFilter: "blur(4px)",
+              }}
+              open={mode == "poster"}
+              onClick={(e) => {
+                e.stopPropagation();
+                closeEditor();
+                // clearSelection();
+              }}
+            >
+              <PosterModalContent
+                text={`《${blogData?.title ?? ""}》/7/7/7/7${
+                  selection?.text ?? ""
+                }`}
+                onClose={closeEditor}
+              />
+            </Backdrop>
+
+            {/* 添加摘要 Backdrop */}
+            <Backdrop
+              sx={{
+                zIndex: (theme) => theme.zIndex.modal + 10,
+                color: "#fff",
+                backdropFilter: "blur(4px)",
+              }}
+              open={mode == "highlight"}
+              onClick={(e) => {
+                e.stopPropagation();
+                closeEditor();
+                // clearSelection();
+              }}
+            >
+              <EditorModalContent
+                selection={selection!}
+                blogId={blogData?.id!}
+                onClose={closeEditor}
+              />
+            </Backdrop>
+
+            {/* 选中文字后的浮动按钮 */}
+            {selection && (
+              <TextSelectionToolbar
+                selection={selection!}
+                onGenerate={openPoster}
+                onAddHighlight={openHighlight}
+              />
+            )}
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -342,5 +349,50 @@ export default function BlogContentStyle3({
         <BlogContentMain identifier={identifier}></BlogContentMain>
       </Grid>
     </>
+  );
+}
+
+function SelectionRectOverlay({ rect }: { rect?: DOMRect }) {
+  if (!rect) return null;
+
+  return (
+    <Box
+      sx={{
+        position: "fixed",
+        left: rect.left,
+        top: rect.top,
+        width: rect.width,
+        height: rect.height,
+
+        borderRadius: 0.5,
+        pointerEvents: "none",
+        zIndex: 1300,
+        boxSizing: "border-box",
+
+        border: "2px solid transparent",
+       background: `
+        linear-gradient(
+          rgba(25,118,210,0.12),
+          rgba(25,118,210,0.12)
+        ) padding-box,
+        linear-gradient(
+          135deg,
+          rgba(100,181,246,0.6),
+          rgba(25,118,210,0.6),
+          rgba(13,71,161,0.6)
+        ) border-box
+      `
+      }}
+    />
+  );
+}
+
+function expandRect(rect: DOMRect, padding: number) {
+  if(!rect) return null;
+   return new DOMRect(
+    rect.left - padding,
+    rect.top - padding,
+    rect.width + padding * 2,
+    rect.height + padding * 2
   );
 }

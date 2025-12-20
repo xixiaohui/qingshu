@@ -104,3 +104,17 @@ export type BlogSummary = {
   author: "user" | "ai";
   created_at: string;
 };
+
+export function isPointInRect(
+  x: number,
+  y: number,
+  rect: DOMRect
+) {
+  return (
+    x >= rect.left &&
+    x <= rect.right &&
+    y >= rect.top &&
+    y <= rect.bottom
+  );
+}
+

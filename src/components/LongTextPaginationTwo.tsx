@@ -55,7 +55,7 @@ export default function LongTextPaginationTwo({
   blog,
 }: {
   content: string;
-  blog: CardItem;
+  blog?: CardItem;
 }) {
   const [group, setGroup] = useState(1); // ← 当前“组”
 
@@ -70,38 +70,38 @@ export default function LongTextPaginationTwo({
   const leftIndex = (group - 1) * 2; // 左页
   const rightIndex = leftIndex + 1; // 右页
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  // const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const {
-    selection,
-    mode,
-    openPoster,
-    openHighlight,
-    closeEditor,
-    clearSelection,
-  } = useTextSelectionInfo(containerRef, { text: content || "" });
+  // const {
+  //   selection,
+  //   mode,
+  //   openPoster,
+  //   openHighlight,
+  //   closeEditor,
+  //   clearSelection,
+  // } = useTextSelectionInfo(containerRef, { text: content || "" });
 
-  console.log("重新绘制");
+  // console.log("重新绘制");
 
   return (
     <>
       <Box
-        ref={containerRef}
+        // ref={containerRef}
         sx={{
           display: "flex",
           flexDirection: "column",
           maxWidth: "100%",
           justifyContent: "space-between",
         }}
-        onMouseDown={e => {
-          // 只在点容器自身（不是选区/工具栏）
-          console.log('删除selection 111');
-          // if (e.target === e.currentTarget) {
-            clearSelection();
-            console.log('selection', selection);
-            console.log('删除selection 222');
-          // }
-        }}
+        // onMouseDown={e => {
+        //   // 只在点容器自身（不是选区/工具栏）
+        //   console.log('删除selection 111');
+        //   // if (e.target === e.currentTarget) {
+        //     clearSelection();
+        //     console.log('selection', selection);
+        //     console.log('删除selection 222');
+        //   // }
+        // }}
       >
         <Box sx={{ minHeight: "75vh" }}>
           <Grid container columns={12}>
@@ -143,8 +143,8 @@ export default function LongTextPaginationTwo({
         </Box>
       </Box>
 
-      <Box>
-        {/* 海报模式 Backdrop */}
+      {/* <Box>
+  
         <Backdrop
           sx={{
             zIndex: (theme) => theme.zIndex.modal + 10,
@@ -166,7 +166,6 @@ export default function LongTextPaginationTwo({
           />
         </Backdrop>
 
-        {/* 添加摘要 Backdrop */}
         <Backdrop
           sx={{
             zIndex: (theme) => theme.zIndex.modal + 10,
@@ -187,7 +186,6 @@ export default function LongTextPaginationTwo({
           />
         </Backdrop>
 
-        {/* 选中文字后的浮动按钮 */}
         {selection && (
           <TextSelectionToolbar
             selection={selection!}
@@ -195,7 +193,7 @@ export default function LongTextPaginationTwo({
             onAddHighlight={openHighlight}
           />
         )}
-      </Box>
+      </Box> */}
     </>
   );
 }

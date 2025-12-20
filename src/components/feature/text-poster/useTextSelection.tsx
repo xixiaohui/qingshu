@@ -307,7 +307,7 @@ export function useTextSelectionInfo(
       setSelection(null);
     },
     clearSelection: () => {
-      console.log("--------------------5-----------");
+      // console.log("--------------------5-----------");
       window.getSelection()?.removeAllRanges();
       setSelection(null);
     },
