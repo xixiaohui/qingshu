@@ -47,13 +47,13 @@ export default function LongTextPagination({ content }: { content: string }) {
           <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <BlogContentMarkdown
-                content={pages[page - 1]} 
+                content={pages[page - 1].text}
               ></BlogContentMarkdown>
             </Box>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <BlogContentMarkdown content={pages[page]}></BlogContentMarkdown>
+              <BlogContentMarkdown content={pages[page].text}></BlogContentMarkdown>
             </Box>
           </Grid>
         </Grid>

@@ -229,7 +229,7 @@ export default function BlogContentCardUseMarkdown({
 
 }: {
   content: string;
-  blog: CardItem;
+  blog?: CardItem;
 
 }) {
   const theme = useTheme();
