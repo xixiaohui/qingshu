@@ -1,81 +1,76 @@
-"use client";
-import AppAppBar from "@/components/homepage/AppAppBar";
-import Footer from "@/components/homepage/Footer";
+import type { Metadata } from "next";
+import { getBlog } from "@/lib/getBlog";
 
-import BlogContentStyle1 from "@/components/BlogContentStyle1";
-import { useParams } from "next/navigation";
-import BlogContentStyle2 from "@/components/BlogContentStyle2";
-import { useMediaQuery, useTheme } from "@mui/system";
-import BlogContentStyle3 from "@/components/BlogContentStyle3";
+import BlogClient from "@/components/BlogClient";
 
-type BlogStyleType = "style1" | "style2" | "style3";
+// 临时缓存 Map（同一次请求内）
+const blogCache = new Map<string, any>();
 
-const components: Record<BlogStyleType, React.FC<{ identifier: string }>> = {
-  style1: BlogContentStyle1,
-  style2: BlogContentStyle2,
-  style3: BlogContentStyle3,
-};
+async function getBlogCached(id: string) {
+  if (blogCache.has(id)) return blogCache.get(id);
+  const post = await getBlog(id);
+  blogCache.set(id, post);
+  return post;
+}
 
-const BlogContent = ({
-  type,
-  identifier,
-}: {
-  type: BlogStyleType;
-  identifier: string;
-}) => {
-  const style = {
-    style1: () => (
-      <BlogContentStyle1 identifier={identifier}></BlogContentStyle1>
-    ),
-    style2: () => (
-      <BlogContentStyle2 identifier={identifier}></BlogContentStyle2>
-    ),
-    style3: () => (
-      <BlogContentStyle3 identifier={identifier}></BlogContentStyle3>
-    ),
+
+
+
+// ---seo---
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> })
+{
+
+  const { id } = await params;
+
+  console.log("slug is ",id);
+  
+  // const post = await getBlog(id);
+  const post = await getBlogCached(decodeURIComponent(id));
+
+  if (!post) {
+    return {
+      title: "文章不存在｜情书",
+      description: "你要找的这篇情书，可能已经被风带走了。",
+    };
+  }
+
+  const description = post.content
+    ?.replace(/<[^>]+>/g, "")
+    .slice(0, 120);
+
+  return {
+    title: post.title,
+    description,
+    alternates: {
+      canonical: `https://qingshu.shop/blog/${id}`,
+    },
+    openGraph: {
+      type: "article",
+      locale: "zh_TW",
+      title: post.title,
+      description,
+      url: `https://qingshu.shop/blog/${id}`,
+    },
   };
+}
 
-  const RenderComponent = style[type];
+//---end seo---
 
-  return RenderComponent ? <RenderComponent /> : <></>;
-};
 
-const typeByScreen = {
-  xs: "style1",
-  sm: "style1",
-  md: "style2",
-  lg: "style2",
-  xl: "style3",
-} as const;
 
-export default function BlogPage() {
-  const params = useParams(); // 👈 获取到博客ID
-  const identifier = params?.id ?? "unknown"; // 防止 undefined
 
-  const theme = useTheme();
+export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
 
-  // 依照 MUI breakpoints 逐级判断
-  const isXs = useMediaQuery(theme.breakpoints.only("xs"));
-  const isSm = useMediaQuery(theme.breakpoints.only("sm"));
-  const isMd = useMediaQuery(theme.breakpoints.only("md"));
-  const isLg = useMediaQuery(theme.breakpoints.only("lg"));
-  const isXl = useMediaQuery(theme.breakpoints.only("xl"));
+  const { id } = await params;
 
-  let type: string = typeByScreen.xs; // 默认值
+  console.log("id:", id);
 
-  if (isSm) type = typeByScreen.sm;
-  if (isMd) type = typeByScreen.md;
-  if (isLg) type = typeByScreen.lg;
-  if (isXl) type = typeByScreen.xl;
+  const post = await getBlogCached(decodeURIComponent(id));
 
   return (
     <>
-      <AppAppBar />
-      <BlogContent
-        type={type as BlogStyleType}
-        identifier={identifier as string}
-      ></BlogContent>
-      <Footer />
+      <BlogClient id={id} post={post}></BlogClient>
     </>
   );
 }

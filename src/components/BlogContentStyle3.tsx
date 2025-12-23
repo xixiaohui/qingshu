@@ -25,6 +25,7 @@ import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
 import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
 import { useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
 import { BlogMarksLayer } from "./BlogMarksLayer";
+import { getBlog } from "@/lib/getBlog";
 
 
 const cardData = [
@@ -43,7 +44,7 @@ const cardData = [
   },
 ];
 
-function BlogContentMain({ identifier }: { identifier: string }) {
+function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardItem}) {
   const [blogData, setblogData] = useState<CardItem>();
 
   const [marks, setMarks] = useState<BlogMark[]>();
@@ -54,19 +55,31 @@ function BlogContentMain({ identifier }: { identifier: string }) {
 
   useEffect(() => {
     async function load() {
-      const { data, error } = await supabase
-        .from("blogs")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .eq(isId ? "id" : "slug", identifier)
-        .maybeSingle();
-      if (error) {
-        console.error(error);
-        const errorData = cardData[0];
-        setblogData(errorData);
-      } else {
-        setblogData(data);
-      }
+
+      // const { data, error } = await supabase
+      //   .from("blogs")
+      //   .select("*")
+      //   .order("created_at", { ascending: false })
+      //   .eq(isId ? "id" : "slug", identifier)
+      //   .maybeSingle();
+      // if (error) {
+      //   console.error(error);
+      //   const errorData = cardData[0];
+      //   setblogData(errorData);
+      // } else {
+      //   setblogData(data);
+      // }
+
+      // const data = await getBlog(identifier);
+      // if(data){
+      //   setblogData(data);
+      // }else{
+      //   const errorData = cardData[0];
+      //   setblogData(errorData);
+      // }
+
+      setblogData(post);
+      
     }
     load();
   }, [identifier]);
@@ -382,13 +395,15 @@ function BlogContentMain({ identifier }: { identifier: string }) {
 
 export default function BlogContentStyle3({
   identifier,
+  post
 }: {
   identifier: string;
+  post:CardItem
 }) {
   return (
     <>
       <Grid container spacing={2} columns={12} sx={{ my: 12 }}>
-        <BlogContentMain identifier={identifier}></BlogContentMain>
+        <BlogContentMain identifier={identifier} post={post}></BlogContentMain>
       </Grid>
     </>
   );

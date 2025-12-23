@@ -79,3 +79,14 @@ create table annotations (
   type text not null, -- highlight | underline
   created_at timestamp default now()
 );
+
+
+# SEO 12-23
+情书网站的 SEO，本质不是技术，而是“被理解”
+
+Google 只是在替人找「共鸣」
+
+港台 SEO 赢在「语言共鸣 + 稳定技术」
+
+Next.js + Vercel 只是工具，
+你真正做的是「被看见的情绪」
