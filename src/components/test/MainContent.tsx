@@ -23,6 +23,7 @@ import MainContentCard, { CardItem } from "./MainContentCard";
 import Hero from "../homepage/Hero";
 import { chips, getRandomIntBetween } from "@/lib/util";
 import { useRouter } from "next/navigation";
+import Adsense from "../Adsense";
 
 function Search() {
   const router = useRouter();
@@ -209,11 +210,19 @@ function MainContent() {
             }}
           >
             <MainContentCard
-              data={blogs.slice(3, 5)}
+              data={blogs.slice(3, 4)}
               md={4}
               isHaveImage={false}
             ></MainContentCard>
+            <Box>
+              {/* 文章中插入廣告 */}
+              <Adsense
+                adClient="ca-pub-6634656437365032"
+                adSlot="7741256542"
+              />
+            </Box>
           </Box>
+          
         </Grid>
         <MainContentCard data={blogs.slice(5, 6)} md={4}></MainContentCard>
       </Grid>
