@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import Providers from "./providers";
 
-import { notoSerifTC, firaCode } from "./fonts";
+import Providers from "./providers";
+import Script from "next/script";
+
 import "./globals.css";
 
 export const metadata = {
@@ -28,6 +28,15 @@ export default function RootLayout({
     <html lang="zh-TW"
       suppressHydrationWarning
     >
+       <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6634656437365032"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
+      
       <body>
         <Providers>
           {children}
