@@ -1,6 +1,7 @@
 
 import Providers from "./providers";
 import Script from "next/script";
+import type { Metadata } from "next";
 
 import "./globals.css";
 
@@ -16,6 +17,9 @@ export const metadata = {
     siteName: "情书",
     locale: "zh_TW",
     type: "website",
+  },
+  other: {
+    "google-adsense-account": "ca-pub-6634656437365032",
   },
 };
 
