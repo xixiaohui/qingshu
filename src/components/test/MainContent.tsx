@@ -49,7 +49,7 @@ function Search() {
           id="search"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="查找..."
+          placeholder="尋找..."
           sx={{ flexGrow: 1 }}
           startAdornment={
             <InputAdornment position="start" sx={{ color: "text.primary" }}>
@@ -67,7 +67,7 @@ function Search() {
         />
       </FormControl>
       <Button variant="contained" color="primary" onClick={handleSearch}>
-        搜索
+        搜尋
       </Button>
     </>
   );

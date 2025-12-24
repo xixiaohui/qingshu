@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
       <Link color="text.secondary" href="https://qingshu.shop">
-        情书
+        情書
       </Link>
       &nbsp;
       {new Date().getFullYear()}
@@ -59,12 +59,12 @@ export default function Footer() {
           <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
             <SitemarkIcon />
             <Typography variant="body2" gutterBottom sx={{ fontWeight: 600, mt: 2 }}>
-              加入情书
+              加入情書
             </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-              订阅即可每周收到最新资讯。绝无垃圾邮件！
+              訂閱即可每週收到最新資訊。絕無垃圾郵件！
             </Typography>
-            <InputLabel htmlFor="email-newsletter">邮箱</InputLabel>
+            <InputLabel htmlFor="email-newsletter">信箱</InputLabel>
             <Stack direction="row" spacing={1} useFlexGap>
               <TextField
                 id="email-newsletter"
@@ -73,7 +73,7 @@ export default function Footer() {
                 variant="outlined"
                 fullWidth
                 aria-label="Enter your email address"
-                placeholder="您的邮箱地址"
+                placeholder="您的郵件地址"
                 slotProps={{
                   htmlInput: {
                     autoComplete: 'off',
@@ -88,7 +88,7 @@ export default function Footer() {
                 size="small"
                 sx={{ flexShrink: 0 }}
               >
-                订阅
+                訂閱
               </Button>
             </Stack>
           </Box>
@@ -101,25 +101,25 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
-            情书
+            情書
           </Typography>
           <Link color="text.secondary" variant="body2" href="/selected">
-            精选
+            精選
           </Link>
           <Link color="text.secondary" variant="body2" href="/latest">
             最新
           </Link>
           <Link color="text.secondary" variant="body2" href="/confessing">
-            表白专栏
+            表白專欄
           </Link>
           <Link color="text.secondary" variant="body2" href="/end">
-            散场信箱
+            散場信箱
           </Link>
           <Link color="text.secondary" variant="body2" href="/blog_zh">
             中文文章
           </Link>
           <Link color="text.secondary" variant="body2" href="/shakespeare">
-            莎士比亚
+            莎士比亞
           </Link>
           <Link color="text.secondary" variant="body2" href="/ja">
             日文文章
@@ -133,16 +133,16 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
-            情书Club
+            情書Club
           </Typography>
           <Link color="text.secondary" variant="body2" href="/about">
-            关于情书
+            關於情書
           </Link>
           <Link color="text.secondary" variant="body2" href="#">
-            愿景
+            願景
           </Link>
           <Link color="text.secondary" variant="body2" href="#">
-            规划
+            規劃
           </Link>
         </Box>
         <Box
@@ -155,17 +155,20 @@ export default function Footer() {
           <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
             合法的
           </Typography>
-          <Link color="text.secondary" variant="body2" href="#">
-            条款
+          <Link color="text.secondary" variant="body2" href="/policy">
+            隱私權政策
           </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            隐私
+          <Link color="text.secondary" variant="body2" href="/service">
+            服務條款
           </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            联系
+          <Link color="text.secondary" variant="body2" href="/about">
+            關於我們
+          </Link>
+          <Link color="text.secondary" variant="body2" href="/contact">
+            聯絡我們
           </Link>
           <Link color="text.secondary" variant="body2" href="/devlog">
-            开发
+            開發
           </Link>
         </Box>
       </Box>
@@ -180,14 +183,14 @@ export default function Footer() {
         }}
       >
         <div>
-          <Link color="text.secondary" variant="body2" href="#">
-            隐私政策
+          <Link color="text.secondary" variant="body2" href="policy">
+            隱私權政策
           </Link>
           <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
             &nbsp;•&nbsp;
           </Typography>
-          <Link color="text.secondary" variant="body2" href="#">
-            服务条款
+          <Link color="text.secondary" variant="body2" href="/service">
+            服務條款
           </Link>
           <Copyright />
         </div>

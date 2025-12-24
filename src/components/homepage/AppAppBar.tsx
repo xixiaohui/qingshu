@@ -61,12 +61,12 @@ export default function AppAppBar() {
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Link href="/">
                 <Button variant="text" color="info" size="small">
-                  主页
+                  首頁
                 </Button>
               </Link>
               <Link href="/selected">
                 <Button variant="text" color="info" size="small">
-                  精选
+                  精選
                 </Button>
               </Link>
               <Link href="/latest">
@@ -76,7 +76,7 @@ export default function AppAppBar() {
               </Link>
               <Link href="/confessing">
                 <Button variant="text" color="info" size="small">
-                  表白专栏
+                  表白專欄
                 </Button>
               </Link>
               <Link href="/end">
@@ -86,7 +86,7 @@ export default function AppAppBar() {
                   size="small"
                   sx={{ minWidth: 0 }}
                 >
-                  散场信箱
+                  散場信箱
                 </Button>
               </Link>
               <Link href="/about">
@@ -96,7 +96,7 @@ export default function AppAppBar() {
                   size="small"
                   sx={{ minWidth: 0 }}
                 >
-                  了解情书
+                  了解情書
                 </Button>
               </Link>
             </Box>
@@ -109,10 +109,10 @@ export default function AppAppBar() {
             }}
           >
             <Button color="primary" variant="text" size="small">
-              登陆
+              登陸
             </Button>
             <Button color="primary" variant="contained" size="small">
-              注册
+              註冊
             </Button>
             <ColorModeIconDropdown />
           </Box>
@@ -143,21 +143,21 @@ export default function AppAppBar() {
                   </IconButton>
                 </Box>
 
-                <MenuItem>主页</MenuItem>
-                <MenuItem>精选</MenuItem>
+                <MenuItem>首頁</MenuItem>
+                <MenuItem>精選</MenuItem>
                 <MenuItem>最新</MenuItem>
-                <MenuItem>表白专栏</MenuItem>
-                <MenuItem>散场信箱</MenuItem>
-                <MenuItem>了解情书</MenuItem>
+                <MenuItem>表白專欄</MenuItem>
+                <MenuItem>散場信箱</MenuItem>
+                <MenuItem>了解情書</MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button color="primary" variant="contained" fullWidth>
-                    注册
+                    註冊
                   </Button>
                 </MenuItem>
                 <MenuItem>
                   <Button color="primary" variant="outlined" fullWidth>
-                    登陆
+                    登陸
                   </Button>
                 </MenuItem>
               </Box>

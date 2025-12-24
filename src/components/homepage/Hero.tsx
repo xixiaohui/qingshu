@@ -96,7 +96,7 @@ export default function Hero() {
               fontSize: "clamp(3rem, 10vw, 3.5rem)",
             }}
           >
-            <Link href="/selected">精选&nbsp;</Link>
+            <Link href="/selected">精選&nbsp;</Link>
             <Link href="/latest">最新&nbsp;</Link>
             <Link href="/all">
               <Typography
@@ -122,7 +122,7 @@ export default function Hero() {
               width: { sm: "100%", md: "80%" },
             }}
           >
-            "让人重新相信文字里的爱。" —— 一个专注于表达与理解爱的社交平台。
+            "讓人重新相信文字裡的愛。" —— 一個專注於表達與理解愛的社交平台。
           </Typography>
           {/* <Stack
             direction={{ xs: 'column', sm: 'row' }}

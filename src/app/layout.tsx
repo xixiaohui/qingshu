@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 
-export const metadata = {
+export const metadata :Metadata = {
   metadataBase: new URL("https://qingshu.shop"),
   title: {
     default: "情书｜写给没说出口的爱",
@@ -21,6 +21,7 @@ export const metadata = {
   other: {
     "google-adsense-account": "ca-pub-6634656437365032",
   },
+ 
 };
 
 export default function RootLayout({
@@ -40,7 +41,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      
+
       <body>
         <Providers>
           {children}

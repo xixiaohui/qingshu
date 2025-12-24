@@ -50,26 +50,25 @@ export function splitTextToPages(text: string, pageSize: number = 1000) {
 }
 
 export const chips = [
-  "精选",
-  "表白专栏",
-  "散场信箱",
-  "暧昧集",
-  "心绪日记",
-  "情书博物馆",
-
+  "精選",
+  "表白專欄",
+  "散場信箱",
+  "曖昧集",
+  "心緒日記",
+  "情書博物館",
 ];
 
 export const LATEST = "最新";
 
 export const PAGE_LIMIT = 7;
 
-export const mainKeyWords =[
-  "精选",
-  "表白专栏",
-  "散场信箱",
-  "暧昧集",
-  "心绪日记",
-  "情书博物馆",
+export const mainKeyWords = [
+  "精選",
+  "表白專欄",
+  "散場信箱",
+  "曖昧集",
+  "心緒日記",
+  "情書博物館",
   "Shakespeare",
   "Elizabeth",
   "Christina",
