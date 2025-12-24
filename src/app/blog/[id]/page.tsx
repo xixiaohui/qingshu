@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   if (!post) {
     return {
-      title: "文章不存在｜情书",
-      description: "你要找的这篇情书，可能已经被风带走了。",
+      title: "文章不存在｜情書",
+      description: "你要找的這篇情書，可能已經被風帶走了。",
     };
   }
 

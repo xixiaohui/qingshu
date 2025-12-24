@@ -208,7 +208,7 @@ function BlogListButton({ message }: { message: string }) {
             {loading ? (
               <CircularProgress size={22} sx={{ color: "primary" }} />
             ) : (
-              "加载更多"
+              "載入更多"
             )}
           </Button>
         </Box>
