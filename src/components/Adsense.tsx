@@ -3,26 +3,32 @@
 import { useEffect } from "react";
 
 type Props = {
-  slot: string;
+  adClient: string;
+  adSlot: string;
   style?: React.CSSProperties;
 };
 
-export default function Adsense({ slot, style }: Props) {
+export default function Adsense({ adClient, adSlot, style }: Props) {
   useEffect(() => {
     try {
       // @ts-ignore
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {}
+    } catch (e) {
+      console.error("Adsense push error:", e);
+    }
   }, []);
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={{ display: "block", ...style }}
-      data-ad-client="ca-pub-6634656437365032"
-      data-ad-slot={slot}
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-    />
+    <>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", textAlign: "center", ...style }}
+        data-ad-client={adClient}
+        data-ad-slot={adSlot}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
+      />
+    </>
   );
 }
+

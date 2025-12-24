@@ -4,6 +4,8 @@ import { useState, useMemo, useRef } from "react";
 import { Box, Grid, Pagination } from "@mui/material";
 import BlogContentMarkdown from "./BlogContentMarkdown";
 import { CardItem } from "./test/MainContentCard";
+import Adsense from "./Adsense";
+import PDFButton from "./PDFButton";
 
 export interface MyPage {
   text: string;
@@ -117,6 +119,27 @@ export default function LongTextPaginationTwo({
             }}
           />
         </Box>
+        <Box
+         sx={{
+              my:2,
+            }}
+        >
+          {/* 文章中插入廣告 */}
+          <Adsense
+            adClient="ca-pub-6634656437365032"
+            adSlot="9440694485"
+          />
+        </Box>
+        <Box
+            sx={{
+              bgcolor: "transparent",
+              display: "flex",
+              justifyContent: "center",
+              my:7,
+            }}
+          >
+            {blog && <PDFButton blog={blog}></PDFButton>}
+          </Box>
       </Box>
     </>
   );

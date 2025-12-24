@@ -364,7 +364,6 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
               {marks && 
                 <BlogMarksLayer rootRef={contentRef} marks={marks} />
               }
-              
             </Grid>
 
             <Grid
