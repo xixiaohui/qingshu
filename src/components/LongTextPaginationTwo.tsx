@@ -124,7 +124,7 @@ export default function LongTextPaginationTwo({
               my:2,
             }}
         >
-          {/* 文章中插入廣告 */}
+          {/* 情书内嵌广告 */}
           <Adsense
             adClient="ca-pub-6634656437365032"
             adSlot="9440694485"

@@ -209,20 +209,21 @@ function MainContent() {
               height: "100%",
             }}
           >
-            <MainContentCard
-              data={blogs.slice(3, 4)}
-              md={4}
-              isHaveImage={false}
-            ></MainContentCard>
+            
             <Box>
-              {/* 文章中插入廣告 */}
+              {/* 情书展示广告 */}
               <Adsense
                 adClient="ca-pub-6634656437365032"
                 adSlot="7741256542"
               />
             </Box>
+            <MainContentCard
+              data={blogs.slice(3, 4)}
+              md={4}
+              isHaveImage={false}
+            ></MainContentCard>
           </Box>
-          
+
         </Grid>
         <MainContentCard data={blogs.slice(5, 6)} md={4}></MainContentCard>
       </Grid>

@@ -26,6 +26,7 @@ import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
 import { useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
 import { BlogMarksLayer } from "./BlogMarksLayer";
 import { getBlog } from "@/lib/getBlog";
+import Adsense from "./Adsense";
 
 
 const cardData = [
@@ -374,16 +375,19 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
                 justifyContent: "flex-end",
               }}
             >
-              <Box
+              {/* <Box
                 sx={{
-                  bgcolor: "transparent",
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-end",
                 }}
               >
                 {blogData && <PDFButton blog={blogData}></PDFButton>}
-              </Box>
+                <Adsense
+                  adClient="ca-pub-6634656437365032"
+                  adSlot="7741256542"
+                />
+              </Box> */}
             </Grid>
           </Box>
         </Box>
