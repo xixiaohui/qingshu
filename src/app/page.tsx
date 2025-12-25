@@ -37,8 +37,8 @@ export default function Home() {
         }}
       >
         <MainContent></MainContent>
-        <Latest></Latest>
         <Adsbygoogle></Adsbygoogle>
+        <Latest></Latest>
         <Footer />
       </Container>
     </>

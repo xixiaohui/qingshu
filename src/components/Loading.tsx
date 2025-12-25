@@ -17,7 +17,7 @@ export default function LoadingFrame(){
         >
           <CircularProgress color="primary" />
           <Typography variant="body1" color="text.secondary">
-            正在加载数据，请稍候...
+            正在載入數據，請稍候...
           </Typography>
         </Box>
       </>
