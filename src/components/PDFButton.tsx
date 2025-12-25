@@ -2,7 +2,7 @@
 
 import { jsPDF } from "jspdf";
 
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { CardItem } from "./test/MainContentCard";
 import { NotoSansTC } from "../fonts/NotoSansTC-Regular";
 import { Oswald } from "../fonts/Oswald-VariableFont_wght";
@@ -81,7 +81,8 @@ export default function PDFButton({ blog }: { blog: CardItem }) {
   return (
     <Button variant="contained" onClick={handleDownload}>
       <Download />
-      下载 PDF
+      <Typography variant="body2" gutterBottom>下載 pdf</Typography>
+        
     </Button>
   );
 }

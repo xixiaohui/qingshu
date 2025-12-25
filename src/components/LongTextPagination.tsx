@@ -5,6 +5,9 @@ import { Box, Grid, Pagination, Typography } from "@mui/material";
 import BlogContentMarkdown from "./BlogContentMarkdown";
 import BlogContentMarkdownWithAnnotation from "./BlogContentAnnotation";
 import { paginateByLinesWithOffset } from "./LongTextPaginationTwo";
+import { CardItem } from "./test/MainContentCard";
+import Adsense from "./Adsense";
+import PDFButton from "./PDFButton";
 
 function splitTextToPages(text: string, size: number = 1000) {
   const pages = [];
@@ -28,7 +31,7 @@ export function paginateByLines(text: string, linesPerPage: number = 20) {
   return pages;
 }
 
-export default function LongTextPagination({ content }: { content: string }) {
+export default function LongTextPagination({ content ,blog}: { content: string,blog?:CardItem }) {
   const [page, setPage] = useState(1);
 
   const pages = useMemo(() => paginateByLinesWithOffset(content, 14), [content]);
@@ -42,18 +45,21 @@ export default function LongTextPagination({ content }: { content: string }) {
         justifyContent: "space-between",
       }}
     >
-      <Box sx={{ minHeight: "75vh"}}>
+      <Box sx={{ minHeight: "75vh" }}>
         <Grid container columns={12}>
-          <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
+          <Grid
+            size={{ xs: 12, md: 12 }}
+            sx={{
+              p: 2,
+              backgroundColor: "rgba(206, 236, 236, 0.1)",
+              borderRadius: 7,
+            }}
+          >
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <BlogContentMarkdown
                 content={pages[page - 1].text}
+                blog={blog}
               ></BlogContentMarkdown>
-            </Box>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }} sx={{ p: 2 }}>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <BlogContentMarkdown content={pages[page].text}></BlogContentMarkdown>
             </Box>
           </Grid>
         </Grid>
@@ -81,6 +87,24 @@ export default function LongTextPagination({ content }: { content: string }) {
             },
           }}
         />
+      </Box>
+      <Box
+        sx={{
+          my: 7,
+        }}
+      >
+        {/* 情书内嵌广告 */}
+        <Adsense adClient="ca-pub-6634656437365032" adSlot="9440694485" />
+      </Box>
+      <Box
+        sx={{
+          bgcolor: "transparent",
+          display: "flex",
+          justifyContent: "center",
+          mb: 7,
+        }}
+      >
+        {blog && <PDFButton blog={blog}></PDFButton>}
       </Box>
     </Box>
   );

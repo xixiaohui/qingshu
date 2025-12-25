@@ -7,13 +7,15 @@ import BlogContentStyle2 from "./BlogContentStyle2";
 import BlogContentStyle3 from "./BlogContentStyle3";
 import { useMediaQuery, useTheme } from "@mui/system";
 import { CardItem } from "./test/MainContentCard";
+import BlogContentStyle4 from "./BlogContentStyle4";
 
-type BlogStyleType = "style1" | "style2" | "style3";
+type BlogStyleType = "style1" | "style2" | "style3" | "style4";
 
 const components: Record<BlogStyleType, React.FC<{ identifier: string ,post:CardItem}>> = {
   style1: BlogContentStyle1,
   style2: BlogContentStyle2,
   style3: BlogContentStyle3,
+  style4: BlogContentStyle4,
 };
 
 const BlogContent = ({
@@ -35,6 +37,9 @@ const BlogContent = ({
     style3: () => (
       <BlogContentStyle3 identifier={identifier} post={post}></BlogContentStyle3>
     ),
+    style4: () => (
+      <BlogContentStyle4 identifier={identifier} post={post}></BlogContentStyle4>
+    ),
   };
 
   const RenderComponent = style[type];
@@ -47,7 +52,7 @@ const typeByScreen = {
   sm: "style1",
   md: "style2",
   lg: "style2",
-  xl: "style3",
+  xl: "style4",
 } as const;
 
 export default function BlogClient({ id ,post}: { id: string,post:CardItem }) {
@@ -70,7 +75,11 @@ export default function BlogClient({ id ,post}: { id: string,post:CardItem }) {
   return (
     <>
       <AppAppBar />
-      <BlogContent type={type as BlogStyleType} identifier={id} post={post}></BlogContent>
+      <BlogContent
+        type={type as BlogStyleType}
+        identifier={id}
+        post={post}
+      ></BlogContent>
       <Footer />
     </>
   );
