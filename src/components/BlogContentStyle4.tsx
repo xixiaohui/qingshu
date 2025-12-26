@@ -159,7 +159,7 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
           }}
         >
           <Box>
-            {/* <SelectionRectOverlay rect={expandRect(selection?.rect!,2)}></SelectionRectOverlay> */}
+            <SelectionRectOverlay rect={expandRect(selection?.rect!,2)}></SelectionRectOverlay>
             {/* <SelectionRectOverlay rect={newRect!}></SelectionRectOverlay> */}
 
             {/* 海报模式 Backdrop */}
@@ -233,7 +233,7 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
                 }}
               >
                 <Typography
-                  variant="h2"
+                  variant="h1"
                   sx={{
                     fontWeight: 700,
                     color: "#373737",
@@ -404,9 +404,9 @@ function SelectionRectOverlay({ rect }: { rect?: DOMRect }) {
         ) padding-box,
         linear-gradient(
           135deg,
-          rgba(235, 252, 5, 0.28),
-          rgba(208, 255, 0, 0.35),
-          rgba(251, 255, 11, 0.32)
+          rgba(253, 140, 11, 0.28),
+          rgba(4, 0, 255, 0.35),
+          rgba(255, 11, 23, 0.32)
         ) border-box
       `
       }}
