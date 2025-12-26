@@ -1,4 +1,4 @@
-
+import { Analytics } from "@vercel/analytics/next"
 import Providers from "./providers";
 import Script from "next/script";
 import type { Metadata } from "next";
