@@ -8,13 +8,13 @@ import "./globals.css";
 export const metadata :Metadata = {
   metadataBase: new URL("https://qingshu.shop"),
   title: {
-    default: "情书｜写给没说出口的爱",
-    template: "%s｜情书",
+    default: "情書｜寫給沒說出口的愛｜情書大全｜情感表達｜分享社交｜理解與共鳴｜文藝青年",
+    template: "%s｜情書",
   },
   description:
-    "情书 qingshu.shop，一个为台湾与香港用户打造的繁体中文情感文字网站。",
+    "情書 qingshu.shop,讓人重新相信文字裡的愛! 一個專注於表達與理解愛情的社交平台。",
   openGraph: {
-    siteName: "情书",
+    siteName: "情書",
     locale: "zh_TW",
     type: "website",
   },
