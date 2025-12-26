@@ -73,7 +73,7 @@ export function EditorModalContent({
       onClose(); // 清空选区
     } catch (err) {
       console.error("保存高亮失败", err);
-      alert("保存失败，请重试");
+      alert("儲存失敗，請重試");
     } finally {
       setSaving(false);
     }
@@ -125,7 +125,7 @@ export function EditorModalContent({
           fullWidth
           multiline
           minRows={3}
-          placeholder="用你自己的话写一句理解…"
+          placeholder="用自己的話寫一句理解…"
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
           onClick={(e) => e.stopPropagation()}
@@ -169,15 +169,15 @@ export function EditorModalContent({
           zIndex: (theme) => theme.zIndex.modal + 11,
         }}
       >
-        <DialogTitle>提交前请回答</DialogTitle>
+        <DialogTitle>提交前請回答</DialogTitle>
 
         <DialogContent>
           <Typography sx={{ mb: 1 }}>
-            请回答问题后才能提交摘要：
+            請回答問題後才能提交摘要：
           </Typography>
 
           <Typography sx={{ mb: 1 }}>
-            为什么选择这段话~~
+            為什麼選擇這段話~~
           </Typography>
 
           <TextField
@@ -190,7 +190,7 @@ export function EditorModalContent({
             }}
             error={!!error}
             helperText={error}
-            placeholder="请输入你的回答"
+            placeholder="請輸入你的回答"
           />
 
         </DialogContent>
@@ -225,7 +225,7 @@ export function EditorModalContent({
               }
             }}
           >
-            确认提交
+            確認提交
           </LoadingButton>
         </DialogActions>
       </Dialog>

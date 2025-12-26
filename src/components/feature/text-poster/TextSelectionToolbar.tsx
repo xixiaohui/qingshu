@@ -80,7 +80,7 @@ export function TextSelectionToolbar({
           onGenerate();
         }}
       >
-        <Typography variant="subtitle1">海报</Typography>
+        <Typography variant="subtitle1">海報</Typography>
       </Button>
 
     </Box>

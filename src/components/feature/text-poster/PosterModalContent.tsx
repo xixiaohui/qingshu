@@ -114,7 +114,7 @@ export function PosterModalContent({
             },
           }}
         >
-          下载海报
+          下載海報
         </Button>
       </Stack>
     </Box>

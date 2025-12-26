@@ -363,7 +363,7 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
   );
 }
 
-export default function BlogContentStyle3({
+export default function BlogContentStyle4({
   identifier,
   post
 }: {
