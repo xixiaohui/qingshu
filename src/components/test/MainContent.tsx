@@ -174,7 +174,7 @@ function MainContent() {
       .then((data) => {
         //过滤条件
         const filtered = data.filter(
-          (item: CardItem) => item.tag && (item.tag.includes(message) || item.tag.includes("Love"))
+          (item: CardItem) => item.tag && (item.tag.includes(message))
         );
         setBlogs(filtered);
       });
@@ -211,10 +211,7 @@ function MainContent() {
           >
             <Box>
               {/* 情书展示广告 */}
-              <Adsense
-                adClient="ca-pub-6634656437365032"
-                adSlot="7741256542"
-              />
+              <Adsense adClient="ca-pub-6634656437365032" adSlot="7741256542" />
             </Box>
             <MainContentCard
               data={blogs.slice(3, 4)}
@@ -222,7 +219,6 @@ function MainContent() {
               isHaveImage={false}
             ></MainContentCard>
           </Box>
-
         </Grid>
         <MainContentCard data={blogs.slice(5, 6)} md={4}></MainContentCard>
       </Grid>
