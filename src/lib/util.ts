@@ -56,6 +56,7 @@ export const chips = [
   "曖昧集",
   "心緒日記",
   "情書博物館",
+  "Shakespeare",
 ];
 
 export const LATEST = "最新";

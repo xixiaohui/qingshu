@@ -174,7 +174,7 @@ function MainContent() {
       .then((data) => {
         //过滤条件
         const filtered = data.filter(
-          (item: CardItem) => item.tag && item.tag.includes(message)
+          (item: CardItem) => item.tag && (item.tag.includes(message) || item.tag.includes("Love"))
         );
         setBlogs(filtered);
       });

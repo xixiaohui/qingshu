@@ -134,7 +134,7 @@ function ContentCard({
   return (
     <Grid size={{ xs: 12, md: md }}>
       <Link
-        href={`/blog/${data.slug}`}
+        href={`/blog/${data.id ? data.id : data.slug}`}
         style={{ textDecoration: "none" }}
       >
         <StyledCard
@@ -196,7 +196,7 @@ function ContentCard2({
   return (
     <>
       <Link
-        href={`/blog/${data.slug}`}
+        href={`/blog/${data.id ? data.id : data.slug}`}
         style={{ textDecoration: "none" }}
       >
         <StyledCard

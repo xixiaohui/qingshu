@@ -153,7 +153,7 @@ export default function Latest() {
   return (
     <div>
       <Typography variant="h2" gutterBottom>
-        最新的
+        最新的情書
       </Typography>
       <Grid container spacing={8} columns={12} sx={{ my: 4 }}>
         {blogs
@@ -161,7 +161,7 @@ export default function Latest() {
           .map((blog, index) => (
             <Grid key={index} size={{ xs: 12, sm: 6 }}>
               <Link
-                href={`/blog/${blog.slug}`}
+                href={`/blog/${blog.id ? blog.id : blog.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <Box

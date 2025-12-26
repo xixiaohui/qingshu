@@ -354,19 +354,7 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
                 justifyContent: "flex-end",
               }}
             >
-              {/* <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-end",
-                }}
-              >
-                {blogData && <PDFButton blog={blogData}></PDFButton>}
-                <Adsense
-                  adClient="ca-pub-6634656437365032"
-                  adSlot="7741256542"
-                />
-              </Box> */}
+              
             </Grid>
           </Box>
         </Box>
