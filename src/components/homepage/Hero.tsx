@@ -48,11 +48,20 @@ export default function Hero() {
   const [totalCount, setTotalCount] = useState(0);
 
   async function fetchCount() {
-    const { count } = await supabase
+    const { count ,error} = await supabase
       .from("blogs")
-      .select("*", { count: "exact", head: true });
+      .select("id", { count: "estimated"});
 
-    if (count) setTotalCount(count);
+    if (count) {
+      setTotalCount(count);
+      console.log(count);
+    }
+
+    if(error){
+      console.log(error)
+    }
+
+
   }
   useEffect(() => {
     fetchCount();
