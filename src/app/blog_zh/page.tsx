@@ -66,7 +66,7 @@ export default function BlogZhPage() {
 
   return (
     <>
-      <CatalogePage catalogeName="中文文章">
+      <CatalogePage catalogeName="zh">
 
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>

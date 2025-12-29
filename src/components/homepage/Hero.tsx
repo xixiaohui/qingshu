@@ -124,52 +124,9 @@ export default function Hero() {
           >
             "讓人重新相信文字裡的愛。" —— 一個專注於表達與理解愛的社交平台。
           </Typography>
-          {/* <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={1}
-            useFlexGap
-            sx={{ pt: 2, width: { xs: '100%', sm: '350px' } }}
-          >
-            <InputLabel htmlFor="email-hero" sx={visuallyHidden}>
-              邮箱
-            </InputLabel>
-            <TextField
-              id="email-hero"
-              hiddenLabel
-              size="small"
-              variant="outlined"
-              aria-label="Enter your email address"
-              placeholder="您的邮箱地址"
-              fullWidth
-              slotProps={{
-                htmlInput: {
-                  autoComplete: 'off',
-                  'aria-label': 'Enter your email address',
-                },
-              }}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              sx={{ minWidth: 'fit-content' }}
-            >
-              现在开始
-            </Button>
-          </Stack>
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{ textAlign: 'center' }}
-          >
-            点击 &quot;现在开始&quot; 同意我们的&nbsp;
-            <Link href="#" color="primary">
-              条款  & 细则
-            </Link>
-            .
-          </Typography> */}
+          
         </Stack>
-        {/* <StyledBox id="image" /> */}
+        
       </Container>
     </Box>
   );
