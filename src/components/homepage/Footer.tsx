@@ -14,6 +14,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
 import SitemarkIcon from './SitemarkIcon';
+import { Email } from '@mui/icons-material';
 
 function Copyright() {
   return (
@@ -200,7 +201,7 @@ export default function Footer() {
           useFlexGap
           sx={{ justifyContent: 'left', color: 'text.secondary' }}
         >
-          <IconButton
+          {/* <IconButton
             color="inherit"
             size="small"
             href="/"
@@ -226,7 +227,16 @@ export default function Footer() {
             sx={{ alignSelf: 'center' }}
           >
             <LinkedInIcon />
-          </IconButton>
+          </IconButton> */
+          <IconButton
+            color="inherit"
+            size="small"
+            href="/contact"
+            aria-label="Email"
+            sx={{ alignSelf: 'center' }}
+          >
+            <Email />
+          </IconButton>}
         </Stack>
       </Box>
     </Container>

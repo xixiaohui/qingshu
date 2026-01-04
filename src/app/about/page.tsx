@@ -104,7 +104,7 @@ function AboutQS() {
   async function fetchCount() {
     const { count } = await supabase
       .from("blogs")
-      .select("*", { count: "exact", head: true });
+      .select("id", { count: "estimated"});
 
     if (count) setTotalCount(count);
   }

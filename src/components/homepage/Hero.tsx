@@ -60,8 +60,6 @@ export default function Hero() {
     if(error){
       console.log(error)
     }
-
-
   }
   useEffect(() => {
     fetchCount();
