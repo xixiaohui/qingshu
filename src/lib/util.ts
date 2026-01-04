@@ -75,6 +75,12 @@ export const mainKeyWords = [
   "Christina",
   "Byron",
   "gutenberg",
+  "Twain, Mark",
+  "Jefferson, Thomas",
+  "Lincoln",
+  "Sand, George",
+  "Burnand, F. C."
+
 ];
 
 export const SHARE_IAMGE_WIDTH = 1280;
