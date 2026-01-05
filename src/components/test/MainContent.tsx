@@ -209,12 +209,16 @@ function MainContent() {
               height: "100%",
             }}
           >
-            <Box>
-              {/* 情书展示广告 */}
+            {/* <Box>
               <Adsense adClient="ca-pub-6634656437365032" adSlot="7741256542" />
-            </Box>
+            </Box> */}
             <MainContentCard
               data={blogs.slice(3, 4)}
+              md={4}
+              isHaveImage={false}
+            ></MainContentCard>
+            <MainContentCard
+              data={blogs.slice(4, 5)}
               md={4}
               isHaveImage={false}
             ></MainContentCard>
