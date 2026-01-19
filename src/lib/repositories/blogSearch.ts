@@ -1,6 +1,6 @@
 import { blogSearchSupabaseRepo } from "./blogSearchSupabase";
-import { blogSearchPostgresRepo } from "./blogSearchPostgres";
 import { BlogSearchRepository } from "./blogSearchRepository";
+import { blogSearchPostgresRepo } from "./blogSearchPostgresRepo";
 
 const USE_SUPABASE = process.env.USE_SUPABASE === "true";
 
