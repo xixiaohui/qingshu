@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { formatDateSmart } from "@/lib/util";
+import { normalizeAuthors } from "@/lib/utils/normalizeAuthors";
 
 export const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
@@ -53,15 +54,22 @@ export const StyledTypography = styled(Typography)({
   textOverflow: "ellipsis",
 });
 
+type AuthorPostgresql = {
+  name: string
+  [key: string]: any
+}
+
 export function Author({
   authors,
   time = "2025年11月12日",
 }: {
-  authors: { name: string; avatar: string }[];
+  authors: AuthorPostgresql[];
   time?: string;
 }) {
   if(!authors){
     authors=[{name:"",avatar:"/static/images/avatar/7.jpg"}]
+  }else{
+    authors = normalizeAuthors(authors)
   }
 
   return (
@@ -112,7 +120,8 @@ export type CardItem = {
   authors: { name: string; avatar: string }[];
   content?: string;
   created_at?: string;
-  slug?:string
+  slug?:string;
+  index?:string
 };
 
 // 单卡组件
@@ -134,7 +143,7 @@ function ContentCard({
   return (
     <Grid size={{ xs: 12, md: md }}>
       <Link
-        href={`/blog/${data.id ? data.id : data.slug}`}
+        href={`/blog/${data.index ? data.index : data.slug}`}
         style={{ textDecoration: "none" }}
       >
         <StyledCard

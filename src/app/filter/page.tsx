@@ -7,6 +7,7 @@ import {
   StyledCardContent,
   StyledTypography,
 } from "@/components/test/MainContentCard";
+import { blogSearchRepo } from "@/lib/repositories/blogSearch";
 import { supabase } from "@/lib/supabaseClient";
 import { mainKeyWords } from "@/lib/util";
 import { Masonry } from "@mui/lab";
@@ -90,38 +91,49 @@ function BlogListButton({ message }: { message: string }) {
     const start = page * LIMIT;
     const end = start + LIMIT - 1;
 
-    let { data, error } = await supabase
-      .from("blogs")
-      .select("*")
-      .ilike("tag", `%${message}%`)
-      .range(start, end)
-      .order("id", { ascending: true });
-    if (!error && (!data || data.length === 0)) {
-      const fields = ["title", "content"];
+    // let { data, error } = await supabase
+    //   .from("blogs")
+    //   .select("*")
+    //   .ilike("tag", `%${message}%`)
+    //   .range(start, end)
+    //   .order("id", { ascending: true });
+    // if (!error && (!data || data.length === 0)) {
+    //   const fields = ["title", "content"];
 
-      for (const field of fields) {
-        const res = await supabase
-          .from("blogs")
-          .select("*")
-          .ilike(field, `%${message}%`)
-          .range(start, end)
-          .order("id", { ascending: true });
+    //   for (const field of fields) {
+    //     const res = await supabase
+    //       .from("blogs")
+    //       .select("*")
+    //       .ilike(field, `%${message}%`)
+    //       .range(start, end)
+    //       .order("id", { ascending: true });
 
-        if (res.data && res.data.length > 0) {
-          data = res.data;
-          break;
-        }
-      }
-    }
+    //     if (res.data && res.data.length > 0) {
+    //       data = res.data;
+    //       break;
+    //     }
+    //   }
+    // }
 
-    if (error) {
-      console.error(error);
-      setLoading(false);
-      return;
-    }
-
+    // if (error) {
+    //   console.error(error);
+    //   setLoading(false);
+    //   return;
+    // }
+    
     // 添加新数据
-    setBlogs((prev) => [...prev, ...(data ?? [])]);
+    // setBlogs((prev) => [...prev, ...(data ?? [])]);
+
+    blogSearchRepo
+      .searchBlogs(message)
+      .then((data) => {
+        setBlogs((prev) => [...prev, ...data]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+      
 
     // 3. 等待 DOM 渲染后恢复滚动位置
     requestAnimationFrame(() => {
@@ -146,7 +158,6 @@ function BlogListButton({ message }: { message: string }) {
     setTimeout(() => {
       setPage(0);
     });
-
   }, [message]);
 
   const handleLoadMore = () => {
