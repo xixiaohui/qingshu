@@ -16,6 +16,7 @@ import {
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import LoadingFrame from "../Loading";
+import { blogSearchRepo } from "@/lib/repositories/blogSearch";
 
 function CatalogeTitle({ name }: { name: string }) {
   return (
@@ -46,45 +47,57 @@ function CatalogeMain({ name }: { name: string }) {
     async function load() {
       setLoading(true);
       console.log(`name is ${name}`)
-      let { data, error } = await supabase
-        .from("blogs")
-        .select("id,img,tag,title,description,authors,slug")
-        .ilike("tag", `%${name}%`)
-        .order("id", { ascending: true })
-        .range(0, 50);
 
-      if (!data || data.length === 0) {
-        const titleResult = await supabase
-          .from("blogs")
-          .select("id,img,tag,title,description,authors,slug")
-          .ilike("title", `%${name}%`)
-          .order("id", { ascending: true })// false = 倒序;
-          .range(0, 50);
+      // let { data, error } = await supabase
+      //   .from("blogs")
+      //   .select("id,img,tag,title,description,authors,slug")
+      //   .ilike("tag", `%${name}%`)
+      //   .order("id", { ascending: true })
+      //   .range(0, 50);
 
-        data = titleResult.data;
+      // if (!data || data.length === 0) {
+      //   const titleResult = await supabase
+      //     .from("blogs")
+      //     .select("id,img,tag,title,description,authors,slug")
+      //     .ilike("title", `%${name}%`)
+      //     .order("id", { ascending: true })// false = 倒序;
+      //     .range(0, 50);
 
-        if ((!data || data.length === 0) && !titleResult.error) {
-          const contentResult = await supabase
-            .from("blogs")
-            .select("id,img,tag,title,description,authors,slug")
-            .ilike("content", `%${name}%`)
-            .order("id", { ascending: true })// false = 倒序;
-            .range(0, 50);
-          data = contentResult.data;
-        }
-      }
+      //   data = titleResult.data;
 
-      if (error) {
-        console.error(error);
+      //   if ((!data || data.length === 0) && !titleResult.error) {
+      //     const contentResult = await supabase
+      //       .from("blogs")
+      //       .select("id,img,tag,title,description,authors,slug")
+      //       .ilike("content", `%${name}%`)
+      //       .order("id", { ascending: true })// false = 倒序;
+      //       .range(0, 50);
+      //     data = contentResult.data;
+      //   }
+      // }
+      // if (error) {
+      //   console.error(error);
+      //   setLoading(false);
+      // } else {
+      //   if (data) {
+      //     setblogData(data);
+      //     let pageCount = Math.ceil(data.length / pageLimit);
+      //     setpageCount(pageCount);
+
+      //     setLoading(false);
+      //   }
+      // }
+
+      try {
+        const res = await fetch(`/api/blogs/search?q=${encodeURIComponent(name)}`);
+        const data = await res.json();
+
+        setblogData(data);
+        setpageCount(Math.ceil(data.length / pageLimit));
+      } catch (err) {
+        console.error(err);
+      } finally {
         setLoading(false);
-      } else {
-        if (data) {
-          setblogData(data);
-          let pageCount = Math.ceil(data.length / pageLimit);
-          setpageCount(pageCount);
-
-          setLoading(false);
-        }
       }
     }
     load();
