@@ -25,10 +25,11 @@ import { PosterModalContent } from "./feature/text-poster/PosterModalContent";
 import { EditorModalContent } from "./feature/text-poster/EditorModalContent";
 import { useTextSelectionInfo } from "./feature/text-poster/useTextSelection";
 import { BlogMarksLayer } from "./BlogMarksLayer";
-import { getBlog } from "@/lib/getBlog";
 import Adsense from "./Adsense";
 import LongTextPagination from "./LongTextPagination";
+import { normalizeAuthors } from "@/lib/utils/normalizeAuthors";
 
+const USE_SUPABASE = process.env.USE_SUPABASE === "true"
 
 const cardData = [
   {
@@ -57,8 +58,11 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
 
   useEffect(() => {
     async function load() {
-
       setblogData(post);
+      
+      console.log("----post----");
+      console.log(post);
+
       
     }
     load();
@@ -126,6 +130,8 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
 
   // console.log(marks);
   // console.log("----------------------marks----------------");
+
+  const authors = normalizeAuthors(blogData?.authors)
   return (
     <>
       <Grid
@@ -256,7 +262,7 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
                   {blogData?.description}
                 </Typography>
 
-                {blogData?.authors?.map((a) => (
+                {authors.map((a) => (
                   <Link
                     key={a.name}
                     href={`/author/${encodeURIComponent(a.name)}`}
@@ -287,7 +293,7 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
                   {blogData?.tag}
                 </Typography>
                 <Typography gutterBottom variant="caption" component="div">
-                  {formatDateSmart(blogData?.created_at || "")}
+                  {USE_SUPABASE?formatDateSmart(blogData?.created_at || ""):blogData?.created_at?.toString() || ""}
                 </Typography>
               </Box>
             </Grid>

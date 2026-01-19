@@ -5,35 +5,50 @@ import Footer from "@/components/homepage/Footer";
 import Latest from "@/components/test/Latest";
 import MainContent from "@/components/test/MainContent";
 import AppTheme from "@/shared-theme/AppTheme";
-import { Box, CircularProgress, Container, CssBaseline, Skeleton, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, CssBaseline, Link, Skeleton, Typography } from "@mui/material";
 import { useEffect,useState } from "react";
+import { Pagination, Stack } from "@mui/material";
+import { blogPostgresRepo, BlogRepository, blogSupabaseRepo } from "@/lib/getBlog";
 
-type PostgresqlBlog={
-  id:string
-  title:string
-  description:string
-  created_at:string
-  authors:string
-}
+type PostgresqlBlog = {
+  id: string;
+  title: string;
+  description: string;
+  created_at: string;
+  authors: string;
+  slug?: string;
+  index?: number;
+};
+
+
 
 function PostgreSQLContent(){
   const [blogs, setBlogs] = useState<PostgresqlBlog[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(()=>{
-    fetch('/api/blogs')
-    .then(res => res.json())
-    .then(data => {
-        setBlogs(data)
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+
+  const pageSize = 10;
+
+  useEffect(() => {
+    setLoading(true);
+
+
+    fetch(`/api/blogs?page=${page}&pageSize=${pageSize}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setBlogs(res.data);
+        setTotal(res.total);
         // console.log(data)
       })
-      .catch(err => {
-        console.error(err)
+      .catch((err) => {
+        console.error(err);
       })
       .finally(() => {
-        setLoading(false)
-      })
-  },[])
+        setLoading(false);
+      });
+  }, [page]);
 
   if (loading) {
     return (
@@ -58,24 +73,39 @@ function PostgreSQLContent(){
   }
 
 
-  
+
   return (
     <Box>
-      <Typography variant="h1">Blog List</Typography>
       {blogs.map((b) => (
-        <Box key={b.id} sx={{ mb: 3 }}>
-          <Typography variant="h2">{b.title}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            {b.authors}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {b.description}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {new Date(b.created_at).toLocaleString()}
-          </Typography>
-        </Box>
+        <Link key={b.id} href={`/blog/${b.index ? b.index : b.slug}`}>
+          <Box  sx={{ mb: 3 }}>
+            <Typography variant="h2">{b.title}</Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {b.authors}
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              {b.description}
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              {new Date(b.created_at).toLocaleString()}
+            </Typography>
+          </Box>
+        </Link>
+
       ))}
+
+       {/* 分页 */}
+      <Stack alignItems="center" sx={{ mt: 4 }}>
+        <Pagination
+          count={Math.ceil(total / pageSize)}
+          page={page}
+          onChange={(_, value) => setPage(value)}
+          color="primary"
+          shape="rounded"
+          showFirstButton
+          showLastButton
+        />
+      </Stack>
     </Box>
   );
 }

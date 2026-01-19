@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
-import { getBlog } from "@/lib/getBlog";
+import { blogPostgresRepo, BlogRepository, blogSupabaseRepo } from "@/lib/getBlog";
 
 import BlogClient from "@/components/BlogClient";
+
+
+// 通过环境变量控制
+const USE_SUPABASE = process.env.USE_SUPABASE === "true"
+export const blogRepo: BlogRepository = USE_SUPABASE
+  ? blogSupabaseRepo
+  : blogPostgresRepo
+  
 
 // 临时缓存 Map（同一次请求内）
 const blogCache = new Map<string, any>();
 
 async function getBlogCached(id: string) {
   if (blogCache.has(id)) return blogCache.get(id);
-  const post = await getBlog(id);
+  const post = await blogRepo.getBlog(id);
   blogCache.set(id, post);
   return post;
 }
-
-
 
 
 // ---seo---
