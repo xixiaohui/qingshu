@@ -21,7 +21,7 @@ export async function GET(req: Request) {
   for (const condition of queries) {
     const { rows } = await pool.query(
       `
-      SELECT id, img, tag, title, description, authors, slug,index,created_at
+      SELECT id, img, tag, title, description, authors, slug,blog_index,created_at
       FROM blogs
       WHERE ${condition}
       ORDER BY created_at DESC

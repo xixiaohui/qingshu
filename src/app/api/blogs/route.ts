@@ -40,7 +40,7 @@ export async function GET(req: Request) {
   // 1️⃣ 查当前页数据
   const dataResult = await pool.query(
     `
-    SELECT id, title, created_at, description, tag, img, slug, updated_at, authors,index
+    SELECT id, title, created_at, description, tag, img, slug, updated_at, authors,blog_index
     FROM blogs
     ORDER BY created_at DESC
     LIMIT $1 OFFSET $2

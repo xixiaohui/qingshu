@@ -37,7 +37,7 @@ export const blogPostgresRepo: BlogRepository = {
       `
       SELECT *
       FROM blogs
-      WHERE ${isId ? "index = $1" : "slug = $1"}
+      WHERE ${isId ? "blog_index = $1" : "slug = $1"}
       LIMIT 1
       `,
       [value]

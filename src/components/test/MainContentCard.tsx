@@ -121,7 +121,7 @@ export type CardItem = {
   content?: string;
   created_at?: string;
   slug?:string;
-  index?:string
+  blog_index?:string
 };
 
 // 单卡组件
@@ -143,7 +143,7 @@ function ContentCard({
   return (
     <Grid size={{ xs: 12, md: md }}>
       <Link
-        href={`/blog/${data.index ? data.index : data.slug}`}
+        href={`/blog/${data.blog_index ? data.blog_index : data.slug}`}
         style={{ textDecoration: "none" }}
       >
         <StyledCard

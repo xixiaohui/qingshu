@@ -176,7 +176,7 @@ function BlogListButton({ message }: { message: string }) {
           {blogs.map((data, index) => (
             <Card key={index} variant="outlined" tabIndex={0}>
               <Link
-                href={`/blog/${data.id}`}
+                href={`/blog/${data.blog_index}`}
                 style={{ textDecoration: "none" }}
               >
                 <CardMedia
