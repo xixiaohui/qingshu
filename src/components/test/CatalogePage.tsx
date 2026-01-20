@@ -88,17 +88,32 @@ function CatalogeMain({ name }: { name: string }) {
       //   }
       // }
 
-      try {
-        const res = await fetch(`/api/blogs/search?q=${encodeURIComponent(name)}`);
-        const data = await res.json();
+     
 
-        setblogData(data);
-        setpageCount(Math.ceil(data.length / pageLimit));
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+      // try {
+      //   const res = await fetch(`/api/blogs/search?q=${encodeURIComponent(name)}`);
+      //   const data = await res.json();
+
+      //   setblogData(data);
+      //   setpageCount(Math.ceil(data.length / pageLimit));
+      // } catch (err) {
+      //   console.error(err);
+      // } finally {
+      //   setLoading(false);
+      // }
+
+      blogSearchRepo
+        .searchBlogs(name)
+        .then((data) => {
+          setblogData(data);
+          setpageCount(Math.ceil(data.length / pageLimit));
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
     load();
   }, []);
