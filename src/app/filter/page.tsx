@@ -131,6 +131,9 @@ function BlogListButton({ message }: { message: string }) {
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(()=>{
+        setLoading(false);
       });
 
       
@@ -150,6 +153,7 @@ function BlogListButton({ message }: { message: string }) {
     if (page < 0) return;
     console.log("初次加载");
     fetchBlogs();
+
   }, [page]);
 
   useEffect(() => {
