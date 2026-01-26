@@ -93,7 +93,7 @@ export default function LongTextPagination({ content ,blog}: { content: string,b
         }}
       >
         {/* 情书内嵌广告 */}
-        <Adsense adClient="ca-pub-6634656437365032" adSlot="9440694485" />
+        {/* <Adsense adClient="ca-pub-6634656437365032" adSlot="9440694485" /> */}
       </Box>
       <Box
         sx={{

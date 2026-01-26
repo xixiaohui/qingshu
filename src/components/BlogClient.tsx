@@ -50,8 +50,8 @@ const BlogContent = ({
 const typeByScreen = {
   xs: "style1",
   sm: "style1",
-  md: "style2",
-  lg: "style2",
+  md: "style4",
+  lg: "style4",
   xl: "style4",
 } as const;
 

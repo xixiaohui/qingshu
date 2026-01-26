@@ -7,6 +7,8 @@ export type Author = {
 export function normalizeAuthors(
   authors: unknown
 ): Author[] {
+
+ 
   if (!authors) return []
 
   // 已经是数组
@@ -15,8 +17,8 @@ export function normalizeAuthors(
   }
 
   // 单个对象
-  if (typeof authors === "object") {
-    return [authors as Author]
+  if (typeof authors === "string") {
+    return [{name:authors,avatar:"/static/images/avatar/7.jpg"}]
   }
 
   // 其他情况（string / number / etc）

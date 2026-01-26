@@ -125,10 +125,10 @@ export default function LongTextPaginationTwo({
             }}
         >
           {/* 情书内嵌广告 */}
-          <Adsense
+          {/* <Adsense
             adClient="ca-pub-6634656437365032"
             adSlot="9440694485"
-          />
+          /> */}
         </Box>
         <Box
             sx={{

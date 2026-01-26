@@ -56,7 +56,8 @@ export default function PDFButton({ blog }: { blog: CardItem }) {
     y += 25;
 
     doc.setFontSize(12);
-    doc.text(blog.authors[0].name, margin, y);
+    console.log(blog)
+    doc.text(blog.authors.toString()?blog.authors.toString():blog.authors[0].name, margin, y);
     y += 20;
 
     const paragraphs = blog.content.split("\n\n");

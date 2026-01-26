@@ -54,7 +54,7 @@ export const StyledTypography = styled(Typography)({
   textOverflow: "ellipsis",
 });
 
-type AuthorPostgresql = {
+export type AuthorPostgresql = {
   name: string
   [key: string]: any
 }

@@ -11,7 +11,7 @@ import {
   Backdrop,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Author, CardItem } from "./test/MainContentCard";
+import { Author, AuthorPostgresql, CardItem } from "./test/MainContentCard";
 import {
   BlogMark,
   formatDateSmart,
@@ -49,6 +49,7 @@ const cardData = [
 
 function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardItem}) {
   const [blogData, setblogData] = useState<CardItem>();
+  
 
   const [marks, setMarks] = useState<BlogMark[]>();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -56,14 +57,19 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
   const isId = /^\d+$/.test(identifier);
   identifier = decodeURIComponent(identifier);
 
+  const [authors,setAuthors] = useState<any[]>();
+
   useEffect(() => {
     async function load() {
       setblogData(post);
       
-      console.log("----post----");
-      console.log(post);
-
+      // console.log("----post----");
+      // console.log(post);
       
+      // console.log(normalizeAuthors(post?.authors))
+      setAuthors(normalizeAuthors(post?.authors))
+      
+
     }
     load();
   }, [identifier]);
@@ -111,18 +117,18 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
     if (!blogData?.id) return; // ⬅️ 关键保护
 
     async function loadMarks() {
-      const { data, error } = await supabase
-        .from("blog_marks")
-        .select("*")
-        .eq("blog_id", blogData?.id)
-        .order("created_at", { ascending: false });
+      // const { data, error } = await supabase
+      //   .from("blog_marks")
+      //   .select("*")
+      //   .eq("blog_id", blogData?.id)
+      //   .order("created_at", { ascending: false });
 
-      if (error) {
-        console.error("loadMasks error:", error);
-        return;
-      }
+      // if (error) {
+      //   console.error("loadMasks error:", error);
+      //   return;
+      // }
 
-      setMarks(data ?? []);
+      // setMarks(data ?? []);
     }
 
     loadMarks();
@@ -131,7 +137,8 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
   // console.log(marks);
   // console.log("----------------------marks----------------");
 
-  const authors = normalizeAuthors(blogData?.authors)
+  // console.log(authors)
+
   return (
     <>
       <Grid
@@ -262,7 +269,8 @@ function BlogContentMain({ identifier ,post}: { identifier: string ,post:CardIte
                   {blogData?.description}
                 </Typography>
 
-                {authors.map((a) => (
+                
+                {authors?.map((a) => (
                   <Link
                     key={a.name}
                     href={`/author/${encodeURIComponent(a.name)}`}
