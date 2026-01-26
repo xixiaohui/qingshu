@@ -50,7 +50,7 @@ export default function Home() {
         <Latest></Latest>
         <Footer />
       </Container>
-      <Adsbygoogle></Adsbygoogle>
+      {/* <Adsbygoogle></Adsbygoogle> */}
     </>
   );
 }
