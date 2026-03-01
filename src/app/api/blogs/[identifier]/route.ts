@@ -13,7 +13,7 @@ export async function GET(
       `
       SELECT *
       FROM blogs
-      WHERE "index" = $1
+      WHERE id = $1
       LIMIT 1
       `,
       [identifier]
