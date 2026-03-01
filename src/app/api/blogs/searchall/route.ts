@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const keyword = searchParams.get("q") || "";
-  const limit = parseInt(searchParams.get("limit") || "500", 10);  // 默认50条
+  const limit = parseInt(searchParams.get("limit") || "50", 10);  // 默认50条
   const offset = parseInt(searchParams.get("offset") || "0", 10); // 默认从0开始
 
   if (!keyword) {
@@ -21,7 +21,7 @@ export async function GET(req: Request) {
       WHERE tag ILIKE $1
          OR title ILIKE $1
          OR content ILIKE $1
-      ORDER BY created_at DESC
+      ORDER BY created_at ASC
       LIMIT $2 OFFSET $3
       `,
       [like, limit, offset]
@@ -33,3 +33,4 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }
+
