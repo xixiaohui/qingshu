@@ -277,7 +277,7 @@ GET /api/blogs/searchall?q=爱情&limit=20&offset=20
 按作者名称搜索博客，大小写不敏感模糊匹配。
 
 ```
-GET /api/blogs/search_by_author
+GET /api/blogs/searchauthor
 ```
 
 **请求参数（Query）**
@@ -324,10 +324,10 @@ GET /api/blogs/search_by_author
 
 ```typescript
 // 搜索包含 "Legge" 的作者
-GET /api/blogs/search_by_author?q=Legge
+GET /api/blogs/searchauthor?q=Legge
 
 // 分页：第二页
-GET /api/blogs/search_by_author?q=James&limit=20&offset=20
+GET /api/blogs/searchauthor?q=James&limit=20&offset=20
 ```
 
 **移动端使用示例**
@@ -335,13 +335,13 @@ GET /api/blogs/search_by_author?q=James&limit=20&offset=20
 ```dart
 // Flutter
 final response = await http.get(
-  Uri.parse('$baseURL/api/blogs/search_by_author?q=${Uri.encodeComponent(authorName)}'),
+  Uri.parse('$baseURL/api/blogs/searchauthor?q=${Uri.encodeComponent(authorName)}'),
 );
 ```
 
 ```swift
 // Swift
-let url = URL(string: "\(baseURL)/api/blogs/search_by_author?q=\(authorName)")!
+let url = URL(string: "\(baseURL)/api/blogs/searchauthor?q=\(authorName)")!
 ```
 
 **错误响应**
@@ -501,7 +501,7 @@ GET /api/files
 | 2 | `GET` | `/api/blogs/:identifier` | 博客详情（含正文） | - |
 | 3 | `GET` | `/api/blogs/search` | 简单搜索 | 固定 50 条 |
 | 4 | `GET` | `/api/blogs/searchall` | 全字段搜索 | ✅ limit/offset |
-| 5 | `GET` | `/api/blogs/search_by_author` | 按作者搜索 | ✅ limit/offset |
+| 5 | `GET` | `/api/blogs/searchauthor` | 按作者搜索 | ✅ limit/offset |
 | 6 | `POST` | `/api/blogMark` | 创建阅读标记 | - |
 | 7 | `POST` | `/api/translate` | 翻译文本 | - |
 | 8 | `GET` | `/api/files` | 文件列表 | - |
