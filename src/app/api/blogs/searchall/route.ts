@@ -19,8 +19,6 @@ export async function GET(req: Request) {
       SELECT DISTINCT id, img, tag, title, description, authors, slug, blog_index, created_at
       FROM blogs
       WHERE tag ILIKE $1
-         OR title ILIKE $1
-         OR content ILIKE $1
       ORDER BY created_at ASC
       LIMIT $2 OFFSET $3
       `,
