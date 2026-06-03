@@ -19,9 +19,9 @@ export async function GET(req: Request) {
   try {
     const { rows } = await pool.query(
       `
-      SELECT authors
+      SELECT DISTINCT authors
       FROM blogs
-      WHERE $1 ILIKE authors
+      WHERE authors ILIKE $1
       ORDER BY created_at DESC
       LIMIT $2 OFFSET $3
       `,
