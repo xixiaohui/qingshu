@@ -21,7 +21,7 @@ export async function GET(req: Request) {
       `
       SELECT authors
       FROM blogs
-      WHERE authors ILIKE $1
+      WHERE $1 ILIKE authors
       ORDER BY created_at DESC
       LIMIT $2 OFFSET $3
       `,
