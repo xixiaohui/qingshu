@@ -27,7 +27,7 @@ export async function GET(req: Request) {
   try {
     const { rows } = await pool.query(
       `
-      SELECT id, img, tag, title, description, authors, content, slug, blog_index, created_at
+      SELECT id, img, tag, title, description, authors, slug, blog_index, created_at
       FROM blogs
       WHERE blog_index = $1
       LIMIT 1
