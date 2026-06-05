@@ -5,9 +5,10 @@ import { CardItem } from "@/components/test/MainContentCard";
 // ✅ 统一 CORS
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
+
 
 // ✅ 处理预检请求（必须）
 export async function OPTIONS() {
