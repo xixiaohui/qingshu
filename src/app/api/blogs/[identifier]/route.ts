@@ -1,7 +1,21 @@
-
 import { NextRequest, NextResponse } from "next/server"
 import pool from "@/lib/db";
 import { CardItem } from "@/components/test/MainContentCard";
+
+// ✅ 统一 CORS
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+// ✅ 处理预检请求（必须）
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
 
 export async function GET(
   req: NextRequest,
@@ -22,17 +36,17 @@ export async function GET(
     if (!rows[0]) {
       return NextResponse.json(
         { message: "Blog not found" },
-        { status: 404 }
+        { status: 404, headers: corsHeaders }
       )
     }
 
-    return NextResponse.json(rows[0])
+    return NextResponse.json(rows[0], { headers: corsHeaders })
   } catch (error) {
     console.error("GET /api/blogs error:", error)
 
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
 }

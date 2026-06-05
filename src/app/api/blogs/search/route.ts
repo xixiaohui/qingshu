@@ -1,13 +1,27 @@
 import pool from "@/lib/db";
 import { NextResponse } from "next/server";
 
+// ✅ 统一 CORS
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+// ✅ 处理预检请求（必须）
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const keyword = searchParams.get("q");
 
   if (!keyword) {
-    return NextResponse.json([], { status: 400 });
+    return NextResponse.json([], { status: 400, headers: corsHeaders });
   }
 
   const like = `%${keyword}%`;
@@ -31,9 +45,9 @@ export async function GET(req: Request) {
     );
 
     if (rows.length > 0) {
-      return NextResponse.json(rows);
+      return NextResponse.json(rows, { headers: corsHeaders });
     }
   }
 
-  return NextResponse.json([]);
+  return NextResponse.json([], { headers: corsHeaders });
 }

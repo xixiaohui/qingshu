@@ -1,6 +1,21 @@
 import pool from "@/lib/db";
 import { NextResponse } from "next/server";
 
+// ✅ 统一 CORS
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+// ✅ 处理预检请求（必须）
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const keyword = searchParams.get("q") || "";
@@ -8,7 +23,7 @@ export async function GET(req: Request) {
   const offset = parseInt(searchParams.get("offset") || "0", 10); // 默认从0开始
 
   if (!keyword) {
-    return NextResponse.json([], { status: 400 });
+    return NextResponse.json([], { status: 400, headers: corsHeaders });
   }
 
   const like = `%${keyword}%`;
@@ -26,10 +41,9 @@ export async function GET(req: Request) {
       [like, limit, offset]
     );
 
-    return NextResponse.json(rows);
+    return NextResponse.json(rows, { headers: corsHeaders });
   } catch (error) {
     console.error("Search API error:", error);
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500, headers: corsHeaders });
   }
 }
-

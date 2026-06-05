@@ -1,27 +1,20 @@
-// import pool from '@/lib/db'
-// import { NextResponse } from 'next/server'
-
-// const query_asc = `
-// SELECT id, title, created_at,description,tag,content,img,slug,updated_at,authors,index
-//     FROM blogs
-//     ORDER BY created_at ASC
-//     LIMIT 100
-// `;
-// const query_desc =`
-// SELECT id, title, created_at,description,tag,content,img,slug,updated_at,authors,index
-//     FROM blogs
-//     ORDER BY created_at DESC NULLS LAST
-//     LIMIT 20
-// `;
-
-// export async function GET() {
-//   const { rows } = await pool.query(query_desc)
-
-//   return NextResponse.json(rows)
-// }
-
 import pool from "@/lib/db";
 import { NextResponse } from "next/server";
+
+// ✅ 统一 CORS
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+// ✅ 处理预检请求（必须）
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
 
 ///api/blogs?page=1&pageSize=10
 
@@ -51,8 +44,11 @@ export async function GET(req: Request) {
   // 2️⃣ 查总数
   const countResult = await pool.query(`SELECT COUNT(*) FROM blogs`);
 
-  return NextResponse.json({
-    data: dataResult.rows,
-    total: Number(countResult.rows[0].count),
-  });
+  return NextResponse.json(
+    {
+      data: dataResult.rows,
+      total: Number(countResult.rows[0].count),
+    },
+    { headers: corsHeaders }
+  );
 }
