@@ -16,6 +16,7 @@
     "@mui/lab": "^7.0.1-beta.19",
     "@mui/material": "latest",
     "@mui/material-nextjs": "latest",
+    "@mui/system": "^9.4.0",
     "@next/mdx": "^16.0.10",
     "@supabase/supabase-js": "^2.81.0",
     "@tailwindcss/postcss": "^4.1.17",
