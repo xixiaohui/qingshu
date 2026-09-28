@@ -142,4 +142,4 @@ vite.config.ts.timestamp-*
 public/fonts/*
 *.ttf
 *.woff
-*.woff2
+*.woff2.env
